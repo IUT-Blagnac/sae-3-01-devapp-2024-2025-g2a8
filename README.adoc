@@ -54,8 +54,9 @@ Projet est réalisé par::
 
 - https://github.com/LeJoker747[Ethan Besse]
 - https://github.com/Tarsmio[Tristan Chefaï]
-- https://github.com/lohanSR[Lohan Serre]
 - https://github.com/mtthIA[Matthias Lionardo]
+- https://github.com/lohanSR[Lohan Serre]
+
 
 
 Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.fr[JMB]
