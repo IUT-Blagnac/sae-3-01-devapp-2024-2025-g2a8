@@ -116,13 +116,14 @@ De plus ce fichier `README.adoc` devra être à jour des informations suivantes 
 
 == Suivi des Sprints
 
-=== Sprint#1
-  * https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Technique.adoc[Doc Technique]
-  * https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Utilisateur.adoc[Doc Utilisateur]
 
+[cols="1,3"]
+|===
+| Sprints | Documents 
 
-=== Sprint#2
-
+| Sprint#1 |https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Technique.adoc[Doc Technique] + 
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Utilisateur.adoc[Doc Utilisateur]
+|===
 
 
 
