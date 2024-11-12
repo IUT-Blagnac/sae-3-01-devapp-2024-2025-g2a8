@@ -110,6 +110,22 @@ De plus ce fichier `README.adoc` devra être à jour des informations suivantes 
 - Indicateurs de qualité du code (dette technique)
 - ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
 
+
+
+
+
+== Suivi des Sprints
+
+=== Sprint#1
+  * https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Technique.adoc[Doc Technique]
+  * https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Utilisateur.adoc[Doc Utilisateur]
+
+
+=== Sprint#2
+
+
+
+
 Voici un exemple d'évaluation :
 
 ifdef::env-github[]
