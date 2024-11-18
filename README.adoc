@@ -82,14 +82,17 @@ https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Docume
 https://github.com/orgs/IUT-Blagnac/projects/271/views/7[Backlog]
 |===
 
-Voici un exemple d'évaluation :
+=== Evaluation bi-hebdomadaire
 
 ifdef::env-github[]
-image:https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1850914734&amp;format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1850914734&amp;format=image]
+image:https://docs.google.com/spreadsheets/d/e/2PACX-1vSACcYeKaH_ims3faegSLAFJ9s5_Kd9Fbyi4ODEb8BTN5OnUXWenVGhlVPo84yQDhTkTj3f9nXiluh1/pubchart?oid=881427875&amp;format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vSACcYeKaH_ims3faegSLAFJ9s5_Kd9Fbyi4ODEb8BTN5OnUXWenVGhlVPo84yQDhTkTj3f9nXiluh1/pubchart?oid=881427875&amp;format=image]
 endif::[]
 
 ifndef::env-github[]
 ++++
-<iframe width="786" height="430" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1850914734&amp;format=image"></iframe>
+<iframe width="786" height="430" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSACcYeKaH_ims3faegSLAFJ9s5_Kd9Fbyi4ODEb8BTN5OnUXWenVGhlVPo84yQDhTkTj3f9nXiluh1/pubchart?oid=881427875&amp;format=interactive"></iframe>
 ++++
 endif::[]
+=== retour sprint 1 / Initialisation du dépôt
+
+Penser à mettre les rôles dans le readme. A présenter le client. On peut aller un peu plus loin que le titre pour les docs. Il manque la doc de conception qui devrait être bien démarrée. Le lien Backlog renvoi vers le backlog sprint 1 ce n'est pas la même chose. Je dois avoir le backlog produit complet ! Attention les issues/ Task doivent toutes êtres ratachées à une US (ex. Créer les footer).  Elles doivent être assignées. Pas de cahier de tests, heureusement quelques critères d'acceptabilité dans les pauvres US que vous avez recensées.Pas de release ni de date de release. Il reste du travail !!
