@@ -3,5 +3,5 @@
 [cols="1,1,1,1,1"]
 |===
 | Date       | Matthias | Lohan | Ethan | Tristan
-| 20/11/2024 - 14:15-17:15 | Oui |         |         |              
+| 20/11/2024 - 14:15-17:15 | Oui |Oui|         |              
 |===
