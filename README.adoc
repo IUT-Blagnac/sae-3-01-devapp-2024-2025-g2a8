@@ -65,6 +65,8 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 - Le https://webetud.iut-blagnac.fr/course/view.php?id=841[cours Moodle] sur la SAE
 - Le dépôt https://github.com/IUT-Blagnac/sae3-01-template[template] qui sert de base à tous les dépôts étudiants.
 - Le lien https://classroom.github.com/a/OUF7gxEa[classroom] si besoin.
+- Consultez ce https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/T%C3%A9l%C3%A9travail/teletravail.adoc[document] pour connaître les membres de l'équipe actuellement en télétravail.
+
 
 == Réalisations  
 
