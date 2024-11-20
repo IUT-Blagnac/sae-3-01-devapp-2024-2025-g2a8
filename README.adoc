@@ -48,9 +48,9 @@ toc::[]
 
 Projet est réalisé par::
 
-- https://github.com/LeJoker747[Ethan Besse]
+- https://github.com/LeJoker747[Ethan Besse] Product Owner
 - https://github.com/Tarsmio[Tristan Chefaï]
-- https://github.com/mtthIA[Matthias Lionardo]
+- https://github.com/mtthIA[Matthias Lionardo] Scrum Master
 - https://github.com/lohanSR[Lohan Serre]
 
 
@@ -79,7 +79,7 @@ https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Docume
 
 | Sprint#1 |https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Technique.adoc[Doc Technique] + 
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Utilisateur.adoc[Doc Utilisateur] + 
-https://github.com/orgs/IUT-Blagnac/projects/271/views/7[Backlog]
+https://github.com/orgs/IUT-Blagnac/projects/271/views/8[Backlog]
 |===
 
 === Evaluation bi-hebdomadaire
