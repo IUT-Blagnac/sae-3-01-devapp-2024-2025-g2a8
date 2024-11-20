@@ -70,6 +70,7 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Technique.adoc[Doc Technique] + 
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Utilisateur.adoc[Doc Utilisateur] + 
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc-Conception.adoc[Document de Conception]
 
 == Gestion de projet & Qualité
 
@@ -79,7 +80,8 @@ https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Docume
 
 | Sprint#1 |https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Technique.adoc[Doc Technique] + 
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc%20Utilisateur.adoc[Doc Utilisateur] + 
-https://github.com/orgs/IUT-Blagnac/projects/271/views/8[Backlog]
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Sprint%201/Doc-Conception.adoc[Document de Conception] +
+https://github.com/orgs/IUT-Blagnac/projects/271/views/8[Backlog] 
 |===
 
 === Evaluation bi-hebdomadaire
