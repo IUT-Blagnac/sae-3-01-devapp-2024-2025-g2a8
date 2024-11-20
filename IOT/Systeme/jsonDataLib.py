@@ -31,8 +31,10 @@ def writeData(data, dataType):
     return True
 
 def createValueEntry(value):
+    now = datetime.now()
+    formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
     return {
-        "date" : str(datetime.now()),
+        "date" : str(formatted_date),
         "value" : value
     }
     
