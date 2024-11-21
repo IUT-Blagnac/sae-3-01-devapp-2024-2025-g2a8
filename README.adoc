@@ -57,6 +57,11 @@ Projet est réalisé par::
 
 Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.fr[JMB]
 
+== Présentation du client : Rockworld
+Rockworld est une entreprise française fondée en 2023 par Thomas Aussenac, Yassine Laghdas, Loïc
+Phrakousonh, Joan Casas et Sydney Richards. Elle vend des cailloux connectés, les Rockmon, ils sont éducatifs, interactifs  et personnalisables.
+Suite à leur succès rapide, les fondateurs ont vite compris qu'ils auraient besoin d'un site de vente en ligne pour pouvoir vendre les Rockmon plus facilement et avec une interface intuitive pour que les utilisateurs puissent personnaliser et avoir un aperçu de leur compagnon avant achat.
+
 == Contexte général
 
 [[liensUtiles]]
