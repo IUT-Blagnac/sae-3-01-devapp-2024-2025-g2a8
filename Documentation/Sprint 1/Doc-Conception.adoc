@@ -12,5 +12,5 @@ toc::[]
 ---
 
 == I. Use Case
-
+image::/Documentation/img/use case.svg[]
 == II. Diagramme de classe métier
