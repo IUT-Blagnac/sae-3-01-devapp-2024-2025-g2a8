@@ -1,1 +1,16 @@
-# Documentation Utilisateur
+= Documentation Utilisateur
+:toc-title: Table des matières
+:toc: macro
+
+*Par :* _BESSE Ethan, CHEFAI Tristan, LIONARDO Matthias, SERRE Lohan_ +
+*Pour :* _RockWorld_ +
+*Date :* 20/11/2024 +
+*Équipe : 2A8* 
+
+---
+toc::[]
+---
+
+== I. Contexte
+
+== II. Fonctionnement
