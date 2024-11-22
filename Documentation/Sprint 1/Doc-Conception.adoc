@@ -12,5 +12,9 @@ toc::[]
 ---
 
 == I. Use Case
+._Diagramme des cas d'utilisation_
+image::/Documentation/img/use case.svg[]
+Voici donc le diagramme des cas d'utilisation du site, l'utilisateur peut se créer un compte et se connecter/déconnecter, il peut consulter les produits mis en vente, se créer un panier de produits pour passer une commande, et personnaliser le produit avant de l'ajouter au panier.
+L'administrateur peut gérer des produits et des catégories, il peut gérer les commandes des utilisateurs et gérer les stocks des produits.
 
 == II. Diagramme de classe métier
