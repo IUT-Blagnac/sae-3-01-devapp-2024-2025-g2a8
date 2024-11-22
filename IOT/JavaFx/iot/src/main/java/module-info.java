@@ -11,4 +11,7 @@ module net.g2a8.iot {
 
     opens net.g2a8.iot to javafx.fxml;
     exports net.g2a8.iot;
+    exports net.g2a8.iot.controller;
+    exports net.g2a8.iot.view;
+    opens net.g2a8.iot.controller to javafx.fxml;
 }
