@@ -1,16 +1,17 @@
 package net.g2a8.iot.view;
 
 import javafx.stage.Stage;
+import net.g2a8.iot.control.ConfigCapteurs;
 import net.g2a8.iot.control.GestionCapteurs;
 
-public class GestionCapteursViewController {
+public class ConfigCapteursViewController {
     private Stage containingStage;
-    private GestionCapteurs rockCapteurs;
+    private ConfigCapteurs configCapteurs;
 
 
-    public void initContext(Stage containingStage, GestionCapteurs _rc){
+    public void initContext(Stage containingStage, ConfigCapteurs _rc){
         this.containingStage = containingStage;
-        this.rockCapteurs = _rc;
+        this.configCapteurs = _rc;
     }
 
     public void showDialog(){
