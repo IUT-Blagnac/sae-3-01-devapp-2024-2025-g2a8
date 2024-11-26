@@ -1,16 +1,19 @@
-package net.g2a8.iot.controller;
+package net.g2a8.iot.control;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import net.g2a8.iot.view.RockGestMainController;
+import net.g2a8.iot.view.RockGestMainViewController;
 
 public class RockGestMain extends Application {
     private Stage mainStage;
-    private RockGestMainController controller;
+    private RockGestMainViewController controller;
 
+
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader;
@@ -19,7 +22,7 @@ public class RockGestMain extends Application {
 
         this.mainStage = primaryStage;
 
-        loader = new FXMLLoader(RockGestMainController.class.getResource("RockGestMain.fxml"));
+        loader = new FXMLLoader(RockGestMainViewController.class.getResource("RockGestMain.fxml"));
 
         root = loader.load();
 
@@ -36,5 +39,10 @@ public class RockGestMain extends Application {
 
     public static void runApp(){
         launch();
+    }
+
+    public void doOpenCapteursDialog(){
+        RockCapteurs rockCapteurs = new RockCapteurs(this.mainStage);
+        rockCapteurs.doOpenCapteursDialog();
     }
 }
