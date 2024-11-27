@@ -1,9 +1,9 @@
-package net.g2a8.iot.view;
+package application.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import net.g2a8.iot.control.RockGestionMain;
+import application.control.RockGestionMain;
 
 public class RockGestionMainViewController {
     private Stage containingStage;

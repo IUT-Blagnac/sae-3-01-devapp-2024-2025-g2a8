@@ -1,8 +1,8 @@
-package net.g2a8.iot.view;
+package application.view;
 
 import javafx.stage.Stage;
-import net.g2a8.iot.control.GestionPanneaux;
-import net.g2a8.iot.control.GestionPanneaux;
+import application.control.GestionPanneaux;
+import application.control.GestionPanneaux;
 
 public class GestionPanneauxViewController {
         private Stage containingStage;

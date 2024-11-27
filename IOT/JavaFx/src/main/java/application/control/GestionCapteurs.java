@@ -1,11 +1,11 @@
-package net.g2a8.iot.control;
+package application.control;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import net.g2a8.iot.view.GestionCapteursViewController;
+import application.view.GestionCapteursViewController;
 
 public class GestionCapteurs {
 

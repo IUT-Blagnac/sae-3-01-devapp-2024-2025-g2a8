@@ -1,6 +1,6 @@
-package net.g2a8.iot;
+package application;
 
-import net.g2a8.iot.control.RockGestionMain;
+import application.control.RockGestionMain;
 
 public class RockGest {
     public static void main(String[] args) {

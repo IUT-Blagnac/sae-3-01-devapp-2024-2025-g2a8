@@ -1,12 +1,12 @@
-package net.g2a8.iot.control;
+package application.control;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import net.g2a8.iot.view.GestionPanneauxViewController;
-import net.g2a8.iot.view.GestionPanneauxViewController;
+import application.view.GestionPanneauxViewController;
+import application.view.GestionPanneauxViewController;
 
 public class GestionPanneaux {
     private Stage panneauStage;

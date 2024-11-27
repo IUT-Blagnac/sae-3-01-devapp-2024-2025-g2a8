@@ -1,8 +1,8 @@
-package net.g2a8.iot.view;
+package application.view;
 
 import javafx.stage.Stage;
-import net.g2a8.iot.control.ConfigCapteurs;
-import net.g2a8.iot.control.GestionCapteurs;
+import application.control.ConfigCapteurs;
+import application.control.GestionCapteurs;
 
 public class ConfigCapteursViewController {
     private Stage containingStage;
