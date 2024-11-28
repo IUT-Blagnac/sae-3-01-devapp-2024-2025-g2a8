@@ -31,7 +31,7 @@ public class DataLoader {
         ObjectMapper objectMapper = new ObjectMapper();
         
         try {
-            InputStream inputStream = getClass().getResourceAsStream("/" + jsonfilePath);
+            InputStream inputStream = getClass().getResourceAsStream("/pythonResources/" + jsonfilePath);
             if (inputStream == null) {
                 throw new IOException("Cannot find resource: " + jsonfilePath);
             }

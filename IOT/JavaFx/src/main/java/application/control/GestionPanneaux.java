@@ -6,7 +6,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import application.view.GestionPanneauxViewController;
-import application.view.GestionPanneauxViewController;
 
 public class GestionPanneaux {
     private Stage panneauStage;

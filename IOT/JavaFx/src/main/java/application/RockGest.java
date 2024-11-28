@@ -8,8 +8,8 @@ public class RockGest {
         
         // DataLoader dataLoader = new DataLoader();
         // dataLoader.LoadDatasFromJson("dataNormal.json");
-        // dataLoader.affichagerData();
-        // dataLoader.afficherSolarPanel();
+        // // dataLoader.affichagerData();
+        // // dataLoader.afficherSolarPanel();
         RockGestionMain.runApp();
     }
 }
