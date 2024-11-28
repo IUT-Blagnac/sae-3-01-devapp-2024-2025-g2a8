@@ -2,30 +2,38 @@ package application.loader;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class DataCapteurs {
-    private String salle;
+    private String name;
     private List<DataValue> co2;
-    private List<DataValue> temperature;
-    private List<DataValue> humidite;
+    private List<DataValue> temp;
+    private List<DataValue> humidity;
 
 
-    public DataCapteurs(String salle, List<DataValue> co2, List<DataValue> temperature, List<DataValue> humidite) {
-        this.salle = salle;
+    @JsonCreator
+    public DataCapteurs(
+            @JsonProperty("name") String name,
+            @JsonProperty("co2") List<DataValue> co2,
+            @JsonProperty("temp") List<DataValue> temp,
+            @JsonProperty("humidity") List<DataValue> humidity) {
+        this.name = name;
         this.co2 = co2;
-        this.temperature = temperature;
-        this.humidite = humidite;
+        this.temp = temp;
+        this.humidity = humidity;
     }
 
     public DataCapteurs getDataCapteurs() {
         return this;
     }
 
-    public String getSalle() {
-        return this.salle;
+    public String getname() {
+        return this.name;
     }
 
-    public void setSalle(String salle) {
-        this.salle = salle;
+    public void setname(String name) {
+        this.name = name;
     }
 
     public List<DataValue> getCo2() {
@@ -36,20 +44,20 @@ public class DataCapteurs {
         this.co2 = co2;
     }
 
-    public List<DataValue> getTemperature() {
-        return this.temperature;
+    public List<DataValue> gettemp() {
+        return this.temp;
     }
 
-    public void setTemperature(List<DataValue> temperature) {
-        this.temperature = temperature;
+    public void settemp(List<DataValue> temp) {
+        this.temp = temp;
     }
 
-    public List<DataValue> getHumidite() {
-        return this.humidite;
+    public List<DataValue> gethumidity() {
+        return this.humidity;
     }
 
-    public void setHumidite(List<DataValue> humidite) {
-        this.humidite = humidite;
+    public void sethumidity(List<DataValue> humidity) {
+        this.humidity = humidity;
     }
 
 }

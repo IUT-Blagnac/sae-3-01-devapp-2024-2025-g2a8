@@ -42,7 +42,7 @@ public class DataLoader {
 
     public void affichagerData(){
         for (DataCapteurs dataCapteurs : dataLoader) {
-            System.out.println("Salle: " + dataCapteurs.getSalle());
+            System.out.println("Salle: " + dataCapteurs.getname());
             
             // Afficher les données de CO2
             for (DataValue dataValue : dataCapteurs.getCo2()) {
@@ -50,12 +50,12 @@ public class DataLoader {
             }
 
             // Afficher les données de température
-            for (DataValue dataValue : dataCapteurs.getTemperature()) {
+            for (DataValue dataValue : dataCapteurs.gettemp()) {
                 System.out.println("Température - Date: " + dataValue.getDate() + ", Value: " + dataValue.getValue());
             }
 
             // Afficher les données d'humidité
-            for (DataValue dataValue : dataCapteurs.getHumidite()) {
+            for (DataValue dataValue : dataCapteurs.gethumidity()) {
                 System.out.println("Humidité - Date: " + dataValue.getDate() + ", Value: " + dataValue.getValue());
             }
             System.out.println(); 

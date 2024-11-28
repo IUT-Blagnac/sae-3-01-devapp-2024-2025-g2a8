@@ -2,9 +2,12 @@ package application.loader;
 
 import java.util.List;
 
+
 public class DataPrincipale {
 
     private List<DataCapteurs> capteurs;
+    private List<DataSolarPanel> dataLoader;
+
 
     public List<DataCapteurs> getCapteurs() {
         return capteurs;
