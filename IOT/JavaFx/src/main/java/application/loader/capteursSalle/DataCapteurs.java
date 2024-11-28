@@ -1,4 +1,4 @@
-package application.loader;
+package application.loader.capteursSalle;
 
 import java.util.List;
 
@@ -32,32 +32,21 @@ public class DataCapteurs {
         return this.name;
     }
 
-    public void setname(String name) {
-        this.name = name;
-    }
 
     public List<DataValue> getCo2() {
         return this.co2;
     }
 
-    public void setCo2(List<DataValue> co2) {
-        this.co2 = co2;
-    }
 
     public List<DataValue> gettemp() {
         return this.temp;
     }
 
-    public void settemp(List<DataValue> temp) {
-        this.temp = temp;
-    }
 
     public List<DataValue> gethumidity() {
         return this.humidity;
     }
 
-    public void sethumidity(List<DataValue> humidity) {
-        this.humidity = humidity;
-    }
+
 
 }

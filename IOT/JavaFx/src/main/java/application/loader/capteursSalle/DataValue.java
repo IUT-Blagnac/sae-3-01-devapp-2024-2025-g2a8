@@ -1,4 +1,4 @@
-package application.loader;
+package application.loader.capteursSalle;
 
 public class DataValue {
     private String date;
@@ -8,15 +8,9 @@ public class DataValue {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     public double getValue() {
         return value;
     }
 
-    public void setValue(double value) {
-        this.value = value;
-    }
 }
