@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -117,14 +118,9 @@ public class GestionCapteursViewController {
 
         listSalles.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         this.listSalles.getSelectionModel().selectedItemProperty().addListener(e -> this.addDonnees());
-        this.listSalles.getSelectionModel().selectedItemProperty().addListener(e -> {
-            try {
-                this.loadLineChart();
-            } catch (ParseException e1) {
-
-                e1.printStackTrace();
-            }
-        });
+        this.listSalles.getSelectionModel().selectedItemProperty().addListener(e -> this.loadLineChart());
+        
+        
         
     }
 
@@ -165,64 +161,160 @@ public class GestionCapteursViewController {
                 }
             }
 
-            
         }
+        this.loadLineChart();
     }
 
-    private void loadLineChart() throws ParseException{
+    private void loadLineChart() {
+
         this.gridPane.getChildren().clear();
         ArrayList<DataCapteurs> capteursSelect = new ArrayList<DataCapteurs>(this.listSalles.getSelectionModel().getSelectedItems());
-        
-        NumberAxis xAxisC02 = new NumberAxis();
+
+        //ou se trouve le graphique
+        int rowIndex = 0;
+
+        //decalaration graphique C02 générale
+        LineChart<String, Number> lineChartC02 = loadLineChartC02();
+
+        //decalaration graphique Humidité générale
+        LineChart<String, Number> lineChartHumidity = loadLineChartHumidite();
+
+        //decalaration graphique Température générale
+        LineChart<String, Number> lineChartTemp = loadLineChartTemp();
+
+        lineChartC02.setVisible(false);
+        lineChartHumidity.setVisible(false);
+        lineChartTemp.setVisible(false);
+
+        this.gridPane.add(lineChartC02, 0, 0);
+        this.gridPane.add(lineChartTemp, 0, 1);
+        this.gridPane.add(lineChartHumidity, 0, 2);
+
+        for (DataCapteurs capteurs : capteursSelect) {
+
+            //data a mettre dans les graphiques 
+            XYChart.Series<String, Number> seriesC02 = new XYChart.Series();
+            XYChart.Series<String, Number> seriesC02Seul = new XYChart.Series();
+
+            XYChart.Series<String, Number> seriesHumidity = new XYChart.Series();
+            XYChart.Series<String, Number> seriesHumiditySeul = new XYChart.Series();
+
+            XYChart.Series<String, Number> seriesTemp = new XYChart.Series();
+            XYChart.Series<String, Number> seriesTempSeul = new XYChart.Series();
+            if(this.checkCo2.isSelected()) {
+
+                lineChartC02.setVisible(true);
+                //graphique co2 seul par salle
+                LineChart<String, Number> lineChartC02Seul = loadLineChartC02();
+                lineChartC02Seul.setTitle("CO2 Salle : "+capteurs.getname());
+                this.gridPane.add(lineChartC02Seul, 1, rowIndex);
+                rowIndex++;
+                for (DataValue dataValue : capteurs.getCo2()) {
+                    //ajout des données dans les series
+                    seriesC02.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
+                    seriesC02Seul.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
+                }
+
+                seriesC02.setName(capteurs.getname());
+                lineChartC02.getData().add(seriesC02);
+                lineChartC02Seul.getData().add(seriesC02Seul);
+
+            }else{
+                lineChartC02.setVisible(false);
+            }
+            if(this.checkHumidity.isSelected()){
+                lineChartHumidity.setVisible(true);
+                //graphique humidité seul par salle
+                LineChart<String, Number> lineChartHumiditySeul = loadLineChartHumidite();
+                lineChartHumiditySeul.setTitle("Humidité Salle : "+capteurs.getname());
+                this.gridPane.add(lineChartHumiditySeul, 1, rowIndex);
+                rowIndex++;
+
+                
+
+                for (DataValue dataValue : capteurs.gethumidity()) {
+                    //ajout des données dans les series
+                    seriesHumidity.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
+                    seriesHumiditySeul.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
+                }
+
+                seriesHumidity.setName(capteurs.getname());
+                lineChartHumidity.getData().add(seriesHumidity);
+                lineChartHumiditySeul.getData().add(seriesHumiditySeul);
+
+            }else{
+                lineChartHumidity.setVisible(false);
+            }
+
+            if (this.checkTemp.isSelected()) {
+                lineChartTemp.setVisible(true);
+                //graphique température seul par salle
+                LineChart<String, Number> lineChartTempSeul = loadLineChartTemp();
+                lineChartTempSeul.setTitle("Température Salle : "+capteurs.getname());
+                this.gridPane.add(lineChartTempSeul, 1, rowIndex);
+                rowIndex++;
+                
+                
+                for (DataValue dataValue : capteurs.gettemp()) {
+                    //ajout des données dans les series
+                    seriesTemp.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
+                    seriesTempSeul.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
+
+                }
+
+                seriesTemp.setName(capteurs.getname());
+                lineChartTemp.getData().add(seriesTemp);
+                lineChartTempSeul.getData().add(seriesTempSeul);
+
+            }else{
+                lineChartTemp.setVisible(false);
+            }
+        }
+
+    }
+    
+
+
+
+
+
+    
+
+
+    public LineChart<String, Number> loadLineChartC02() {
+        CategoryAxis xAxisC02 = new CategoryAxis();
         NumberAxis yAxisC02 = new NumberAxis();
         xAxisC02.setLabel("Date");
         yAxisC02.setLabel("CO2");
 
-        NumberAxis xAxisTemp = new NumberAxis();
-        NumberAxis yAxisTemp = new NumberAxis();
-        xAxisTemp.setLabel("Date");
-        yAxisTemp.setLabel("Température");
+        LineChart<String, Number> lineChartC02 = new LineChart<>(xAxisC02, yAxisC02);
+        lineChartC02.setTitle("CO2");
+        return lineChartC02;
+    }
 
-        NumberAxis xAxisHumidity = new NumberAxis();
+    public LineChart<String, Number> loadLineChartHumidite() {
+        CategoryAxis xAxisHumidity = new CategoryAxis();
         NumberAxis yAxisHumidity = new NumberAxis();
         xAxisHumidity.setLabel("Date");
         yAxisHumidity.setLabel("Humidité");
 
-        LineChart<Number, Number> lineChartC02 = new LineChart<>(xAxisC02, yAxisC02);
-        this.gridPane.add(lineChartC02, 0, 0);
-        LineChart<Number, Number> lineChartTemp = new LineChart<>(xAxisTemp, yAxisTemp);
-        this.gridPane.add(lineChartTemp, 0, 1);
-        LineChart<Number, Number> lineChartHumidity = new LineChart<>(xAxisHumidity, yAxisHumidity);
-        this.gridPane.add(lineChartHumidity, 0, 2);
-
-        // Ajouter les données aux LineCharts
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        for (DataCapteurs capteurs : capteursSelect) {
-            XYChart.Series<Number, Number> seriesC02 = new XYChart.Series();
-            XYChart.Series<Number, Number> seriesTemp = new XYChart.Series();
-            XYChart.Series<Number, Number> seriesHumidity = new XYChart.Series();
-
-            for (DataValue dataValue : capteurs.getCo2()) {
-                Date date = dateFormat.parse(dataValue.getDate());
-                seriesC02.getData().add(new XYChart.Data(date.getTime(), dataValue.getValue()));
-
-            }
-            for (DataValue dataValue : capteurs.gettemp()) {
-                Date date = dateFormat.parse(dataValue.getDate());
-                seriesTemp.getData().add(new XYChart.Data(date.getTime(), dataValue.getValue()));
-
-            }
-            for (DataValue dataValue : capteurs.gethumidity()) {
-                Date date = dateFormat.parse(dataValue.getDate());
-                seriesHumidity.getData().add(new XYChart.Data(date.getTime(), dataValue.getValue()));
-            }
-
-            lineChartC02.getData().add(seriesC02);
-            lineChartTemp.getData().add(seriesTemp);
-            lineChartHumidity.getData().add(seriesHumidity);
-        }
-
+        LineChart<String, Number> lineChartHumidity = new LineChart<>(xAxisHumidity, yAxisHumidity);
+        lineChartHumidity.setTitle("Humidité");
+        return lineChartHumidity;
     }
+
+    public LineChart<String, Number> loadLineChartTemp() {
+        CategoryAxis xAxisTemp = new CategoryAxis();
+        NumberAxis yAxisTemp = new NumberAxis();
+        xAxisTemp.setLabel("Date");
+        yAxisTemp.setLabel("Température");
+
+        LineChart<String, Number> lineChartTemp = new LineChart<>(xAxisTemp, yAxisTemp);
+        lineChartTemp.setTitle("Température");
+        return lineChartTemp;
+    }
+
+
 
 
 }

@@ -118,7 +118,7 @@
                <content>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0">
                      <content>
-                        <GridPane fx:id="gridPane" prefHeight="695.0" prefWidth="1132.0">
+                        <GridPane fx:id="gridPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                         </GridPane>
                      </content></ScrollPane>
                </content>
