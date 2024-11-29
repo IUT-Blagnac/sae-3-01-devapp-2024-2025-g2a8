@@ -1,22 +1,22 @@
 package application.view;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
+
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import application.control.GestionCapteurs;
 import application.loader.DataLoader;
@@ -26,6 +26,7 @@ import application.model.Donnees;
 
 public class GestionCapteursViewController {
     private Stage containingStage;
+    @SuppressWarnings("unused")
     private GestionCapteurs rockCapteurs;
     // Données de la fenêtre
 	private ObservableList<DataCapteurs> oListCapteurs;
@@ -73,12 +74,16 @@ public class GestionCapteursViewController {
 
         this.tableCapteurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        this.checkCo2.setSelected(true);
+        this.checkTemp.setSelected(true);
+        this.checkHumidity.setSelected(true);
 
         listSalles.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         this.listSalles.getSelectionModel().selectedItemProperty().addListener(e -> this.addDonnees());
     }
 
     private void loadCapteurs(ObservableList<DataCapteurs> olCapteurs){
+        olCapteurs.clear();
         DataLoader dataLoader = new DataLoader();
         dataLoader.LoadDatasFromJson("dataNormal.json");
         List<DataCapteurs> capteurs = dataLoader.getDataLoader();
@@ -100,7 +105,7 @@ public class GestionCapteursViewController {
     TableColumn<Donnees, String> colDate;
 
     @FXML
-    TableColumn<Donnees, String> colValeur;
+    TableColumn<Donnees, Double> colValeur;
 
     @FXML
     TableColumn<Donnees, String> colSalle;
@@ -117,23 +122,24 @@ public class GestionCapteursViewController {
     @FXML
     private void addDonnees(){
         ArrayList<DataCapteurs> capteursSelect = new ArrayList<DataCapteurs>(this.listSalles.getSelectionModel().getSelectedItems());
+        
         this.tableCapteurs.getItems().clear();
         for (DataCapteurs capteurs : capteursSelect) {
             if (this.checkCo2.isSelected()) {
                 for (DataValue dataValue : capteurs.getCo2()) {
-                    Donnees donnee = new Donnees(dataValue.getDate(), String.valueOf(dataValue.getValue()), "PPM", capteurs.getname());
+                    Donnees donnee = new Donnees(dataValue.getDate(), dataValue.getValue(), "PPM", capteurs.getname());
                     this.tableCapteurs.getItems().add(donnee);
                 }
             }
             if (this.checkTemp.isSelected()) {
                 for (DataValue dataValue : capteurs.gettemp()) {
-                    Donnees donnee = new Donnees(dataValue.getDate(), String.valueOf(dataValue.getValue()), "°C", capteurs.getname());
+                    Donnees donnee = new Donnees(dataValue.getDate(), dataValue.getValue(), "°C", capteurs.getname());
                     this.tableCapteurs.getItems().add(donnee);
                 }
             }
             if (this.checkHumidity.isSelected()) {
                 for (DataValue dataValue : capteurs.gethumidity()) {
-                    Donnees donnee = new Donnees(dataValue.getDate(), String.valueOf(dataValue.getValue()), "%", capteurs.getname());
+                    Donnees donnee = new Donnees(dataValue.getDate(), dataValue.getValue(), "%", capteurs.getname());
                     this.tableCapteurs.getItems().add(donnee);
                 }
             }

@@ -2,11 +2,11 @@ package application.model;
 
 public class Donnees {
     private String date;
-    private String valeur;
+    private double valeur;
     private String type;
     private String salle;
 
-    public Donnees(String date, String valeur, String type, String salle) {
+    public Donnees(String date, double valeur, String type, String salle) {
         this.date = date;
         this.valeur = valeur;
         this.type = type;
@@ -17,7 +17,7 @@ public class Donnees {
         return date;
     }
 
-    public String getValeur() {
+    public double getValeur() {
         return valeur;
     }
 

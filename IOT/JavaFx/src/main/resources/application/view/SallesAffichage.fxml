@@ -54,7 +54,7 @@
          <children>
             <ScrollPane prefHeight="751.0" prefWidth="100.0" GridPane.rowIndex="1">
                <content>
-                  <ListView fx:id="listSalles" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="703.0" prefWidth="98.0" />
+                  <ListView fx:id="listSalles" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="713.0" prefWidth="98.0" />
                </content>
             </ScrollPane>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="117.0" text="Salles">
@@ -66,7 +66,7 @@
       </GridPane>
    </left>
    <bottom>
-      <GridPane prefHeight="30.0" prefWidth="873.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="37.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="412.8000244140625" minWidth="0.0" prefWidth="140.00000610351563" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="930.4000061035156" minWidth="10.0" prefWidth="859.1999938964843" />
@@ -99,13 +99,13 @@
       </GridPane>
    </bottom>
    <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane prefHeight="689.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="Données">
                <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                  <BorderPane prefHeight="675.0" prefWidth="900.0">
                      <center>
-                        <TableView fx:id="tableCapteurs" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tableCapteurs" prefHeight="563.0" prefWidth="887.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="colSalle" prefWidth="220.7999725341797" text="Salle" />
                               <TableColumn fx:id="colType" prefWidth="212.00006103515625" text="Type" />
