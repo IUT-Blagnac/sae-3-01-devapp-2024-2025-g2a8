@@ -11,5 +11,9 @@ public class RockGest {
         // // dataLoader.affichagerData();
         // // dataLoader.afficherSolarPanel();
         RockGestionMain.runApp();
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
     }
 }
