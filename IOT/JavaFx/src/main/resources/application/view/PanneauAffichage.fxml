@@ -45,10 +45,10 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tablePanneau" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn prefWidth="429.60003662109375" text="Valeur" />
-                            <TableColumn prefWidth="169.5999755859375" text="Date" />
+                            <TableColumn fx:id="colValeur" prefWidth="390.4000244140625" text="Valeur" />
+                            <TableColumn fx:id="colDate" prefWidth="409.60003662109375" text="Date" />
                           </columns>
                         </TableView>
                      </center>
@@ -67,7 +67,7 @@
                      <children>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <LineChart maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="454.0" prefWidth="772.0" title="Données Panneaux Solaires">
+                              <LineChart fx:id="lineChart" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="454.0" prefWidth="772.0" title="Données Panneaux Solaires">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
                                 </xAxis>

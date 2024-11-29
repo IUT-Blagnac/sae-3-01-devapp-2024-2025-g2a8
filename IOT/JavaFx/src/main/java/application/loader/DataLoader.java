@@ -25,6 +25,10 @@ public class DataLoader {
         return dataLoaderSalles;
     }
 
+    public List<DataSolarPanel> getDataSolarPanel() {
+        return dataLoaderSolarPanels;
+    }
+
     public List<DataSolarPanel> getDataLoaderSolarPanels() {
         return dataLoaderSolarPanels;
     }
