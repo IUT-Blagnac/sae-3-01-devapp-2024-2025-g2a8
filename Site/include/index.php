@@ -4,7 +4,8 @@ require_once("./include/head.php");
 
 <body class="d-flex flex-column min-vh-100">
     <!-- En-tête -->
-    <?php    
+    <?php
+        $pageH1 = "Mon Site E-Commerce";    
         require_once("./include/header.php");
     ?>
 
