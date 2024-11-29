@@ -2,15 +2,18 @@ package application.control;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import application.loader.capteursSalle.DataCapteurs;
 import application.view.GestionCapteursViewController;
 
 public class GestionCapteurs {
 
     private Stage capStage;
     private GestionCapteursViewController capViewController;
+	private TableView<DataCapteurs> tableCapteurs;
     
     
 
@@ -31,6 +34,8 @@ public class GestionCapteurs {
 			this.capStage.setTitle("Gestion des capteurs");
 			this.capStage.setMaximized(true);
 			this.capStage.setResizable(true);
+
+			
 
 			this.capViewController = loader.getController();
 			this.capViewController.initContext(this.capStage, this);

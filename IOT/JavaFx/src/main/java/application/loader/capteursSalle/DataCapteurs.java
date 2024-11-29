@@ -1,5 +1,6 @@
 package application.loader.capteursSalle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -24,8 +25,12 @@ public class DataCapteurs {
         this.humidity = humidity;
     }
 
-    public DataCapteurs getDataCapteurs() {
-        return this;
+    public List<List<DataValue>> getDataCapteurs() {
+        ArrayList<List<DataValue>> dataCapteurs = new ArrayList<List<DataValue>>();
+        dataCapteurs.add(this.co2);
+        dataCapteurs.add(this.temp);
+        dataCapteurs.add(this.humidity);
+        return dataCapteurs;
     }
 
     public String getname() {
@@ -46,6 +51,7 @@ public class DataCapteurs {
     public List<DataValue> gethumidity() {
         return this.humidity;
     }
+
 
 
 
