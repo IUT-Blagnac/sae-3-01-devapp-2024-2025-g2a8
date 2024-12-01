@@ -8,15 +8,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?php if ($current_page == 'index.php') echo 'active'; ?>" href="index.php">Accueil</a>
+                    <a class="nav-link" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link <?php if ($current_page == 'ConsultPrix.php' || $current_page == 'ConsultCat.php') echo 'active'; ?>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Nos Produits
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if ($current_page == 'AjouterCategorie.php') echo 'active'; ?>" href="AjouterCategorie.php">Nouveautés</a>
+                    <a class="nav-link" href="#.php">Nouveautés</a>
                 </li>
             </ul>
         </div>
