@@ -53,6 +53,10 @@ public class DataCapteurs {
     }
 
 
-
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return this.getname();
+    }
 
 }

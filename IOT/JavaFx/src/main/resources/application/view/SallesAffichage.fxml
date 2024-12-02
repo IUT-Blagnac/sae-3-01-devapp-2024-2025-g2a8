@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.GestionCapteursViewController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.GestionCapteursViewController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -40,7 +40,7 @@
       </MenuBar>
    </top>
    <left>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -49,7 +49,7 @@
             <RowConstraints maxHeight="728.0" minHeight="715.0" prefHeight="715.0" />
          </rowConstraints>
          <children>
-            <ScrollPane prefHeight="751.0" prefWidth="100.0" GridPane.rowIndex="1">
+            <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" GridPane.rowIndex="1">
                <content>
                   <ListView fx:id="listSalles" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="713.0" prefWidth="98.0" />
                </content>
@@ -63,7 +63,7 @@
       </GridPane>
    </left>
    <bottom>
-      <GridPane prefHeight="37.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+      <GridPane maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="412.8000244140625" minWidth="0.0" prefWidth="140.00000610351563" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="930.4000061035156" minWidth="10.0" prefWidth="859.1999938964843" />
@@ -96,7 +96,7 @@
       </GridPane>
    </bottom>
    <center>
-      <TabPane prefHeight="689.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="Données">
                <content>

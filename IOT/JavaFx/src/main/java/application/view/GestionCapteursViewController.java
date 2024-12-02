@@ -89,21 +89,8 @@ public class GestionCapteursViewController {
         
         this.loadCapteurs(oListCapteurs);
         this.listSalles.setItems(this.oListCapteurs);
-      // Définir le CellFactory personnalisé
-        this.listSalles.setCellFactory(param -> new ListCell<DataCapteurs>() {
-            @Override
-            protected void updateItem(DataCapteurs capteur, boolean empty) {
-                super.updateItem(capteur, empty);
-                if (empty || capteur == null) {
-                    setText(null);
-                } else {
-                    setText(capteur.getname()); // Affiche uniquement le nom de la salle
-                }
-            }
+        this.listSalles.setAccessibleText(this.oListCapteurs.toString());
 
-
-        }
-        );
 
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colValeur.setCellValueFactory(new PropertyValueFactory<>("valeur"));
