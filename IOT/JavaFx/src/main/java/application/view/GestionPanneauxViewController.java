@@ -56,12 +56,13 @@ public class GestionPanneauxViewController {
         colValeur.setCellValueFactory(new PropertyValueFactory<>("value"));
         
    
-        tablePanneau.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
         colDate.setStyle( "-fx-alignment: CENTER; -fx-font-size: 16px;");
         colValeur.setStyle( "-fx-alignment: CENTER;-fx-font-size: 16px;");
 
         this.rockPanneaux.loadLineChart(this.lineChart, oListPanneaux);
+
+        tablePanneau.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
 
     }
 

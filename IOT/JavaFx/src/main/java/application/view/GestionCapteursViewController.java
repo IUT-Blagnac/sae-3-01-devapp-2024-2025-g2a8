@@ -149,13 +149,13 @@ public class GestionCapteursViewController {
         int rowIndex = 0;
 
         //decalaration graphique C02 générale
-        LineChart<String, Number> lineChartC02 = this.rockCapteurs.createLineChart("PPM", "C02");
+        LineChart<Number, Number> lineChartC02 = this.rockCapteurs.createLineChart("PPM", "C02");
 
         //decalaration graphique Humidité générale
-        LineChart<String, Number> lineChartHumidity = this.rockCapteurs.createLineChart("%", "Humidité");
+        LineChart<Number, Number> lineChartHumidity = this.rockCapteurs.createLineChart("%", "Humidité");
 
         //decalaration graphique Température générale
-        LineChart<String, Number> lineChartTemp = this.rockCapteurs.createLineChart("°C", "Température");
+        LineChart<Number, Number> lineChartTemp = this.rockCapteurs.createLineChart("°C", "Température");
 
         //placement des graphiques
         if (this.checkCo2.isSelected()) {

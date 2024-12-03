@@ -14,6 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import application.loader.DataLoader;
@@ -70,44 +72,56 @@ public class GestionCapteurs {
     }
 
 
-	public LineChart<String, Number> createLineChart(String yAxis, String title) {
-        CategoryAxis xAxisC02 = new CategoryAxis();
-        NumberAxis yAxisC02 = new NumberAxis();
-        xAxisC02.setLabel("Date");
-        yAxisC02.setLabel(yAxis);
+	public LineChart<Number, Number> createLineChart(String yAxisName, String title) {
+        
+        NumberAxis xAxis = new NumberAxis();
+        NumberAxis yAxis = new NumberAxis();
+		xAxis.setForceZeroInRange(false);
+        xAxis.setLabel("Date");
+        yAxis.setLabel(yAxisName);
 
-        LineChart<String, Number> lineChartC02 = new LineChart<>(xAxisC02, yAxisC02);
-        lineChartC02.setTitle(title);
-        return lineChartC02;
+		xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
+            private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            @Override
+            public String toString(Number value) {
+                return dateFormat.format(new Date(value.longValue()));
+            }
+        });
+
+        LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle(title);
+        return lineChart;
     }
 
-	public void addSeriesToLineChart(DataCapteurs capteurs, String type, String unite, LineChart<String, Number> lineChartGeneral, GridPane gridPane, int rowIndex) { 
+	public void addSeriesToLineChart(DataCapteurs capteurs, String type, String unite, LineChart<Number, Number> lineChartGeneral, GridPane gridPane, int rowIndex) { 
 
-		LineChart<String, Number> lineChartSeul = this.createLineChart(unite, type+" : "+capteurs.getname());
+		LineChart<Number, Number> lineChartSeul = this.createLineChart(unite, type+" : "+capteurs.getname());
 		this.createSeries(capteurs, type, lineChartSeul, gridPane);
 		this.createSeries(capteurs, type, lineChartGeneral, gridPane);
 		gridPane.add(lineChartSeul, 1, rowIndex);
 
     }
      
-    private void createSeries(DataCapteurs capteurs, String type, LineChart<String, Number> lineChart, GridPane gridPane) {
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
+    private void createSeries(DataCapteurs capteurs, String type, LineChart<Number, Number> lineChart, GridPane gridPane) {
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
         series.setName(type + " : " + capteurs.getname());
         for (DataValue dataValue : capteurs.getValues(type)) {
-            series.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
+            series.getData().add(new XYChart.Data<>(dateToMillis(dataValue.getDate()), dataValue.getValue()));
         }
         lineChart.getData().add(series);
 
-		for (XYChart.Data<String, Number> seriesData : series.getData()) {
+		for (XYChart.Data<Number, Number> seriesData : series.getData()) {
+			String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(seriesData.getXValue().longValue()));
 			seriesData.getNode().setOnMouseClicked(event -> {
-				Label label = new Label(type + " : " + seriesData.getYValue() +"\nDate : " + seriesData.getXValue());
+				Label label = new Label(type + " : " + seriesData.getYValue() +"\nDate : " + date);
 				label.setStyle( "-fx-alignment: CENTER; -fx-font-size: 16px;");
 				gridPane.getChildren().removeIf(node -> GridPane.getColumnIndex(node) == 2 && GridPane.getRowIndex(node) == 0);
 				gridPane.add(label, 2, 0);
 			});
 			seriesData.getNode().setOnMouseEntered(e -> {
-                seriesData.getNode().setStyle("-fx-background-color: orange;");
-				Tooltip.install(seriesData.getNode(), new Tooltip(type +" : " + seriesData.getYValue() +"\nDate : " + seriesData.getXValue()));
+                seriesData.getNode().setStyle("-fx-background-color:red;");
+				Tooltip.install(seriesData.getNode(), new Tooltip(type +" : " + seriesData.getYValue() +"\nDate : " + date));
 
             });
             seriesData.getNode().setOnMouseExited(e -> {
@@ -116,7 +130,13 @@ public class GestionCapteurs {
 		}
     }
 
-
+	private long dateToMillis(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date).getTime();
+        } catch (Exception e) {
+            throw new RuntimeException("Format de date invalide : " + date, e);
+        }
+    }
 
 }
 
