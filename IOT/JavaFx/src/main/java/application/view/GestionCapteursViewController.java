@@ -161,13 +161,13 @@ public class GestionCapteursViewController {
         int rowIndex = 0;
 
         //decalaration graphique C02 générale
-        LineChart<String, Number> lineChartC02 = loadLineChartC02();
+        LineChart<String, Number> lineChartC02 = loadLineChart("PPM", "C02");
 
         //decalaration graphique Humidité générale
-        LineChart<String, Number> lineChartHumidity = loadLineChartHumidite();
+        LineChart<String, Number> lineChartHumidity = loadLineChart("%", "Humidité");
 
         //decalaration graphique Température générale
-        LineChart<String, Number> lineChartTemp = loadLineChartTemp();
+        LineChart<String, Number> lineChartTemp = loadLineChart("°C", "Température");
 
         lineChartC02.setVisible(false);
         lineChartHumidity.setVisible(false);
@@ -192,8 +192,7 @@ public class GestionCapteursViewController {
 
                 lineChartC02.setVisible(true);
                 //graphique co2 seul par salle
-                LineChart<String, Number> lineChartC02Seul = loadLineChartC02();
-                lineChartC02Seul.setTitle("CO2 Salle : "+capteurs.getname());
+                LineChart<String, Number> lineChartC02Seul = loadLineChart("PPM", "C02 : "+capteurs.getname());
                 this.gridPane.add(lineChartC02Seul, 1, rowIndex);
                 rowIndex++;
                 for (DataValue dataValue : capteurs.getCo2()) {
@@ -212,8 +211,7 @@ public class GestionCapteursViewController {
             if(this.checkHumidity.isSelected()){
                 lineChartHumidity.setVisible(true);
                 //graphique humidité seul par salle
-                LineChart<String, Number> lineChartHumiditySeul = loadLineChartHumidite();
-                lineChartHumiditySeul.setTitle("Humidité Salle : "+capteurs.getname());
+                LineChart<String, Number> lineChartHumiditySeul = loadLineChart("%", "Humidité : "+capteurs.getname());
                 this.gridPane.add(lineChartHumiditySeul, 1, rowIndex);
                 rowIndex++;
 
@@ -236,8 +234,7 @@ public class GestionCapteursViewController {
             if (this.checkTemp.isSelected()) {
                 lineChartTemp.setVisible(true);
                 //graphique température seul par salle
-                LineChart<String, Number> lineChartTempSeul = loadLineChartTemp();
-                lineChartTempSeul.setTitle("Température Salle : "+capteurs.getname());
+                LineChart<String, Number> lineChartTempSeul = loadLineChart("°C", "Température : "+capteurs.getname());
                 this.gridPane.add(lineChartTempSeul, 1, rowIndex);
                 rowIndex++;
                 
@@ -268,38 +265,17 @@ public class GestionCapteursViewController {
     
 
 
-    public LineChart<String, Number> loadLineChartC02() {
+    public LineChart<String, Number> loadLineChart(String yAxis, String title) {
         CategoryAxis xAxisC02 = new CategoryAxis();
         NumberAxis yAxisC02 = new NumberAxis();
         xAxisC02.setLabel("Date");
-        yAxisC02.setLabel("CO2");
+        yAxisC02.setLabel(yAxis);
 
         LineChart<String, Number> lineChartC02 = new LineChart<>(xAxisC02, yAxisC02);
-        lineChartC02.setTitle("CO2");
+        lineChartC02.setTitle(title);
         return lineChartC02;
     }
 
-    public LineChart<String, Number> loadLineChartHumidite() {
-        CategoryAxis xAxisHumidity = new CategoryAxis();
-        NumberAxis yAxisHumidity = new NumberAxis();
-        xAxisHumidity.setLabel("Date");
-        yAxisHumidity.setLabel("Humidité");
-
-        LineChart<String, Number> lineChartHumidity = new LineChart<>(xAxisHumidity, yAxisHumidity);
-        lineChartHumidity.setTitle("Humidité");
-        return lineChartHumidity;
-    }
-
-    public LineChart<String, Number> loadLineChartTemp() {
-        CategoryAxis xAxisTemp = new CategoryAxis();
-        NumberAxis yAxisTemp = new NumberAxis();
-        xAxisTemp.setLabel("Date");
-        yAxisTemp.setLabel("Température");
-
-        LineChart<String, Number> lineChartTemp = new LineChart<>(xAxisTemp, yAxisTemp);
-        lineChartTemp.setTitle("Température");
-        return lineChartTemp;
-    }
 
 
 
