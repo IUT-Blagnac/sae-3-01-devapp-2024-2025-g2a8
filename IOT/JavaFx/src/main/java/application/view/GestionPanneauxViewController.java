@@ -34,7 +34,7 @@ public class GestionPanneauxViewController {
     TableColumn<DataEnergy, String> colDate;
 
     @FXML
-    LineChart<Number, String> lineChart;
+    LineChart<String, Number> lineChart;
 
 
     public void initContext(Stage containingStage, GestionPanneaux _rc){
@@ -56,6 +56,8 @@ public class GestionPanneauxViewController {
         colValeur.setCellValueFactory(new PropertyValueFactory<>("value"));
         
    
+        tablePanneau.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         colDate.setStyle( "-fx-alignment: CENTER; -fx-font-size: 16px;");
         colValeur.setStyle( "-fx-alignment: CENTER;-fx-font-size: 16px;");
 

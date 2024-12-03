@@ -101,11 +101,18 @@ public class GestionCapteurs {
 		for (XYChart.Data<String, Number> seriesData : series.getData()) {
 			seriesData.getNode().setOnMouseClicked(event -> {
 				Label label = new Label(type + " : " + seriesData.getYValue() +"\nDate : " + seriesData.getXValue());
-				Tooltip.install(seriesData.getNode(), new Tooltip(type + " : " + seriesData.getYValue() +"\nDate : " + seriesData.getXValue()));
 				label.setStyle( "-fx-alignment: CENTER; -fx-font-size: 16px;");
 				gridPane.getChildren().removeIf(node -> GridPane.getColumnIndex(node) == 2 && GridPane.getRowIndex(node) == 0);
 				gridPane.add(label, 2, 0);
 			});
+			seriesData.getNode().setOnMouseEntered(e -> {
+                seriesData.getNode().setStyle("-fx-background-color: orange;");
+				Tooltip.install(seriesData.getNode(), new Tooltip(type +" : " + seriesData.getYValue() +"\nDate : " + seriesData.getXValue()));
+
+            });
+            seriesData.getNode().setOnMouseExited(e -> {
+                seriesData.getNode().setStyle("");
+            });
 		}
     }
 

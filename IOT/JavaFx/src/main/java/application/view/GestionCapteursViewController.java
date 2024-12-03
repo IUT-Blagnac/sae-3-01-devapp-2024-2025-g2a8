@@ -95,6 +95,8 @@ public class GestionCapteursViewController {
         this.checkCo2.selectedProperty().addListener(e -> this.loadLineChart());
         this.checkTemp.selectedProperty().addListener(e -> this.loadLineChart());
         this.checkHumidity.selectedProperty().addListener(e -> this.loadLineChart());
+
+        tableCapteurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
    
     }
