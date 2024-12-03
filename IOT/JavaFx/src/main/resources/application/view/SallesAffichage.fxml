@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -17,12 +15,11 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.GestionCapteursViewController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.GestionCapteursViewController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -43,7 +40,7 @@
       </MenuBar>
    </top>
    <left>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -52,12 +49,12 @@
             <RowConstraints maxHeight="728.0" minHeight="715.0" prefHeight="715.0" />
          </rowConstraints>
          <children>
-            <ScrollPane prefHeight="751.0" prefWidth="100.0" GridPane.rowIndex="1">
+            <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" GridPane.rowIndex="1">
                <content>
-                  <VBox prefHeight="737.0" prefWidth="100.0" />
+                  <ListView fx:id="listSalles" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="713.0" prefWidth="98.0" />
                </content>
             </ScrollPane>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="103.0" text="Salles">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="117.0" text="Salles">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -66,10 +63,10 @@
       </GridPane>
    </left>
    <bottom>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.39996337890625" minWidth="10.0" prefWidth="129.60003662109375" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="497.60003662109375" minWidth="10.0" prefWidth="470.39996337890625" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="412.8000244140625" minWidth="0.0" prefWidth="140.00000610351563" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="930.4000061035156" minWidth="10.0" prefWidth="859.1999938964843" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -80,7 +77,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <GridPane GridPane.columnIndex="1">
+            <GridPane prefHeight="30.0" prefWidth="673.0" GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="230.20001220703125" minWidth="10.0" prefWidth="147.59998779296876" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="374.99999237060547" minWidth="10.0" prefWidth="154.00001220703126" />
@@ -90,28 +87,28 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <CheckBox mnemonicParsing="false" text="CO2" />
-                  <CheckBox mnemonicParsing="false" text="Temperature" GridPane.columnIndex="1" />
-                  <CheckBox mnemonicParsing="false" text="Humidité" GridPane.columnIndex="2" />
+                  <CheckBox fx:id="checkCo2" mnemonicParsing="false" onAction="#addDonnees" text="CO2" />
+                  <CheckBox fx:id="checkTemp" mnemonicParsing="false" onAction="#addDonnees" text="Temperature" GridPane.columnIndex="1" />
+                  <CheckBox fx:id="checkHumidity" mnemonicParsing="false" onAction="#addDonnees" text="Humidité" GridPane.columnIndex="2" />
                </children>
             </GridPane>
          </children>
       </GridPane>
    </bottom>
    <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="Données">
                <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                  <BorderPane prefHeight="675.0" prefWidth="900.0">
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                          <columns>
-                            <TableColumn prefWidth="121.60003662109375" text="Salle" />
-                            <TableColumn prefWidth="127.99998474121094" text="Type" />
-                              <TableColumn prefWidth="118.39996337890625" text="Valeur" />
-                              <TableColumn prefWidth="132.80010986328125" text="Date" />
-                          </columns>
+                        <TableView fx:id="tableCapteurs" prefHeight="563.0" prefWidth="887.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="colSalle" prefWidth="220.7999725341797" text="Salle" />
+                              <TableColumn fx:id="colType" prefWidth="212.00006103515625" text="Type" />
+                              <TableColumn fx:id="colValeur" minWidth="0.0" prefWidth="241.60003662109375" text="Valeur" />
+                              <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="227.20001220703125" text="Date" />
+                           </columns>
                         </TableView>
                      </center>
                   </BorderPane>
@@ -121,14 +118,8 @@
                <content>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0">
                      <content>
-                        <LineChart prefHeight="535.0" prefWidth="708.0" title="Données Capteurs">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </LineChart>
+                        <GridPane fx:id="gridPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        </GridPane>
                      </content></ScrollPane>
                </content>
             </Tab>
