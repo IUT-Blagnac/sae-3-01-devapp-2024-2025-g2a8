@@ -18,6 +18,7 @@ public class RockGestionMain extends Application {
     private Stage mainStage;
     private RockGestionMainViewController controller;
 
+    private Thread pythonThread;
 
     
     @Override
@@ -40,6 +41,11 @@ public class RockGestionMain extends Application {
         this.mainStage.setTitle("RockWorld Gestion");
 
         this.controller = loader.getController();
+
+        this.mainStage.setOnCloseRequest(e -> {
+            System.out.println("Arret du script Python");
+            stopPythonScript();
+        });
 
         this.controller.initContext(this.mainStage, this);
         this.controller.showDialog();
@@ -65,20 +71,30 @@ public class RockGestionMain extends Application {
     }
 
     public void launchPythonScript(){
-        Thread thread = new Thread(() -> {
+        pythonThread = new Thread(() -> {
+            Process process = null;
             try {
                 System.out.println("Starting Python script...");
     
                 String scriptPath = "C:\\Users\\Etudiant\\Downloads\\sae-3-01-devapp-2024-2025-g2a8\\IOT\\Systeme\\TP-SAE-IoT.py";
-                ProcessBuilder processBuilder = new ProcessBuilder("python", scriptPath);
+                ProcessBuilder processBuilder = new ProcessBuilder("python", "-u", scriptPath);
                 File scriptDirectory = new File(scriptPath).getParentFile();
                 processBuilder.directory(scriptDirectory);
-                Process process = processBuilder.start();
+    
+                processBuilder.environment().put("PYTHONENCODING", "UTF-8");
+                processBuilder.redirectErrorStream(true);
+    
+                process = processBuilder.start();
                 
                 try (InputStream inputStream = process.getInputStream();
                      BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
+                        if (Thread.currentThread().isInterrupted()) {
+                            System.out.println("Python script interrupted.");
+                            process.destroy();
+                            break;
+                        }
                         System.out.println(line);
                     }
                 }
@@ -88,11 +104,20 @@ public class RockGestionMain extends Application {
     
                 System.out.println("Python script finished.");
             } catch (Exception e) {
+                if (process != null) {
+                    process.destroy();
+                }
                 e.printStackTrace();
             }
         });
     
-        thread.start();
+        pythonThread.start();
+    }
+    
+    public void stopPythonScript(){
+        if (pythonThread != null && pythonThread.isAlive()) {
+            pythonThread.interrupt();
+        }
     }
     
 }
