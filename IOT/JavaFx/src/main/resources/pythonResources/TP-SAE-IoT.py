@@ -25,6 +25,7 @@ topics = []
 for item in config["topics"]:
     topics.append(config["topics"][item])
 
+print("Configuration :")
 
 logging.basicConfig(level=logging.INFO)
 
