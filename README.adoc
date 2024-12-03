@@ -80,6 +80,12 @@ https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Docume
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc-Conception.adoc[Document de Conception]
 https://github.com/orgs/IUT-Blagnac/projects/271/views/8[Backlog Produit]
 
+== Communication 
+
+=== retour semaine 48 
+Pas d'ODJ , pas de CR !
+note : 0/3
+
 == Gestion de projet & Qualité
 
 [cols="1,3"]
