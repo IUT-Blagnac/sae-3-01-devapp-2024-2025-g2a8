@@ -8,8 +8,6 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import application.loader.capteursSalle.DataCapteurs;
-import application.loader.capteursSalle.DataValue;
-import application.loader.solarPanels.DataEnergy;
 import application.loader.solarPanels.DataSolarPanel;
 
 public class DataLoader {
@@ -57,37 +55,7 @@ public class DataLoader {
         
     }
 
-    // public void affichagerData(){
-    //     for (DataCapteurs dataCapteurs : dataLoaderSalles) {
-    //         System.out.println("Salle: " + dataCapteurs.getname());
-            
-    //         // Afficher les données de CO2
-    //         for (DataValue dataValue : dataCapteurs.getCo2()) {
-    //             System.out.println("CO2 - Date: " + dataValue.getDate() + ", Value: " + dataValue.getValue());
-    //         }
 
-    //         // Afficher les données de température
-    //         for (DataValue dataValue : dataCapteurs.gettemp()) {
-    //             System.out.println("Température - Date: " + dataValue.getDate() + ", Value: " + dataValue.getValue());
-    //         }
-
-    //         // Afficher les données d'humidité
-    //         for (DataValue dataValue : dataCapteurs.gethumidity()) {
-    //             System.out.println("Humidité - Date: " + dataValue.getDate() + ", Value: " + dataValue.getValue());
-    //         }
-    //         System.out.println(); 
-    //     }
-    // }
-
-    // public void afficherSolarPanel(){
-    //     for (DataSolarPanel dataSolarPanel : dataLoaderSolarPanels) {
-    //         System.out.println("Panneau solaire: " + dataSolarPanel.getName());
-    //         for (DataEnergy dataEnergy : dataSolarPanel.getEnergy()) {
-    //             System.out.println("Energie - Date: " + dataEnergy.getDate() + ", Value: " + dataEnergy.getValue());
-    //         }
-    //         System.out.println();
-    //     }
-    // }
 
 }
 

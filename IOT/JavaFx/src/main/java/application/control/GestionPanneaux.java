@@ -1,10 +1,20 @@
 package application.control;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.List;
+
+import application.loader.DataLoader;
+import application.loader.solarPanels.DataEnergy;
+import application.loader.solarPanels.DataSolarPanel;
 import application.view.GestionPanneauxViewController;
 
 public class GestionPanneaux {
@@ -42,6 +52,37 @@ public class GestionPanneaux {
 	    
     void doPanneauxDialog(){
 		this.panneauxViewController.showDialog();;
+    }
+
+
+	    public void loadData(TableView<DataEnergy> tablePanneau, ObservableList<DataSolarPanel> oListPanneaux) {
+        tablePanneau.getItems().clear();
+        for (DataSolarPanel dataSolarPanel : oListPanneaux) {
+            for (DataEnergy dataEnergy : dataSolarPanel.getEnergy()) {
+                DataEnergy dataEnergyVal = new DataEnergy(dataEnergy.getDate(), dataEnergy.getValue());
+                tablePanneau.getItems().add(dataEnergyVal);
+            }
+            
+        }
+    }
+
+
+	    public void loadLineChart(LineChart<Number, String> lineChart, ObservableList<DataSolarPanel> oListPanneaux) {
+        XYChart.Series series = new XYChart.Series<>();
+        for (DataSolarPanel dataSolarPanel : oListPanneaux) {
+            for (DataEnergy dataEnergy : dataSolarPanel.getEnergy()) {
+                series.getData().add(new XYChart.Data<>(dataEnergy.getDate(), dataEnergy.getValue()));
+            }
+        }
+        lineChart.getData().addAll(series);
+    }
+
+	public void loadPanneaux(ObservableList<DataSolarPanel> olCapteurs){
+        olCapteurs.clear();
+        DataLoader dataLoader = new DataLoader();
+        dataLoader.LoadDatasFromJson("dataNormal.json");
+        List<DataSolarPanel> capteurs = dataLoader.getDataSolarPanel();  
+        olCapteurs.addAll(capteurs);
     }
 
 }

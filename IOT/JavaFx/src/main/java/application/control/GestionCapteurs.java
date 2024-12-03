@@ -1,11 +1,18 @@
 package application.control;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TableView;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.List;
+
+import application.loader.DataLoader;
 import application.loader.capteursSalle.DataCapteurs;
 import application.view.GestionCapteursViewController;
 
@@ -13,9 +20,6 @@ public class GestionCapteurs {
 
     private Stage capStage;
     private GestionCapteursViewController capViewController;
-	private TableView<DataCapteurs> tableCapteurs;
-    
-    
 
 
     public GestionCapteurs(Stage _parentStage) {
@@ -51,7 +55,25 @@ public class GestionCapteurs {
     }
 
 
+	public LineChart<String, Number> loadLineChart(String yAxis, String title) {
+        CategoryAxis xAxisC02 = new CategoryAxis();
+        NumberAxis yAxisC02 = new NumberAxis();
+        xAxisC02.setLabel("Date");
+        yAxisC02.setLabel(yAxis);
+
+        LineChart<String, Number> lineChartC02 = new LineChart<>(xAxisC02, yAxisC02);
+        lineChartC02.setTitle(title);
+        return lineChartC02;
+    }
 	
+
+	public void loadCapteurs(ObservableList<DataCapteurs> olCapteurs){
+        olCapteurs.clear();
+        DataLoader dataLoader = new DataLoader();
+        dataLoader.LoadDatasFromJson("dataNormal.json");
+        List<DataCapteurs> capteurs = dataLoader.getDataLoader();
+        olCapteurs.addAll(capteurs);
+    }
 
 }
 
