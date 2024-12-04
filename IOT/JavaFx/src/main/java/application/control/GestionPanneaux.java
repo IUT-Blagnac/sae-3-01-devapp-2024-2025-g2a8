@@ -1,6 +1,7 @@
 package application.control;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -50,39 +51,39 @@ public class GestionPanneaux {
 		}
 	}
 
-    public void updateData(ObservableList<DataSolarPanel> olCapteurs, TableView<DataEnergy> tablePanneau, LineChart<String, Number> lineChart) {
-        Thread updatePanneaux = new Thread(() -> {
-            
-            DataLoader dataLoader = new DataLoader();
-            while (true) {
-                try {
-                    Thread.sleep(1000);
-                    dataLoader.LoadDatasFromJson("dataNormal.json");
-                    List<DataSolarPanel> capteurs = dataLoader.getDataSolarPanel();
-                    System.out.println(olCapteurs.size() + " " + capteurs.size()); 
-                    System.out.println(olCapteurs.get(0).getEnergy());
-                    if (olCapteurs.size() != capteurs.size()) {
+        public void updateData(ObservableList<DataSolarPanel> olCapteurs, TableView<DataEnergy> tablePanneau, LineChart<String, Number> lineChart) {
+            Thread updatePanneaux = new Thread(() -> {      
+                DataLoader dataLoader = new DataLoader();
+                while (true) {
+                    try {
+                        Thread.sleep(5000);
+                        ObservableList<DataSolarPanel> oListPanneaux = FXCollections.observableArrayList();
                         Platform.runLater(() -> {
-                            lineChart.getData().clear();
-                            olCapteurs.clear();
-                            olCapteurs.addAll(dataLoader.getDataSolarPanel());
-                            loadData(tablePanneau, olCapteurs);
-                            loadLineChart(lineChart, olCapteurs);
-                        });
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Thread.currentThread().interrupt(); // Restore the interrupted status
-                }
-            }
-        });
-        updatePanneaux.start();
-    }
+                            this.loadPanneaux(oListPanneaux);
+                            if (oListPanneaux.get(0).getEnergy().size() != olCapteurs.get(0).getEnergy().size()) {
+                                olCapteurs.clear();
+                                lineChart.getData().clear();
+                                olCapteurs.addAll(oListPanneaux);
+                                this.loadData(tablePanneau, oListPanneaux);
+                                this.loadLineChart(lineChart, oListPanneaux);
+                            }
 
-	    
-    void doPanneauxDialog(){
-		this.panneauxViewController.showDialog();;
-    }
+                        });
+                        
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        Thread.currentThread().interrupt(); // Restore the interrupted status
+                    }
+                }
+                
+            });
+            updatePanneaux.start();
+        }
+
+    	    
+        void doPanneauxDialog(){
+    		this.panneauxViewController.showDialog();
+        }
 
 
     public void loadData(TableView<DataEnergy> tablePanneau, ObservableList<DataSolarPanel> oListPanneaux) {
@@ -104,20 +105,20 @@ public class GestionPanneaux {
                 series.getData().add(new XYChart.Data<String, Number>(dataEnergy.getDate(), dataEnergy.getValue()));
             }
         }
-        lineChart.getData().addAll(series);
+        lineChart.getData().add(series);
 
-    //     for (XYChart.Data<String, Number> dataSolarPanel : series.getData()) {
-    //         dataSolarPanel.getNode().setOnMouseEntered(e -> {
-    //             dataSolarPanel.getNode().setStyle("-fx-background-color: orange;");
-    //             Tooltip.install(dataSolarPanel.getNode(), new Tooltip("Energie : " + dataSolarPanel.getYValue() +"\nDate : " + dataSolarPanel.getXValue()));
+        for (XYChart.Data<String, Number> dataSolarPanel : series.getData()) {
+            dataSolarPanel.getNode().setOnMouseEntered(e -> {
+                dataSolarPanel.getNode().setStyle("-fx-background-color: orange;");
+                Tooltip.install(dataSolarPanel.getNode(), new Tooltip("Energie : " + dataSolarPanel.getYValue() +"\nDate : " + dataSolarPanel.getXValue()));
 
-    //         });
-    //         dataSolarPanel.getNode().setOnMouseExited(e -> {
-    //             dataSolarPanel.getNode().setStyle("");
+            });
+            dataSolarPanel.getNode().setOnMouseExited(e -> {
+                dataSolarPanel.getNode().setStyle("");
 
-    //         });
+            });
             
-    //     }
+        }
      }
 
 	public void loadPanneaux(ObservableList<DataSolarPanel> olCapteurs){
