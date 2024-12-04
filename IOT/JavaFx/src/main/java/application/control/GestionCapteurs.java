@@ -81,7 +81,7 @@ public class GestionCapteurs {
         yAxis.setLabel(yAxisName);
 
 		xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
-            private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
             @Override
             public String toString(Number value) {
@@ -112,7 +112,7 @@ public class GestionCapteurs {
         lineChart.getData().add(series);
 
 		for (XYChart.Data<Number, Number> seriesData : series.getData()) {
-			String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(seriesData.getXValue().longValue()));
+			String date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date(seriesData.getXValue().longValue()));
 			seriesData.getNode().setOnMouseClicked(event -> {
 				Label label = new Label(type + " : " + seriesData.getYValue() +"\nDate : " + date);
 				label.setStyle( "-fx-alignment: CENTER; -fx-font-size: 16px;");
@@ -120,7 +120,7 @@ public class GestionCapteurs {
 				gridPane.add(label, 2, 0);
 			});
 			seriesData.getNode().setOnMouseEntered(e -> {
-                seriesData.getNode().setStyle("-fx-background-color:red;");
+                seriesData.getNode().setStyle("-fx-background-color:#B22222;");
 				Tooltip.install(seriesData.getNode(), new Tooltip(type +" : " + seriesData.getYValue() +"\nDate : " + date));
 
             });
