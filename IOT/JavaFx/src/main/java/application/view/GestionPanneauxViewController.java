@@ -54,8 +54,8 @@ public class GestionPanneauxViewController {
 
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colValeur.setCellValueFactory(new PropertyValueFactory<>("value"));
-        
-   
+
+        this.rockPanneaux.updateData(this.oListPanneaux, this.tablePanneau, this.lineChart);
         colDate.setStyle( "-fx-alignment: CENTER; -fx-font-size: 16px;");
         colValeur.setStyle( "-fx-alignment: CENTER;-fx-font-size: 16px;");
 

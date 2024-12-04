@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import application.loader.capteursSalle.DataCapteurs;
 import application.loader.solarPanels.DataSolarPanel;
+import java.io.FileInputStream;
 
 public class DataLoader {
     private List<DataCapteurs> dataLoaderSalles;
@@ -35,9 +36,8 @@ public class DataLoader {
     public void LoadDatasFromJson(String jsonfilePath){
 
         ObjectMapper objectMapper = new ObjectMapper();
-        
         try {
-            InputStream inputStream = getClass().getResourceAsStream("/pythonResources/" + jsonfilePath);
+            FileInputStream inputStream = new FileInputStream("C:\\Users\\Etudiant\\Downloads\\sae-3-01-devapp-2024-2025-g2a8\\IOT\\Systeme\\dataNormal.json");
             if (inputStream == null) {
                 throw new IOException("Cannot find resource: " + jsonfilePath);
             }
