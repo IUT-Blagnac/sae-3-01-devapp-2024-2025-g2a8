@@ -1,13 +1,12 @@
 package application.view;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -18,6 +17,7 @@ import javafx.stage.Stage;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import application.control.GestionCapteurs;
 import application.loader.capteursSalle.DataCapteurs;
@@ -77,7 +77,7 @@ public class GestionCapteursViewController {
 
     private void configure(){
         
-        this.configureData();
+        this.configureData(true);  
 
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colValeur.setCellValueFactory(new PropertyValueFactory<>("valeur"));
@@ -96,18 +96,42 @@ public class GestionCapteursViewController {
         this.checkTemp.selectedProperty().addListener(e -> this.loadLineChart());
         this.checkHumidity.selectedProperty().addListener(e -> this.loadLineChart());
 
-        tableCapteurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        this.tableCapteurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
+        this.updateData();
+
    
     }
 
-    private void configureData(){
+    public void configureData(boolean listSallesUpdate){
+        
+
         this.oListCapteurs = FXCollections.observableArrayList();
         this.rockCapteurs.loadCapteurs(oListCapteurs);
-        this.listSalles.setItems(this.oListCapteurs);
-        this.listSalles.setAccessibleText(this.oListCapteurs.toString());
-        this.addDonnees();
-        this.loadLineChart();
+        if(listSallesUpdate){
+
+            List<DataCapteurs> selectedCapteurs = this.listSalles.getSelectionModel().getSelectedItems();
+            List<String> selectedCapteursName = new ArrayList<String>();
+            for (DataCapteurs dataCapteurs : selectedCapteurs) {
+                selectedCapteursName.add(dataCapteurs.getname());
+            }
+
+            this.listSalles.getItems().clear();
+            this.listSalles.setItems(this.oListCapteurs);
+            this.listSalles.setAccessibleText(this.oListCapteurs.toString());
+            
+
+            for (String dataCapteursName : selectedCapteursName) {
+                for (DataCapteurs dataCapteurs : this.oListCapteurs) {
+                    if (dataCapteurs.getname().equals(dataCapteursName)) {
+                        this.listSalles.getSelectionModel().select(dataCapteurs);
+                    }
+                }
+            }
+        }else{
+            this.addDonnees();
+            this.loadLineChart();
+        }
     }
 
 
@@ -181,6 +205,47 @@ public class GestionCapteursViewController {
         }
 
     }
+
+
+    public void updateData() {
+        Thread updateCapteurs = new Thread(() -> {      
+            while (true) {
+                try {
+                    Thread.sleep(5000);
+                    
+                    if(this.oListCapteurs != null){
+                        ObservableList <DataCapteurs> olCapteurs = FXCollections.observableArrayList();
+                        this.rockCapteurs.loadCapteurs(olCapteurs);
+                        Platform.runLater(() -> {
+
+                            if (this.oListCapteurs.size() == olCapteurs.size()) {
+                                for (int i = 0; i < olCapteurs.size(); i++) {
+                                    if (!this.isEqual(this.oListCapteurs.get(i), olCapteurs.get(i), "CO2")) {
+                                        this.configureData(false);
+                                    }
+                                }    
+                            } else {
+                                this.configureData(true);
+                            }
+                        });
+                    }
+                    
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Thread.currentThread().interrupt(); // Restore the interrupted status
+                }
+            }
+            
+        });
+        updateCapteurs.start();
+    }
+
+    private boolean isEqual(DataCapteurs capteurs, DataCapteurs olCapteurs, String type) {
+        return capteurs.getValues(type).size() == olCapteurs.getValues(type).size();
+    }
+
+    
 
 }
 

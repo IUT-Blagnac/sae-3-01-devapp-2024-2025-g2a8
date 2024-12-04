@@ -1,9 +1,9 @@
 package application.control;
 
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -114,14 +114,14 @@ public class GestionCapteurs {
 		for (XYChart.Data<Number, Number> seriesData : series.getData()) {
 			String date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date(seriesData.getXValue().longValue()));
 			seriesData.getNode().setOnMouseClicked(event -> {
-				Label label = new Label(type + " : " + seriesData.getYValue() +"\nDate : " + date);
+				Label label = new Label(type + " : " + seriesData.getYValue() +"\nDate : " + date + "\nSalle : " + capteurs.getname());
 				label.setStyle( "-fx-alignment: CENTER; -fx-font-size: 16px;");
 				gridPane.getChildren().removeIf(node -> GridPane.getColumnIndex(node) == 2 && GridPane.getRowIndex(node) == 0);
 				gridPane.add(label, 2, 0);
 			});
 			seriesData.getNode().setOnMouseEntered(e -> {
                 seriesData.getNode().setStyle("-fx-background-color:#B22222;");
-				Tooltip.install(seriesData.getNode(), new Tooltip(type +" : " + seriesData.getYValue() +"\nDate : " + date));
+				Tooltip.install(seriesData.getNode(), new Tooltip(type +" : " + seriesData.getYValue() +"\nDate : " + date + "\nSalle :" + capteurs.getname()));
 
             });
             seriesData.getNode().setOnMouseExited(e -> {
@@ -137,6 +137,7 @@ public class GestionCapteurs {
             throw new RuntimeException("Format de date invalide : " + date, e);
         }
     }
+
 
 }
 
