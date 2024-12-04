@@ -19,6 +19,7 @@ public class RockGestionMain extends Application {
     private RockGestionMainViewController controller;
 
     private Thread pythonThread;
+    private Process pythonProcess;
 
     
     @Override
@@ -72,7 +73,6 @@ public class RockGestionMain extends Application {
 
     public void launchPythonScript(){
         pythonThread = new Thread(() -> {
-            Process process = null;
             try {
                 System.out.println("Starting Python script...");
     
@@ -84,28 +84,24 @@ public class RockGestionMain extends Application {
                 processBuilder.environment().put("PYTHONENCODING", "UTF-8");
                 processBuilder.redirectErrorStream(true);
     
-                process = processBuilder.start();
+                this.pythonProcess = processBuilder.start();
                 
-                try (InputStream inputStream = process.getInputStream();
+                try (InputStream inputStream = pythonProcess.getInputStream();
                      BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        if (Thread.currentThread().isInterrupted()) {
-                            System.out.println("Python script interrupted.");
-                            process.destroy();
-                            break;
-                        }
                         System.out.println(line);
                     }
                 }
     
-                int exitCode = process.waitFor();
+                int exitCode = pythonProcess.waitFor();
                 System.out.println("Python script exited with code: " + exitCode);
     
                 System.out.println("Python script finished.");
             } catch (Exception e) {
-                if (process != null) {
-                    process.destroy();
+                if (pythonProcess != null && pythonThread != null) {
+                    pythonProcess.destroy();
+                    pythonThread.interrupt();
                 }
                 e.printStackTrace();
             }
@@ -115,6 +111,9 @@ public class RockGestionMain extends Application {
     }
     
     public void stopPythonScript(){
+        if (pythonProcess != null && pythonThread.isAlive()) {
+            pythonProcess.destroy();
+        }
         if (pythonThread != null && pythonThread.isAlive()) {
             pythonThread.interrupt();
         }
