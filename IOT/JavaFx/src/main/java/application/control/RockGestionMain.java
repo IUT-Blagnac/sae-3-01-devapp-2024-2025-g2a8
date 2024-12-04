@@ -6,14 +6,20 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import application.view.RockGestionMainViewController;
+import java.io.InputStreamReader;
 
 public class RockGestionMain extends Application {
     private Stage mainStage;
     private RockGestionMainViewController controller;
 
+    private Thread pythonThread;
+    private Process pythonProcess;
 
     
     @Override
@@ -36,6 +42,11 @@ public class RockGestionMain extends Application {
         this.mainStage.setTitle("RockWorld Gestion");
 
         this.controller = loader.getController();
+
+        this.mainStage.setOnCloseRequest(e -> {
+            System.out.println("Arret du script Python");
+            stopPythonScript();
+        });
 
         this.controller.initContext(this.mainStage, this);
         this.controller.showDialog();
@@ -61,22 +72,50 @@ public class RockGestionMain extends Application {
     }
 
     public void launchPythonScript(){
-       try {
-            System.out.println("Lancement du script Python");
-            // Chemin du script Python
-            String pythonPath = getClass().getResource("/TP-SAE-IoT.py").getPath();
-
-            // Lancer le script Python sans capturer la sortie
-            Process process = Runtime.getRuntime().exec("python " + pythonPath);
-
-            // Optionnel : Assure-toi de nettoyer les flux (important pour éviter des blocages)
-            process.getInputStream().close();
-            process.getErrorStream().close();
-            process.getOutputStream().close();
-
-            System.out.println("Script Python lancé");
-        } catch (Exception e) {
-            e.printStackTrace();
+        pythonThread = new Thread(() -> {
+            try {
+                System.out.println("Starting Python script...");
+    
+                String scriptPath = "C:\\Users\\Etudiant\\Downloads\\sae-3-01-devapp-2024-2025-g2a8\\IOT\\Systeme\\TP-SAE-IoT.py";
+                ProcessBuilder processBuilder = new ProcessBuilder("python", "-u", scriptPath);
+                File scriptDirectory = new File(scriptPath).getParentFile();
+                processBuilder.directory(scriptDirectory);
+    
+                processBuilder.environment().put("PYTHONENCODING", "UTF-8");
+                processBuilder.redirectErrorStream(true);
+    
+                this.pythonProcess = processBuilder.start();
+                
+                try (InputStream inputStream = pythonProcess.getInputStream();
+                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        System.out.println(line);
+                    }
+                }
+    
+                int exitCode = pythonProcess.waitFor();
+                System.out.println("Python script exited with code: " + exitCode);
+    
+                System.out.println("Python script finished.");
+            } catch (Exception e) {
+                if (pythonProcess != null && pythonThread != null) {
+                    pythonProcess.destroy();
+                    pythonThread.interrupt();
+                }
+                e.printStackTrace();
+            }
+        });
+    
+        pythonThread.start();
+    }
+    
+    public void stopPythonScript(){
+        if (pythonProcess != null && pythonThread.isAlive()) {
+            pythonProcess.destroy();
+        }
+        if (pythonThread != null && pythonThread.isAlive()) {
+            pythonThread.interrupt();
         }
     }
     

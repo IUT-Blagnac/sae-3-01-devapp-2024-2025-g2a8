@@ -11,19 +11,22 @@ import json
 import logging
 import configparser
 import datetime as dt
+import configparser
+import os
+
+print("Configuration :")
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
+config.read(config_path)
 
 # Configuration
-mqttServer = config.get("configTopic", "mqttServer")
-nomFichierDonnees = config.get("configTopic", "nomFichierDonnees")
-seuilTemperature = config.get("configTopic", "seuilTemperature")
-panneauxSolaireBool = config.get("configTopic", "panneauxSolaireBool")
+mqttServer = config.get('configTopic', 'mqttServer')
+nomFichierDonnees = config.get('configTopic', 'nomFichierDonnees')
+seuilTemperature = config.get('configTopic', 'seuilTemperature')
+panneauxSolaireBool = config.get('configTopic', 'panneauxSolaireBool')
 
-topics = []
-for item in config["topics"]:
-    topics.append(config["topics"][item])
+topics = list(config['topics'].values())
 
 
 logging.basicConfig(level=logging.INFO)
