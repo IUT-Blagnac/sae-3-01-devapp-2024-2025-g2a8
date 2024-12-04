@@ -53,6 +53,29 @@ public class DataCapteurs {
     }
 
 
+    public List<DataValue> getValues(String type) {
+
+        switch (type) {
+
+            case "CO2":
+
+                return this.getCo2();
+
+            case "Température":
+
+                return this.gettemp();
+
+            case "Humidité":
+
+                return this.gethumidity();
+
+            default:
+
+                return new ArrayList<>();
+
+        }
+    }
+
     @Override
     public String toString() {
         // TODO Auto-generated method stub

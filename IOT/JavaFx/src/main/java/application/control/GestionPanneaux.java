@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -67,14 +68,27 @@ public class GestionPanneaux {
     }
 
 
-	    public void loadLineChart(LineChart<Number, String> lineChart, ObservableList<DataSolarPanel> oListPanneaux) {
-        XYChart.Series series = new XYChart.Series<>();
+	    public void loadLineChart(LineChart<String, Number> lineChart, ObservableList<DataSolarPanel> oListPanneaux) {
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
         for (DataSolarPanel dataSolarPanel : oListPanneaux) {
             for (DataEnergy dataEnergy : dataSolarPanel.getEnergy()) {
-                series.getData().add(new XYChart.Data<>(dataEnergy.getDate(), dataEnergy.getValue()));
+                series.getData().add(new XYChart.Data<String, Number>(dataEnergy.getDate(), dataEnergy.getValue()));
             }
         }
         lineChart.getData().addAll(series);
+
+        for (XYChart.Data<String, Number> dataSolarPanel : series.getData()) {
+            dataSolarPanel.getNode().setOnMouseEntered(e -> {
+                dataSolarPanel.getNode().setStyle("-fx-background-color: orange;");
+                Tooltip.install(dataSolarPanel.getNode(), new Tooltip("Energie : " + dataSolarPanel.getYValue() +"\nDate : " + dataSolarPanel.getXValue()));
+
+            });
+            dataSolarPanel.getNode().setOnMouseExited(e -> {
+                dataSolarPanel.getNode().setStyle("");
+
+            });
+            
+        }
     }
 
 	public void loadPanneaux(ObservableList<DataSolarPanel> olCapteurs){

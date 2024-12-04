@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -28,6 +29,7 @@ public class GestionCapteursViewController {
     private GestionCapteurs rockCapteurs;
     // Données de la fenêtre
 	private ObservableList<DataCapteurs> oListCapteurs;
+
   
     @FXML 
     ListView<DataCapteurs> listSalles;
@@ -59,6 +61,7 @@ public class GestionCapteursViewController {
 
     @FXML
     GridPane gridPane;
+
     
 
 
@@ -74,11 +77,7 @@ public class GestionCapteursViewController {
 
     private void configure(){
         
-        this.oListCapteurs = FXCollections.observableArrayList();
-        this.rockCapteurs.loadCapteurs(oListCapteurs);
-        this.listSalles.setItems(this.oListCapteurs);
-        this.listSalles.setAccessibleText(this.oListCapteurs.toString());
-
+        this.configureData();
 
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colValeur.setCellValueFactory(new PropertyValueFactory<>("valeur"));
@@ -96,9 +95,19 @@ public class GestionCapteursViewController {
         this.checkCo2.selectedProperty().addListener(e -> this.loadLineChart());
         this.checkTemp.selectedProperty().addListener(e -> this.loadLineChart());
         this.checkHumidity.selectedProperty().addListener(e -> this.loadLineChart());
+
+        tableCapteurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
-        
-        
+   
+    }
+
+    private void configureData(){
+        this.oListCapteurs = FXCollections.observableArrayList();
+        this.rockCapteurs.loadCapteurs(oListCapteurs);
+        this.listSalles.setItems(this.oListCapteurs);
+        this.listSalles.setAccessibleText(this.oListCapteurs.toString());
+        this.addDonnees();
+        this.loadLineChart();
     }
 
 
@@ -136,110 +145,42 @@ public class GestionCapteursViewController {
         ArrayList<DataCapteurs> capteursSelect = new ArrayList<DataCapteurs>(this.listSalles.getSelectionModel().getSelectedItems());
 
         //ou se trouve le graphique
-        int rowIndex = 0;
         int rowIndex2 = 0;
-
-        //decalaration Des graphiques généraux
-        
+        int rowIndex = 0;
 
         //decalaration graphique C02 générale
-        LineChart<String, Number> lineChartC02 = this.rockCapteurs.loadLineChart("PPM", "C02");
+        LineChart<Number, Number> lineChartC02 = this.rockCapteurs.createLineChart("PPM", "C02");
 
         //decalaration graphique Humidité générale
-        LineChart<String, Number> lineChartHumidity = this.rockCapteurs.loadLineChart("%", "Humidité");
+        LineChart<Number, Number> lineChartHumidity = this.rockCapteurs.createLineChart("%", "Humidité");
 
         //decalaration graphique Température générale
-        LineChart<String, Number> lineChartTemp = this.rockCapteurs.loadLineChart("°C", "Température");
-
+        LineChart<Number, Number> lineChartTemp = this.rockCapteurs.createLineChart("°C", "Température");
 
         //placement des graphiques
         if (this.checkCo2.isSelected()) {
-            this.gridPane.add(lineChartC02, 0, rowIndex2);
-            rowIndex2++;
+            this.gridPane.add(lineChartC02, 0, rowIndex2++);
         }
         if (this.checkHumidity.isSelected()) {
-            this.gridPane.add(lineChartHumidity, 0, rowIndex2);
-            rowIndex2++;
+            this.gridPane.add(lineChartHumidity, 0, rowIndex2++);
         }
         if (this.checkTemp.isSelected()) {
-            this.gridPane.add(lineChartTemp, 0, rowIndex2);
-            rowIndex2++;
+            this.gridPane.add(lineChartTemp, 0, rowIndex2++);
         }
 
-
         for (DataCapteurs capteurs : capteursSelect) {
-            //data a mettre dans les graphiques 
-            XYChart.Series<String, Number> seriesC02 = new XYChart.Series<>();
-            XYChart.Series<String, Number> seriesC02Seul = new XYChart.Series<>();
-
-            XYChart.Series<String, Number> seriesHumidity = new XYChart.Series<>();
-            XYChart.Series<String, Number> seriesHumiditySeul = new XYChart.Series<>();
-
-            XYChart.Series<String, Number> seriesTemp = new XYChart.Series<>();
-            XYChart.Series<String, Number> seriesTempSeul = new XYChart.Series<>();
-            if(this.checkCo2.isSelected()) {
-
-                lineChartC02.setVisible(true);
-                //graphique co2 seul par salle
-                LineChart<String, Number> lineChartC02Seul = this.rockCapteurs.loadLineChart("PPM", "C02 : "+capteurs.getname());
-                this.gridPane.add(lineChartC02Seul, 1, rowIndex);
-                rowIndex++;
-                for (DataValue dataValue : capteurs.getCo2()) {
-                    //ajout des données dans les series
-                    seriesC02.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
-                    seriesC02Seul.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
-                }
-
-                seriesC02.setName(capteurs.getname());
-                lineChartC02.getData().add(seriesC02);
-                lineChartC02Seul.getData().add(seriesC02Seul);
+            if (this.checkCo2.isSelected()) {
+                rockCapteurs.addSeriesToLineChart(capteurs, "CO2", "PPM", lineChartC02, this.gridPane, rowIndex++);
             }
-            if(this.checkHumidity.isSelected()){
-                lineChartHumidity.setVisible(true);
-                //graphique humidité seul par salle
-                LineChart<String, Number> lineChartHumiditySeul = this.rockCapteurs.loadLineChart("%", "Humidité : "+capteurs.getname());
-                this.gridPane.add(lineChartHumiditySeul, 1, rowIndex);
-                rowIndex++;
-
-                
-
-                for (DataValue dataValue : capteurs.gethumidity()) {
-                    //ajout des données dans les series
-                    seriesHumidity.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
-                    seriesHumiditySeul.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
-                }
-
-                seriesHumidity.setName(capteurs.getname());
-                lineChartHumidity.getData().add(seriesHumidity);
-                lineChartHumiditySeul.getData().add(seriesHumiditySeul);
-
+            if (this.checkHumidity.isSelected()) {
+                rockCapteurs.addSeriesToLineChart(capteurs, "Humidité", "%", lineChartHumidity, this.gridPane, rowIndex++);
             }
-
             if (this.checkTemp.isSelected()) {
-                lineChartTemp.setVisible(true);
-                //graphique température seul par salle
-                LineChart<String, Number> lineChartTempSeul = this.rockCapteurs.loadLineChart("°C", "Température : "+capteurs.getname());
-                this.gridPane.add(lineChartTempSeul, 1, rowIndex);
-                rowIndex++;
-                
-                
-                for (DataValue dataValue : capteurs.gettemp()) {
-                    //ajout des données dans les series
-                    seriesTemp.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
-                    seriesTempSeul.getData().add(new XYChart.Data<>(dataValue.getDate(), dataValue.getValue()));
-
-                }
-
-                seriesTemp.setName(capteurs.getname());
-                lineChartTemp.getData().add(seriesTemp);
-                lineChartTempSeul.getData().add(seriesTempSeul);
-
+                rockCapteurs.addSeriesToLineChart(capteurs, "Température", "°C", lineChartTemp, this.gridPane, rowIndex++);
             }
         }
 
     }
-    
-
 
 }
 

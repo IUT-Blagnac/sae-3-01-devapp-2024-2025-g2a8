@@ -6,14 +6,21 @@ import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import application.loader.DataLoader;
 import application.loader.capteursSalle.DataCapteurs;
+import application.loader.capteursSalle.DataValue;
 import application.view.GestionCapteursViewController;
 
 public class GestionCapteurs {
@@ -55,17 +62,6 @@ public class GestionCapteurs {
     }
 
 
-	public LineChart<String, Number> loadLineChart(String yAxis, String title) {
-        CategoryAxis xAxisC02 = new CategoryAxis();
-        NumberAxis yAxisC02 = new NumberAxis();
-        xAxisC02.setLabel("Date");
-        yAxisC02.setLabel(yAxis);
-
-        LineChart<String, Number> lineChartC02 = new LineChart<>(xAxisC02, yAxisC02);
-        lineChartC02.setTitle(title);
-        return lineChartC02;
-    }
-	
 
 	public void loadCapteurs(ObservableList<DataCapteurs> olCapteurs){
         olCapteurs.clear();
@@ -73,6 +69,73 @@ public class GestionCapteurs {
         dataLoader.LoadDatasFromJson("dataNormal.json");
         List<DataCapteurs> capteurs = dataLoader.getDataLoader();
         olCapteurs.addAll(capteurs);
+    }
+
+
+	public LineChart<Number, Number> createLineChart(String yAxisName, String title) {
+        
+        NumberAxis xAxis = new NumberAxis();
+        NumberAxis yAxis = new NumberAxis();
+		xAxis.setForceZeroInRange(false);
+        xAxis.setLabel("Date");
+        yAxis.setLabel(yAxisName);
+
+		xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
+            private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+            @Override
+            public String toString(Number value) {
+                return dateFormat.format(new Date(value.longValue()));
+            }
+        });
+
+        LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle(title);
+        return lineChart;
+    }
+
+	public void addSeriesToLineChart(DataCapteurs capteurs, String type, String unite, LineChart<Number, Number> lineChartGeneral, GridPane gridPane, int rowIndex) { 
+
+		LineChart<Number, Number> lineChartSeul = this.createLineChart(unite, type+" : "+capteurs.getname());
+		this.createSeries(capteurs, type, lineChartSeul, gridPane);
+		this.createSeries(capteurs, type, lineChartGeneral, gridPane);
+		gridPane.add(lineChartSeul, 1, rowIndex);
+
+    }
+     
+    private void createSeries(DataCapteurs capteurs, String type, LineChart<Number, Number> lineChart, GridPane gridPane) {
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
+        series.setName(type + " : " + capteurs.getname());
+        for (DataValue dataValue : capteurs.getValues(type)) {
+            series.getData().add(new XYChart.Data<>(dateToMillis(dataValue.getDate()), dataValue.getValue()));
+        }
+        lineChart.getData().add(series);
+
+		for (XYChart.Data<Number, Number> seriesData : series.getData()) {
+			String date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date(seriesData.getXValue().longValue()));
+			seriesData.getNode().setOnMouseClicked(event -> {
+				Label label = new Label(type + " : " + seriesData.getYValue() +"\nDate : " + date);
+				label.setStyle( "-fx-alignment: CENTER; -fx-font-size: 16px;");
+				gridPane.getChildren().removeIf(node -> GridPane.getColumnIndex(node) == 2 && GridPane.getRowIndex(node) == 0);
+				gridPane.add(label, 2, 0);
+			});
+			seriesData.getNode().setOnMouseEntered(e -> {
+                seriesData.getNode().setStyle("-fx-background-color:#B22222;");
+				Tooltip.install(seriesData.getNode(), new Tooltip(type +" : " + seriesData.getYValue() +"\nDate : " + date));
+
+            });
+            seriesData.getNode().setOnMouseExited(e -> {
+                seriesData.getNode().setStyle("");
+            });
+		}
+    }
+
+	private long dateToMillis(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date).getTime();
+        } catch (Exception e) {
+            throw new RuntimeException("Format de date invalide : " + date, e);
+        }
     }
 
 }
