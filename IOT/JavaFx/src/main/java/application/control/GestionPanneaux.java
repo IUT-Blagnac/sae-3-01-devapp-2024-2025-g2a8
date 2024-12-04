@@ -24,6 +24,8 @@ public class GestionPanneaux {
     private Stage panneauStage;
     private GestionPanneauxViewController panneauxViewController;
     
+    private Thread updatePanneaux;
+    private boolean running = true;
 
 
     public GestionPanneaux(Stage _parentStage) {
@@ -44,6 +46,13 @@ public class GestionPanneaux {
 			this.panneauStage.setResizable(true);
 
 			this.panneauxViewController = loader.getController();
+
+            this.panneauStage.setOnCloseRequest(e -> {
+                running = false;
+                System.out.println("Arret du script Update Panneaux");
+                updatePanneaux.interrupt();
+            });
+            
 			this.panneauxViewController.initContext(this.panneauStage, this);
 
 		} catch (Exception e) {
@@ -52,9 +61,8 @@ public class GestionPanneaux {
 	}
 
         public void updateData(ObservableList<DataSolarPanel> olCapteurs, TableView<DataEnergy> tablePanneau, LineChart<String, Number> lineChart) {
-            Thread updatePanneaux = new Thread(() -> {      
-                DataLoader dataLoader = new DataLoader();
-                while (true) {
+            updatePanneaux = new Thread(() -> {      
+                while (running) {
                     try {
                         Thread.sleep(5000);
                         ObservableList<DataSolarPanel> oListPanneaux = FXCollections.observableArrayList();
@@ -72,7 +80,7 @@ public class GestionPanneaux {
                         
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                        Thread.currentThread().interrupt(); // Restore the interrupted status
+                        Thread.currentThread().interrupt();
                     }
                 }
                 
