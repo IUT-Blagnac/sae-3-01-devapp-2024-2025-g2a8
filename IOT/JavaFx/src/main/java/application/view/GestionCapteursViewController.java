@@ -61,51 +61,33 @@ public class GestionCapteursViewController {
     GridPane gridPane;
 
     
-
-
-    /**
-     * Initialise le contexte du contrôleur de vue.
-     * 
-     * @param containingStage La fenêtre contenant cette vue
-     * @param _rc L'instance de GestionCapteurs pour gérer les données des capteurs
-     */
-
     public void initContext(Stage containingStage, GestionCapteurs _rc){
         this.containingStage = containingStage;
         this.rockCapteurs = _rc;
         this.configure();
     }
 
-    /**
-     * Affiche la fenêtre de dialogue.
-     */
+
     public void showDialog(){
         this.containingStage.showAndWait();
     }
 
  
-    /**
-     * Configure les éléments de l'interface graphique et initialise les événements.
-     */
+
     private void configure(){
-        //Configure les données initiales
         this.configureData();
 
-        //Initialisation des colonnes du TableView
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colValeur.setCellValueFactory(new PropertyValueFactory<>("valeur"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colSalle.setCellValueFactory(new PropertyValueFactory<>("salle"));
 
-        //Active par défaut tous les checkboxes de filtrage (CO2, Température, Humidité)
         this.checkCo2.setSelected(true);
         this.checkTemp.setSelected(true);
         this.checkHumidity.setSelected(true);
 
-        //Configure la sélection multiple pour la liste des salles
         listSalles.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        //Ajoute les listeners
         this.listSalles.getSelectionModel().selectedItemProperty().addListener(e -> this.addDonnees());
         this.listSalles.getSelectionModel().selectedItemProperty().addListener(e -> this.loadLineChart());
 
@@ -113,15 +95,12 @@ public class GestionCapteursViewController {
         this.checkTemp.selectedProperty().addListener(e -> this.loadLineChart());
         this.checkHumidity.selectedProperty().addListener(e -> this.loadLineChart());
 
-        //Configure la politique de redimensionnement des colonnes du tableau
         tableCapteurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
    
     }
 
-    /**
-     * Configure les données initiales de la fenêtre.
-     */
+
     private void configureData(){
         this.oListCapteurs = FXCollections.observableArrayList();
         this.rockCapteurs.loadCapteurs(oListCapteurs);
