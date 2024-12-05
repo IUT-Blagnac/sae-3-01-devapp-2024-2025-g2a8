@@ -13,6 +13,15 @@ public class DataCapteurs {
     private List<DataValue> humidity;
 
 
+    /**
+     * Constructeur de DataCapteurs permettant d'initialiser les données des capteurs d'une salle
+     * en utilisant le format JSON pour la désérialisation
+     * 
+     * @param name      : (String) nom de la salle
+     * @param co2       : (List<DataValue>) liste des valeurs de CO2 mesurées
+     * @param temp      : (List<DataValue>) liste des valeurs de température mesurées
+     * @param humidity  : (List<DataValue>) liste des valeurs d'humidité mesurées
+     */
     @JsonCreator
     public DataCapteurs(
             @JsonProperty("name") String name,
@@ -25,34 +34,45 @@ public class DataCapteurs {
         this.humidity = humidity;
     }
 
-    public List<List<DataValue>> getDataCapteurs() {
-        ArrayList<List<DataValue>> dataCapteurs = new ArrayList<List<DataValue>>();
-        dataCapteurs.add(this.co2);
-        dataCapteurs.add(this.temp);
-        dataCapteurs.add(this.humidity);
-        return dataCapteurs;
-    }
-
+   
+    /**
+     * Méthode permettant de récupérer le nom de la salle
+     */
     public String getname() {
         return this.name;
     }
 
 
+    /**
+     * Méthode permettant de récupérer les valeurs de CO2 mesurées
+     */
     public List<DataValue> getCo2() {
         return this.co2;
     }
 
 
+    /**
+     * Méthode permettant de récupérer les valeurs de température mesurées
+     */
     public List<DataValue> gettemp() {
         return this.temp;
     }
 
 
+    /**
+     * Méthode permettant de récupérer les valeurs d'humidité mesurées
+     */
     public List<DataValue> gethumidity() {
         return this.humidity;
     }
 
 
+    /**
+     * Méthode permettant de récupérer les valeurs mesurées en fonction du type de mesure souhaité
+     * 
+     * @param type : (String) type de mesure
+     * @return List<DataValue> : liste des valeurs mesurées
+     */
     public List<DataValue> getValues(String type) {
 
         switch (type) {
@@ -76,9 +96,11 @@ public class DataCapteurs {
         }
     }
 
+    /**
+     * @return String : nom de la salle
+     */
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return this.getname();
     }
 

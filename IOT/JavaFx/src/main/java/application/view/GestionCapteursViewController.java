@@ -64,31 +64,56 @@ public class GestionCapteursViewController {
 
     
 
-
+    /**
+     * Initialise le contexte de la fenêtre de gestion des capteurs.
+     * Configure la fenêtre et l'associe au contrôleur de gestion des capteurs.
+     * 
+     * @param containingStage La fenêtre principale qui contiendra la vue
+     * @param _rc L'instance de GestionCapteurs qui gère la logique des capteurs
+     */
     public void initContext(Stage containingStage, GestionCapteurs _rc){
         this.containingStage = containingStage;
         this.rockCapteurs = _rc;
         this.configure();
     }
 
+    /**
+     * Affiche la fenêtre de gestion des capteurs.
+     */
     public void showDialog(){
         this.containingStage.showAndWait();
     }
 
+    /**
+     * Configure l'interface utilisateur et initialise les composants de la vue.
+     * Cette méthode met en place :
+     * - Les colonnes de la table des capteurs avec leurs propriétés respectives
+     * - Les cases à cocher pour les différents types de capteurs (CO2, Température, Humidité)
+     * - Le mode de sélection multiple pour la liste des salles
+     * - Les écouteurs d'événements pour la mise à jour dynamique des données
+     * - La politique de redimensionnement des colonnes de la table
+     * 
+     * Elle initialise également les données et met à jour l'affichage.
+     */
     private void configure(){
-        
+        // Initialisation des données
         this.configureData(true);  
 
+        // Configuration des colonnes de la table
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colValeur.setCellValueFactory(new PropertyValueFactory<>("valeur"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colSalle.setCellValueFactory(new PropertyValueFactory<>("salle"));
 
+        //Les cases coché par défaut pour les différents types de capteurs (CO2, Température, Humidité)
         this.checkCo2.setSelected(true);
         this.checkTemp.setSelected(true);
         this.checkHumidity.setSelected(true);
 
+        //Mode de sélection multiple pour la liste des salles
         listSalles.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        //Ajout des différents listeners
         this.listSalles.getSelectionModel().selectedItemProperty().addListener(e -> this.addDonnees());
         this.listSalles.getSelectionModel().selectedItemProperty().addListener(e -> this.loadLineChart());
 
@@ -96,13 +121,22 @@ public class GestionCapteursViewController {
         this.checkTemp.selectedProperty().addListener(e -> this.loadLineChart());
         this.checkHumidity.selectedProperty().addListener(e -> this.loadLineChart());
 
+        //Politique de redimensionnement des colonnes de la table
         this.tableCapteurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
+        //Mise à jour dynamique des données avec l'aide d'un thread
         this.updateData();
 
    
     }
 
+    /**
+     * Configure les données de la vue.
+     * Cette méthode initialise la liste des capteurs et les affiche dans la liste des salles.
+     * Elle met également à jour les données de la table des capteurs et les graphiques.
+     * 
+     * @param listSallesUpdate Indique si la liste des salles doit être mise à jour
+     */
     public void configureData(boolean listSallesUpdate){
         
 
@@ -135,6 +169,9 @@ public class GestionCapteursViewController {
     }
 
 
+    /**
+     * Ajoute les données des capteurs sélectionnés à la table des capteurs.
+     */
     @FXML
     private void addDonnees(){
         ArrayList<DataCapteurs> capteursSelect = new ArrayList<DataCapteurs>(this.listSalles.getSelectionModel().getSelectedItems());
@@ -163,6 +200,9 @@ public class GestionCapteursViewController {
         }
     }
 
+    /**
+     * Charge les graphiques des capteurs sélectionnés.
+     */
     private void loadLineChart() {
 
         this.gridPane.getChildren().clear();
@@ -192,6 +232,7 @@ public class GestionCapteursViewController {
             this.gridPane.add(lineChartTemp, 0, rowIndex2++);
         }
 
+        //ajout des séries aux graphiques généraux et création de 3 nouveaux graphiques pour chaque capteurs	
         for (DataCapteurs capteurs : capteursSelect) {
             if (this.checkCo2.isSelected()) {
                 rockCapteurs.addSeriesToLineChart(capteurs, "CO2", "PPM", lineChartC02, this.gridPane, rowIndex++);
@@ -207,6 +248,10 @@ public class GestionCapteursViewController {
     }
 
 
+    /**
+     * Met à jour les données de la vue.
+     * Cette méthode crée un thread qui met à jour les données de la vue toutes les 5 secondes si nécessaire.
+     */
     public void updateData() {
         Thread updateCapteurs = new Thread(() -> {      
             while (true) {
@@ -241,6 +286,14 @@ public class GestionCapteursViewController {
         updateCapteurs.start();
     }
 
+    /**
+     * Vérifie si les données des capteurs sont égales.
+     * 
+     * @param capteurs Les données des capteurs
+     * @param olCapteurs Les nouvelles données des capteurs
+     * @param type Le type de données à comparer
+     * @return true si les données sont égales, false sinon
+     */
     private boolean isEqual(DataCapteurs capteurs, DataCapteurs olCapteurs, String type) {
         return capteurs.getValues(type).size() == olCapteurs.getValues(type).size();
     }
