@@ -29,4 +29,9 @@ public class ConfigCapteursViewController {
         configCapteurs.write(nomFich.getText(), frequence.getText(), seuil.getText());
         this.containingStage.close();
     }
+
+    @FXML
+    public void doQuitter(){
+        this.containingStage.close();
+    }
 }

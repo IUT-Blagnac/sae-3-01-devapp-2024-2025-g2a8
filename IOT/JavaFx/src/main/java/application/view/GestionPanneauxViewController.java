@@ -66,6 +66,11 @@ public class GestionPanneauxViewController {
 
     }
 
+    @FXML
+    public void doQuitter(){
+        this.containingStage.close();
+    }
+
 
 
 
