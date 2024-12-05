@@ -98,7 +98,7 @@ public class GestionCapteursViewController {
 
         this.tableCapteurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
-        this.updateData();
+        this.rockCapteurs.updateCapteurs(this.oListCapteurs);
 
    
     }
@@ -204,45 +204,6 @@ public class GestionCapteursViewController {
             }
         }
 
-    }
-
-
-    public void updateData() {
-        Thread updateCapteurs = new Thread(() -> {      
-            while (true) {
-                try {
-                    Thread.sleep(5000);
-                    
-                    if(this.oListCapteurs != null){
-                        ObservableList <DataCapteurs> olCapteurs = FXCollections.observableArrayList();
-                        this.rockCapteurs.loadCapteurs(olCapteurs);
-                        Platform.runLater(() -> {
-
-                            if (this.oListCapteurs.size() == olCapteurs.size()) {
-                                for (int i = 0; i < olCapteurs.size(); i++) {
-                                    if (!this.isEqual(this.oListCapteurs.get(i), olCapteurs.get(i), "CO2")) {
-                                        this.configureData(false);
-                                    }
-                                }    
-                            } else {
-                                this.configureData(true);
-                            }
-                        });
-                    }
-                    
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Thread.currentThread().interrupt(); // Restore the interrupted status
-                }
-            }
-            
-        });
-        updateCapteurs.start();
-    }
-
-    private boolean isEqual(DataCapteurs capteurs, DataCapteurs olCapteurs, String type) {
-        return capteurs.getValues(type).size() == olCapteurs.getValues(type).size();
     }
 
     

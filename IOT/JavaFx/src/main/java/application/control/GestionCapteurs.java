@@ -1,6 +1,16 @@
 package application.control;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import application.loader.DataLoader;
+import application.loader.capteursSalle.DataCapteurs;
+import application.loader.capteursSalle.DataValue;
+import application.view.GestionCapteursViewController;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,47 +24,85 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import application.loader.DataLoader;
-import application.loader.capteursSalle.DataCapteurs;
-import application.loader.capteursSalle.DataValue;
-import application.view.GestionCapteursViewController;
-
 public class GestionCapteurs {
 
     private Stage capStage;
     private GestionCapteursViewController capViewController;
+    private ObservableList<DataCapteurs> oListCapteurs;
 
 
-    public GestionCapteurs(Stage _parentStage) {
+    Thread updateCapteurs;
+    private boolean running = true;
+    
+    
+        public GestionCapteurs(Stage _parentStage) {
+    
+            try {
+                FXMLLoader loader = new FXMLLoader(
+                GestionCapteursViewController.class.getResource("SallesAffichage.fxml"));
+                BorderPane root = loader.load();
+    
+                Scene scene = new Scene(root, root.getPrefWidth() + 50, root.getPrefHeight() + 10);
+    
+                this.capStage = new Stage();
+                this.capStage.initModality(Modality.NONE);
+                this.capStage.initOwner(_parentStage);
+                this.capStage.setScene(scene);
+                this.capStage.setTitle("Gestion des capteurs");
+                this.capStage.setMaximized(true);
+                this.capStage.setResizable(true);
+    
+                this.capStage.setOnCloseRequest(e -> {
+                    running = false;
+                    System.out.println("Arret du script Update Capteurs");
+                    updateCapteurs.interrupt();
+                });
+    
+                this.capViewController = loader.getController();
+                this.capViewController.initContext(this.capStage, this);
+    
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    
+        public void updateCapteurs(ObservableList<DataCapteurs> oListCapteurs) {
+            updateCapteurs = new Thread(() -> {      
+                while (running) {
+                    try {
+                        Thread.sleep(5000);
+                        
+                        if(this.oListCapteurs != null){
+                        ObservableList <DataCapteurs> olCapteurs = FXCollections.observableArrayList();
+                        this.loadCapteurs(olCapteurs);
+                        Platform.runLater(() -> {
 
-		try {
-			FXMLLoader loader = new FXMLLoader(
-			GestionCapteursViewController.class.getResource("SallesAffichage.fxml"));
-			BorderPane root = loader.load();
+                            if (this.oListCapteurs.size() == olCapteurs.size()) {
+                                for (int i = 0; i < olCapteurs.size(); i++) {
+                                    if (!this.isEqual(this.oListCapteurs.get(i), olCapteurs.get(i), "CO2")) {
+                                        this.capViewController.configureData(false);
+                                    }
+                                }    
+                            } else {
+                                this.capViewController.configureData(true);
+                            }
+                        });
+                    }
+                    
 
-			Scene scene = new Scene(root, root.getPrefWidth() + 50, root.getPrefHeight() + 10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Thread.currentThread().interrupt(); // Restore the interrupted status
+                }
+            }
+            
+        });
+        updateCapteurs.start();
+    }
 
-			this.capStage = new Stage();
-			this.capStage.initModality(Modality.NONE);
-			this.capStage.initOwner(_parentStage);
-			this.capStage.setScene(scene);
-			this.capStage.setTitle("Gestion des capteurs");
-			this.capStage.setMaximized(true);
-			this.capStage.setResizable(true);
-
-			
-
-			this.capViewController = loader.getController();
-			this.capViewController.initContext(this.capStage, this);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    private boolean isEqual(DataCapteurs capteurs, DataCapteurs olCapteurs, String type) {
+        return capteurs.getValues(type).size() == olCapteurs.getValues(type).size();
+    }
 
 	    
     public void doCapteursDialog(){
