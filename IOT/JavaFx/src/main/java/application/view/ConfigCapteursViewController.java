@@ -2,7 +2,6 @@ package application.view;
 
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import application.control.ConfigCapteurs;
 
@@ -14,7 +13,9 @@ public class ConfigCapteursViewController {
     @FXML TextField seuilTemperature;
     @FXML TextField seuilHumidite;
     @FXML TextField seuilCO2;
-    @FXML Label fileChooser;
+    @FXML TextField nomFichierDonnees;
+    @FXML TextField nomFichierDonneesStrange;
+
 
     public void initContext(Stage containingStage, ConfigCapteurs _rc){
         this.containingStage = containingStage;
@@ -23,6 +24,8 @@ public class ConfigCapteursViewController {
         this.seuilTemperature.setText(configCapteurs.read("configTopic", "seuilTemperature"));
         this.seuilHumidite.setText(configCapteurs.read("configTopic", "seuilHumidity"));
         this.seuilCO2.setText(configCapteurs.read("configTopic", "seuilCo2"));
+        this.nomFichierDonnees.setText(configCapteurs.read("configTopic", "nomFichierDonnees"));
+        this.nomFichierDonneesStrange.setText(configCapteurs.read("configTopic", "nomFichierDonneesStrange"));
     }
 
     public void showDialog(){
@@ -30,7 +33,7 @@ public class ConfigCapteursViewController {
     }
 
     public void doSave(){
-        configCapteurs.write(frequence.getText(), seuilTemperature.getText(), seuilHumidite.getText(), seuilCO2.getText());
+        configCapteurs.write(frequence.getText(), seuilTemperature.getText(), seuilHumidite.getText(), seuilCO2.getText(), nomFichierDonnees.getText(), nomFichierDonneesStrange.getText());
         this.containingStage.close();
     }
 

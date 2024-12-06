@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.ini4j.Wini;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import application.tools.AlertUtilities;
@@ -140,7 +142,11 @@ public class RockGestionMain extends Application {
             while (running) {
                 try {
                     Thread.sleep(2000);
-                    String path = new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "dataStrange.json";
+                    
+                    Wini ini = new Wini(new File(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "config.ini")); 
+                    String fileName = ini.get("configTopic", "nomFichierDonneesStrange")+ ".json";                
+                    
+                    String path = new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + fileName;
                     System.out.println(path);
 
                     // Charger les données JSON
