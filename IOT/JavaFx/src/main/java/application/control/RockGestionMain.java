@@ -88,6 +88,11 @@ public class RockGestionMain extends Application {
         configCapteurs.doConfigDialog();
     }
 
+    public void reloadPythonScript() {
+        stopPythonScript();
+        launchPythonScript();
+    }
+
     public void launchPythonScript(){
         pythonThread = new Thread(() -> {
             try {

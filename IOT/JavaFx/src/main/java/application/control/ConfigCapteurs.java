@@ -64,17 +64,20 @@ public class ConfigCapteurs {
 		return null;
 	}
 
-	public void write(String nomFich, String frequence, String seuil){
+	public void write(String frequence, String seuilTemperature, String seuilHumidite, String seuilCO2){
 		try{
             Wini ini = new Wini(new File(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "config.ini")); 
-			if (!nomFich.isEmpty()){
-				ini.put("configTopic", "nomFichierDonnees", nomFich);
-			}
 			if (!frequence.isEmpty()){
 				ini.put("configTopic", "frequence", frequence);
 			}
-			if (!seuil.isEmpty()){
-				ini.put("configTopic", "seuilTemperature", seuil);
+			if (!seuilTemperature.isEmpty()){
+				ini.put("configTopic", "seuilTemperature", seuilTemperature);
+			}
+			if (!seuilHumidite.isEmpty()) {
+				ini.put("configTopic", "seuilHumidity", seuilHumidite);
+			}
+			if (!seuilCO2.isEmpty()) {
+				ini.put("configTopic", "seuilCo2", seuilCO2);
 			}
 			
             ini.store();

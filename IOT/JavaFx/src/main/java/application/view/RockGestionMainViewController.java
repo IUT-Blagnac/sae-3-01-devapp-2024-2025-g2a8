@@ -36,7 +36,12 @@ public class RockGestionMainViewController {
     @FXML
     public void doCapteurs(){
         this.rockGestMain.capteurs();
-    } 
+    }
+    
+    @FXML
+    public void doReloadPython() {
+        this.rockGestMain.reloadPythonScript();
+    }
 
     @FXML
     public void doPanneaux(){
