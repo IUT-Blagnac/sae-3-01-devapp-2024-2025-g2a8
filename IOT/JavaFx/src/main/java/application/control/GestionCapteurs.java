@@ -1,9 +1,12 @@
 package application.control;
 
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import org.ini4j.Wini;
 
 import application.loader.DataLoader;
 import application.loader.capteursSalle.DataCapteurs;
@@ -110,11 +113,21 @@ public class GestionCapteurs {
     }
 
 
+    public String read(String section, String option){
+		try{
+            Wini ini = new Wini(new File(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "config.ini")); 
+			return (ini.get(section, option));
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+		return null;
+	}
 
 	public void loadCapteurs(ObservableList<DataCapteurs> olCapteurs){
         olCapteurs.clear();
         DataLoader dataLoader = new DataLoader();
-        dataLoader.LoadDatasFromJson("dataNormal.json");
+        String fileName = this.read("configTopic", "nomFichierDonnees");
+        dataLoader.LoadDatasFromJson(fileName+".json");
         List<DataCapteurs> capteurs = dataLoader.getDataLoader();
         olCapteurs.addAll(capteurs);
     }

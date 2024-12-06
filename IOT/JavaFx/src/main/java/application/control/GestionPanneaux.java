@@ -13,7 +13,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.List;
+
+import org.ini4j.Wini;
 
 import application.loader.DataLoader;
 import application.loader.solarPanels.DataEnergy;
@@ -132,9 +135,20 @@ public class GestionPanneaux {
 	public void loadPanneaux(ObservableList<DataSolarPanel> olCapteurs){
         olCapteurs.clear();
         DataLoader dataLoader = new DataLoader();
-        dataLoader.LoadDatasFromJson("dataNormal.json");
+        String fileName = this.read("configTopic", "nomFichierDonnees");
+        dataLoader.LoadDatasFromJson(fileName+".json");
         List<DataSolarPanel> capteurs = dataLoader.getDataSolarPanel();  
         olCapteurs.addAll(capteurs);
     }
+
+    public String read(String section, String option){
+		try{
+            Wini ini = new Wini(new File(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "config.ini")); 
+			return (ini.get(section, option));
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+		return null;
+	}
 
 }

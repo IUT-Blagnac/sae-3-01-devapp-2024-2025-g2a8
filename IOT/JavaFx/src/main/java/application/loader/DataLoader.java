@@ -54,7 +54,7 @@ public class DataLoader {
         ObjectMapper objectMapper = new ObjectMapper();
         //Emplacement du fichier JSON
         try {
-            FileInputStream inputStream = new FileInputStream(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent() + File.separator + "dataNormal.json");
+            FileInputStream inputStream = new FileInputStream(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent() + File.separator + jsonfilePath);
 
             //Désérialisation du fichier JSON
             DataPrincipale dataPrincipale = objectMapper.readValue(inputStream, DataPrincipale.class);
