@@ -126,9 +126,10 @@ public class GestionCapteursViewController {
         //Politique de redimensionnement des colonnes de la table
         this.tableCapteurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
+        this.rockCapteurs.updateCapteurs(this.oListCapteurs);
+
         //Mise à jour dynamique des données avec l'aide d'un thread
         this.updateData();
-
    
     }
 
@@ -305,7 +306,6 @@ public class GestionCapteursViewController {
     private boolean isEqual(DataCapteurs capteurs, DataCapteurs olCapteurs, String type) {
         return capteurs.getValues(type).size() == olCapteurs.getValues(type).size();
     }
-
     
 
 }

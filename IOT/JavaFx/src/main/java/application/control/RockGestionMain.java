@@ -1,24 +1,39 @@
 package application.control;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
-
-import application.view.RockGestionMainViewController;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import application.tools.AlertUtilities;
+import application.view.RockGestionMainViewController;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class RockGestionMain extends Application {
     private Stage mainStage;
     private RockGestionMainViewController controller;
 
+    private Map<String, List<Map<String, Object>>> ancienneValeur = new HashMap<>();
+    private boolean premierLancement = true;
+
     private Thread pythonThread;
     private Process pythonProcess;
+
+    private Thread alerte;
+    private boolean running = true;
 
     
     @Override
@@ -43,9 +58,12 @@ public class RockGestionMain extends Application {
         this.controller = loader.getController();
 
         this.mainStage.setOnCloseRequest(e -> {
+            running = false;
             System.out.println("Arret du script Python");
             stopPythonScript();
         });
+
+        this.alerte();
 
         this.controller.initContext(this.mainStage, this);
         this.controller.showDialog();
@@ -108,6 +126,73 @@ public class RockGestionMain extends Application {
     
         pythonThread.start();
     }
+
+    @SuppressWarnings("unchecked")
+    public void alerte() {
+        alerte = new Thread(() -> {
+            ObjectMapper objectMapper = new ObjectMapper(); 
+    
+            while (running) {
+                try {
+                    Thread.sleep(2000);
+    
+                    // Charger les données JSON
+                    Map<String, Object> fichierJson = objectMapper.readValue(
+                            new File("C:\\Users\\Etudiant\\Downloads\\sae-3-01-devapp-2024-2025-g2a8\\IOT\\Systeme\\dataStrange.json"),
+                            Map.class
+                    );
+    
+                    // Extraire la liste des capteurs depuis le JSON
+                    List<Map<String, Object>> capteurs = (List<Map<String, Object>>) fichierJson.get("capteurs");
+    
+                    for (Map<String, Object> capteur : capteurs) {
+                        String nomCapteur = (String) capteur.get("name"); // Nom unique du capteur
+    
+                        // Vérifier les nouvelles valeurs pour chaque type de données
+                        for (String type : Arrays.asList("co2", "temp", "humidity")) {
+                            List<Map<String, Object>> nouvellesValeurs = (List<Map<String, Object>>) capteur.get(type);
+    
+                            // Si c'est le premier lancement, initialiser les anciennes valeurs et passer au prochain type
+                            if (premierLancement) {
+                                ancienneValeur.putIfAbsent(nomCapteur + "-" + type, new ArrayList<>(nouvellesValeurs));
+                                continue;
+                            }
+    
+                            // S'assurer que la clé existe dans le map des anciennes valeurs
+                            ancienneValeur.putIfAbsent(nomCapteur + "-" + type, new ArrayList<>());
+    
+                            // Récupérer les anciennes valeurs associées à ce capteur et type
+                            List<Map<String, Object>> anciennesValeurs = ancienneValeur.get(nomCapteur + "-" + type);
+    
+                            // Si de nouvelles valeurs ont été ajoutées depuis la dernière vérification
+                            if (nouvellesValeurs.size() > anciennesValeurs.size()) {
+                                String val = nouvellesValeurs.get(nouvellesValeurs.size() - 1).get("value").toString();
+
+                                System.out.println("Alerte : Nouvelle valeur ajoutée pour " + nomCapteur + " (" + type + ")");
+                                System.out.println("Nouvelle valeur : " + val);
+                                
+                                // Afficher une alerte
+                                Platform.runLater(() -> {
+                                    AlertUtilities.showAlert(mainStage, "Alerte : " + type, "Dépassement de " + nomCapteur, type + " : " + val, AlertType.WARNING);
+                                });
+                            }
+    
+                            // Mettre à jour les anciennes valeurs avec la liste actuelle
+                            ancienneValeur.put(nomCapteur + "-" + type, new ArrayList<>(nouvellesValeurs));
+                        }
+                    }
+    
+                    premierLancement = false;
+    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    
+        alerte.start();
+    }
+    
     
     public void stopPythonScript(){
         if (pythonProcess != null && pythonThread.isAlive()) {
@@ -115,6 +200,9 @@ public class RockGestionMain extends Application {
         }
         if (pythonThread != null && pythonThread.isAlive()) {
             pythonThread.interrupt();
+        }
+        if (alerte != null && alerte.isAlive()) {
+            alerte.interrupt();
         }
     }
     
