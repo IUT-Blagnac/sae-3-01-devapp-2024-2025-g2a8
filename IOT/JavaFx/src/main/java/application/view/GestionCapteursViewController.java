@@ -71,18 +71,19 @@ public class GestionCapteursViewController {
      * @param containingStage La fenêtre principale qui contiendra la vue
      * @param _rc L'instance de GestionCapteurs qui gère la logique des capteurs
      */
+
     public void initContext(Stage containingStage, GestionCapteurs _rc){
         this.containingStage = containingStage;
         this.rockCapteurs = _rc;
         this.configure();
     }
 
-    /**
-     * Affiche la fenêtre de gestion des capteurs.
-     */
+
+
     public void showDialog(){
         this.containingStage.showAndWait();
     }
+
 
     /**
      * Configure l'interface utilisateur et initialise les composants de la vue.
@@ -113,6 +114,7 @@ public class GestionCapteursViewController {
         //Mode de sélection multiple pour la liste des salles
         listSalles.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+
         //Ajout des différents listeners
         this.listSalles.getSelectionModel().selectedItemProperty().addListener(e -> this.addDonnees());
         this.listSalles.getSelectionModel().selectedItemProperty().addListener(e -> this.loadLineChart());
@@ -130,6 +132,7 @@ public class GestionCapteursViewController {
    
     }
 
+
     /**
      * Configure les données de la vue.
      * Cette méthode initialise la liste des capteurs et les affiche dans la liste des salles.
@@ -138,8 +141,7 @@ public class GestionCapteursViewController {
      * @param listSallesUpdate Indique si la liste des salles doit être mise à jour
      */
     public void configureData(boolean listSallesUpdate){
-        
-
+    
         this.oListCapteurs = FXCollections.observableArrayList();
         this.rockCapteurs.loadCapteurs(oListCapteurs);
         if(listSallesUpdate){
@@ -166,6 +168,11 @@ public class GestionCapteursViewController {
             this.addDonnees();
             this.loadLineChart();
         }
+    }
+
+    @FXML
+    public void doQuitter(){
+        this.containingStage.close();
     }
 
 
@@ -232,7 +239,8 @@ public class GestionCapteursViewController {
             this.gridPane.add(lineChartTemp, 0, rowIndex2++);
         }
 
-        //ajout des séries aux graphiques généraux et création de 3 nouveaux graphiques pour chaque capteurs	
+        //Pour chaque salle sélectionnée on ajoute les séries au graphiques principaux et créé 3 graphiques pour chaque salle
+
         for (DataCapteurs capteurs : capteursSelect) {
             if (this.checkCo2.isSelected()) {
                 rockCapteurs.addSeriesToLineChart(capteurs, "CO2", "PPM", lineChartC02, this.gridPane, rowIndex++);

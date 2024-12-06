@@ -13,15 +13,9 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
          <menus>
-            <Menu mnemonicParsing="false" text="Fichier">
+            <Menu mnemonicParsing="false" text="Options">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#doQuitter" text="Quitter" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Données">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Enregistrement" />
-                  <MenuItem mnemonicParsing="false" text="Seuil alerte" />
               </items>
             </Menu>
          </menus>
