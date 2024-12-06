@@ -11,7 +11,6 @@ import json
 import logging
 import configparser
 import datetime as dt
-import configparser
 import os
 
 print("Configuration :")
@@ -23,7 +22,10 @@ config.read(config_path)
 # Configuration
 mqttServer = config.get('configTopic', 'mqttServer')
 nomFichierDonnees = config.get('configTopic', 'nomFichierDonnees')
+#Récupération des seuils 
 seuilTemperature = config.get('configTopic', 'seuilTemperature')
+seuilHumidite = config.get('configTopic', 'seuilHumidity')
+seuilCO2 = config.get('configTopic', 'seuilCO2')
 panneauxSolaireBool = config.get('configTopic', 'panneauxSolaireBool')
 
 topics = list(config['topics'].values())
@@ -51,40 +53,71 @@ def get_data(mqttc, obj, msg):
 
             #On recupere la valeur a sauvegarder pour la salle
             salle = msg.topic.split("/")[2]
-
+            
             #si la temperature est au dessus du seuil
             if (jsonMsg[0]["temperature"] >= int(seuilTemperature)):
 
                 #On recupere les valeurs a sauvegarder
-                valueToSave =  [jsonMsg[0]["temperature"], jsonMsg[0]["humidity"], jsonMsg[0]["co2"]]
-                temp = createValueEntry(valueToSave[0])
-                hum = createValueEntry(valueToSave[1])
-                co2 = createValueEntry(valueToSave[2])
+                valueToSave =  jsonMsg[0]["temperature"]
+                temp = createValueEntry(valueToSave)
 
                 #Enregistrement des valeurs dans un fichier json different
                 addInfoToCapteur(temp, salle, ValueTypeCap.TEMPERATURE, DataType.STARNGE)
-                addInfoToCapteur(hum, salle, ValueTypeCap.HUMIDITE, DataType.STARNGE)
-                addInfoToCapteur(co2, salle, ValueTypeCap.CO2, DataType.STARNGE)
+                
 
                 print("Salle de cours : " + salle)
                 print("Temperature : " + str(valueToSave[0]) + " °C")
-                print("humidité : " + str(valueToSave[1]) + " %")
-                print("co² : " + str(valueToSave[2]) + " ppm")
-            else:
+            else :
                 #On recupere les valeurs a sauvegarder
-                valueToSave =  [jsonMsg[0]["temperature"], jsonMsg[0]["humidity"], jsonMsg[0]["co2"]]
-                temp = createValueEntry(valueToSave[0])
-                hum = createValueEntry(valueToSave[1])
-                co2 = createValueEntry(valueToSave[2])
+                valueToSave =  jsonMsg[0]["temperature"]
+                temp = createValueEntry(valueToSave)
 
                 #Enregistrement des valeurs dans un fichier json pour les valeurs normales
                 addInfoToCapteur(temp, salle, ValueTypeCap.TEMPERATURE, DataType.NORMAL)
+
+                print("Salle de cours : " + salle)
+                print("Temperature : " + str(valueToSave) + " °C")
+            if (jsonMsg[0]["humidity"] >= int(seuilHumidite)):
+                #On recupere les valeurs a sauvegarder
+                valueToSave =  jsonMsg[0]["humidity"]
+                hum = createValueEntry(valueToSave)
+
+                #Enregistrement des valeurs dans un fichier json different
+                addInfoToCapteur(hum, salle, ValueTypeCap.HUMIDITE, DataType.STARNGE)
+
+                print("Salle de cours : " + salle)
+                print("humidité : " + str(valueToSave) + " %")
+            else:
+                #On recupere les valeurs a sauvegarder
+                valueToSave =  jsonMsg[0]["humidity"]
+                hum = createValueEntry(valueToSave)
+
+                #Enregistrement des valeurs dans un fichier json pour les valeurs normales
                 addInfoToCapteur(hum, salle, ValueTypeCap.HUMIDITE, DataType.NORMAL)
+
+                print("Salle de cours : " + salle)
+                print("humidité : " + str(valueToSave) + " %")
+            if (jsonMsg[0]["co2"] >= int(seuilCO2)):
+                #On recupere les valeurs a sauvegarder
+                valueToSave =  jsonMsg[0]["co2"]
+                co2 = createValueEntry(valueToSave)
+
+                #Enregistrement des valeurs dans un fichier json different
+                addInfoToCapteur(co2, salle, ValueTypeCap.CO2, DataType.STARNGE)
+
+                print("Salle de cours : " + salle)
+                print("co2 : " + str(valueToSave) + " ppm")
+            else:
+                #On recupere les valeurs a sauvegarder
+                valueToSave =  jsonMsg[0]["co2"]
+                co2 = createValueEntry(valueToSave)
+
+                #Enregistrement des valeurs dans un fichier json pour les valeurs normales
                 addInfoToCapteur(co2, salle, ValueTypeCap.CO2, DataType.NORMAL)
-                
-                print("Temperature : " + str(valueToSave[0]) + " °C")
-                print("humidité : " + str(valueToSave[1]) + " %")
-                print("co² : " + str(valueToSave[2]) + " ppm")
+
+                print("Salle de cours : " + salle)
+                print("co2 : " + str(valueToSave) + " ppm")
+            
             
     except (json.JSONDecodeError, KeyError) as e:
         logging.error("Erreur dans les données reçues : %s", e)
