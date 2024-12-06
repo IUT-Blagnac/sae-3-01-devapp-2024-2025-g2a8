@@ -1,5 +1,7 @@
 package application.control;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,7 +24,8 @@ public class GestionPanneaux {
     private Stage panneauStage;
     private GestionPanneauxViewController panneauxViewController;
     
-    
+    private Thread updatePanneaux;
+    private boolean running = true;
 
 
     public GestionPanneaux(Stage _parentStage) {
@@ -43,6 +46,13 @@ public class GestionPanneaux {
 			this.panneauStage.setResizable(true);
 
 			this.panneauxViewController = loader.getController();
+
+            this.panneauStage.setOnCloseRequest(e -> {
+                running = false;
+                System.out.println("Arret du script Update Panneaux");
+                updatePanneaux.interrupt();
+            });
+            
 			this.panneauxViewController.initContext(this.panneauStage, this);
 
 		} catch (Exception e) {
@@ -50,13 +60,41 @@ public class GestionPanneaux {
 		}
 	}
 
-	    
-    void doPanneauxDialog(){
-		this.panneauxViewController.showDialog();;
-    }
+        public void updateData(ObservableList<DataSolarPanel> olCapteurs, TableView<DataEnergy> tablePanneau, LineChart<String, Number> lineChart) {
+            updatePanneaux = new Thread(() -> {      
+                while (running) {
+                    try {
+                        Thread.sleep(5000);
+                        ObservableList<DataSolarPanel> oListPanneaux = FXCollections.observableArrayList();
+                        Platform.runLater(() -> {
+                            this.loadPanneaux(oListPanneaux);
+                            if (oListPanneaux.get(0).getEnergy().size() != olCapteurs.get(0).getEnergy().size()) {
+                                olCapteurs.clear();
+                                lineChart.getData().clear();
+                                olCapteurs.addAll(oListPanneaux);
+                                this.loadData(tablePanneau, oListPanneaux);
+                                this.loadLineChart(lineChart, oListPanneaux);
+                            }
+
+                        });
+                        
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        Thread.currentThread().interrupt();
+                    }
+                }
+                
+            });
+            updatePanneaux.start();
+        }
+
+    	    
+        void doPanneauxDialog(){
+    		this.panneauxViewController.showDialog();
+        }
 
 
-	    public void loadData(TableView<DataEnergy> tablePanneau, ObservableList<DataSolarPanel> oListPanneaux) {
+    public void loadData(TableView<DataEnergy> tablePanneau, ObservableList<DataSolarPanel> oListPanneaux) {
         tablePanneau.getItems().clear();
         for (DataSolarPanel dataSolarPanel : oListPanneaux) {
             for (DataEnergy dataEnergy : dataSolarPanel.getEnergy()) {
@@ -68,14 +106,14 @@ public class GestionPanneaux {
     }
 
 
-	    public void loadLineChart(LineChart<String, Number> lineChart, ObservableList<DataSolarPanel> oListPanneaux) {
+    public void loadLineChart(LineChart<String, Number> lineChart, ObservableList<DataSolarPanel> oListPanneaux) {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         for (DataSolarPanel dataSolarPanel : oListPanneaux) {
             for (DataEnergy dataEnergy : dataSolarPanel.getEnergy()) {
                 series.getData().add(new XYChart.Data<String, Number>(dataEnergy.getDate(), dataEnergy.getValue()));
             }
         }
-        lineChart.getData().addAll(series);
+        lineChart.getData().add(series);
 
         for (XYChart.Data<String, Number> dataSolarPanel : series.getData()) {
             dataSolarPanel.getNode().setOnMouseEntered(e -> {
@@ -89,7 +127,7 @@ public class GestionPanneaux {
             });
             
         }
-    }
+     }
 
 	public void loadPanneaux(ObservableList<DataSolarPanel> olCapteurs){
         olCapteurs.clear();
