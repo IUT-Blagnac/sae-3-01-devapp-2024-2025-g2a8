@@ -14,7 +14,7 @@ public class ConfigCapteurs {
     private Stage configStage;
     private ConfigCapteursViewController configCapteursViewController;
     
-    
+    private String fileEmplacement;
 
 
     public ConfigCapteurs(Stage _parentStage) {
@@ -41,6 +41,14 @@ public class ConfigCapteurs {
 		}
 	}
 
+	public void setFileEmplacement(String path) {
+		this.fileEmplacement = path;
+	}
+
+	public String getFileEmplacement() {
+		return this.fileEmplacement;
+	}
+
 	    
     public void doConfigDialog(){
 		this.configCapteursViewController.showDialog();
@@ -48,7 +56,7 @@ public class ConfigCapteurs {
 
 	public String read(String section, String option){
 		try{
-            Wini ini = new Wini(new File("IOT\\JavaFx\\src\\main\\resources\\pythonResources\\config.ini")); 
+            Wini ini = new Wini(new File(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "config.ini")); 
 			return (ini.get(section, option));
         }catch(Exception e){
             System.err.println(e.getMessage());
@@ -58,7 +66,7 @@ public class ConfigCapteurs {
 
 	public void write(String nomFich, String frequence, String seuil){
 		try{
-            Wini ini = new Wini(new File("IOT\\JavaFx\\src\\main\\resources\\pythonResources\\config.ini"));
+            Wini ini = new Wini(new File(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "config.ini")); 
 			if (!nomFich.isEmpty()){
 				ini.put("configTopic", "nomFichierDonnees", nomFich);
 			}

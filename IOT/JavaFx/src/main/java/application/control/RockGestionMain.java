@@ -93,7 +93,7 @@ public class RockGestionMain extends Application {
             try {
                 System.out.println("Starting Python script...");
     
-                String scriptPath = "C:\\Users\\Etudiant\\Downloads\\sae-3-01-devapp-2024-2025-g2a8\\IOT\\Systeme\\TP-SAE-IoT.py";
+                String scriptPath = new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "TP-SAE-IoT.py";
                 ProcessBuilder processBuilder = new ProcessBuilder("python", "-u", scriptPath);
                 File scriptDirectory = new File(scriptPath).getParentFile();
                 processBuilder.directory(scriptDirectory);
@@ -135,10 +135,12 @@ public class RockGestionMain extends Application {
             while (running) {
                 try {
                     Thread.sleep(2000);
-    
+                    String path = new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "dataStrange.json";
+                    System.out.println(path);
+
                     // Charger les données JSON
                     Map<String, Object> fichierJson = objectMapper.readValue(
-                            new File("C:\\Users\\Etudiant\\Downloads\\sae-3-01-devapp-2024-2025-g2a8\\IOT\\Systeme\\dataStrange.json"),
+                        new File(path),
                             Map.class
                     );
     

@@ -27,12 +27,6 @@
          <children>
             <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Label maxWidth="1.7976931348623157E308" text="Nom du fichier" />
-                  <Button fx:id="fichPathButton" mnemonicParsing="false" onAction="#fichPath" text="Choose file" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" spacing="10.0">
-               <children>
                   <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" text="Fréquence des messsage (minutes)" />
                   <TextField fx:id="frequence" maxWidth="1.7976931348623157E308" />
                </children>
@@ -40,7 +34,19 @@
             <HBox alignment="CENTER" spacing="10.0">
                <children>
                   <Label maxWidth="1.7976931348623157E308" text="Seuil de température (°C)" />
-                  <TextField fx:id="seuil" maxWidth="1.7976931348623157E308" />
+                  <TextField maxWidth="1.7976931348623157E308" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" text="Seuil humidité (%)" />
+                  <TextField maxWidth="1.7976931348623157E308" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" text="Seuil CO2 (ppm)" />
+                  <TextField maxWidth="1.7976931348623157E308" />
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#doSave" text="Sauvegarder" />

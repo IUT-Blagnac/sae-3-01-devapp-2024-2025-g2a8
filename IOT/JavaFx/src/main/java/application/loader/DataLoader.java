@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import application.loader.capteursSalle.DataCapteurs;
 import application.loader.solarPanels.DataSolarPanel;
+
+import java.io.File;
 import java.io.FileInputStream;
 
 public class DataLoader {
@@ -50,22 +52,17 @@ public class DataLoader {
 
         //Initialisation de l'objet ObjectMapper
         ObjectMapper objectMapper = new ObjectMapper();
+        //Emplacement du fichier JSON
         try {
-            //Emplacement du fichier JSON
-            FileInputStream inputStream = new FileInputStream("C:\\Users\\Etudiant\\Downloads\\sae-3-01-devapp-2024-2025-g2a8\\IOT\\Systeme\\dataNormal.json");
-            if (inputStream == null) {
-                throw new IOException("Cannot find resource: " + jsonfilePath);
-            }
-            
+            FileInputStream inputStream = new FileInputStream(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent() + File.separator + "dataNormal.json");
+
             //Désérialisation du fichier JSON
             DataPrincipale dataPrincipale = objectMapper.readValue(inputStream, DataPrincipale.class);
 
-            //Ajout des données dans les listes
+                        //Ajout des données dans les listes
             this.dataLoaderSalles.addAll(dataPrincipale.getCapteurs());
             this.dataLoaderSolarPanels.addAll(dataPrincipale.getsolarPanels());
-
-            
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("Error loading JSON data: " + e.getMessage());
             e.printStackTrace();
         }

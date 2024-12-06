@@ -153,7 +153,7 @@ public class GestionCapteurs {
      
     private void createSeries(DataCapteurs capteurs, String type, LineChart<Number, Number> lineChart, GridPane gridPane) {
         XYChart.Series<Number, Number> series = new XYChart.Series<>();
-        series.setName(type + " : " + capteurs.getname());
+        series.setName(capteurs.getname());
         for (DataValue dataValue : capteurs.getValues(type)) {
             series.getData().add(new XYChart.Data<>(dateToMillis(dataValue.getDate()), dataValue.getValue()));
         }
