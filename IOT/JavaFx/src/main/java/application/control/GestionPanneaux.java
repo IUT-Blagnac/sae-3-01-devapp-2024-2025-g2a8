@@ -117,7 +117,7 @@ public class GestionPanneaux {
 
         for (XYChart.Data<String, Number> dataSolarPanel : series.getData()) {
             dataSolarPanel.getNode().setOnMouseEntered(e -> {
-                dataSolarPanel.getNode().setStyle("-fx-background-color: orange;");
+                dataSolarPanel.getNode().setStyle("-fx-background-color: #B22222;");
                 Tooltip.install(dataSolarPanel.getNode(), new Tooltip("Energie : " + dataSolarPanel.getYValue() +"\nDate : " + dataSolarPanel.getXValue()));
 
             });

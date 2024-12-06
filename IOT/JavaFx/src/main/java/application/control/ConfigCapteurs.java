@@ -7,6 +7,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import application.view.ConfigCapteursViewController;
 import application.view.GestionCapteursViewController;
+import org.ini4j.*;
+import java.io.File;
 
 public class ConfigCapteurs {
     private Stage configStage;
@@ -43,4 +45,33 @@ public class ConfigCapteurs {
     public void doConfigDialog(){
 		this.configCapteursViewController.showDialog();
     }
+
+	public String read(String section, String option){
+		try{
+            Wini ini = new Wini(new File("IOT\\JavaFx\\src\\main\\resources\\pythonResources\\config.ini")); 
+			return (ini.get(section, option));
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+		return null;
+	}
+
+	public void write(String nomFich, String frequence, String seuil){
+		try{
+            Wini ini = new Wini(new File("IOT\\JavaFx\\src\\main\\resources\\pythonResources\\config.ini"));
+			if (!nomFich.isEmpty()){
+				ini.put("configTopic", "nomFichierDonnees", nomFich);
+			}
+			if (!frequence.isEmpty()){
+				ini.put("configTopic", "frequence", frequence);
+			}
+			if (!seuil.isEmpty()){
+				ini.put("configTopic", "seuilTemperature", seuil);
+			}
+			
+            ini.store();
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+	}
 }
