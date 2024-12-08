@@ -37,7 +37,11 @@ public class GestionCapteurs {
     Thread updateCapteurs;
     private boolean running = true;
     
-    
+        /**
+         * Initialiser une fenêtre permettant de gérer les capteurs
+         * et l'associe à un controlleur qui gère la logique derrière 
+         * @param _parentStage la fenêtre parente 
+         */
         public GestionCapteurs(Stage _parentStage) {
     
             try {
@@ -69,6 +73,10 @@ public class GestionCapteurs {
             }
         }
     
+        /**
+         * Permet de mettre à jour les capteurs avec un intervalle de 5 secondes grace à un thread
+         * @param oListCapteurs la liste des capteurs 
+         */
         public void updateCapteurs(ObservableList<DataCapteurs> oListCapteurs) {
             updateCapteurs = new Thread(() -> {      
                 while (running) {
@@ -95,7 +103,7 @@ public class GestionCapteurs {
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    Thread.currentThread().interrupt(); // Restore the interrupted status
+                    Thread.currentThread().interrupt();
                 }
             }
             
@@ -103,16 +111,29 @@ public class GestionCapteurs {
         updateCapteurs.start();
     }
 
+    /**
+     * Permet de comparer deux listes de capteurs
+     * @param capteurs 
+     * @param olCapteurs 
+     * @param type le type de capteurs a comparer
+     * @return
+     */
     private boolean isEqual(DataCapteurs capteurs, DataCapteurs olCapteurs, String type) {
         return capteurs.getValues(type).size() == olCapteurs.getValues(type).size();
     }
 
-	    
+	
     public void doCapteursDialog(){
 		this.capViewController.showDialog();
     }
 
 
+    /**
+     * Permet de lire une valeur dans le fichier de configuration
+     * @param section Section du fichier de configuration
+     * @param option Option de la section
+     * @return la valeur de l'option
+     */
     public String read(String section, String option){
 		try{
             Wini ini = new Wini(new File(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "config.ini")); 
@@ -123,6 +144,11 @@ public class GestionCapteurs {
 		return null;
 	}
 
+    /**
+     * Permet de charger les capteurs depuis un fichier JSON
+     * @param olCapteurs la liste des capteurs
+     * @param configFileName le nom de l'option pour trouver le nom du fichier JSON
+     */
 	public void loadCapteurs(ObservableList<DataCapteurs> olCapteurs, String configFileName) {
         olCapteurs.clear();
         DataLoader dataLoader = new DataLoader();
@@ -133,6 +159,12 @@ public class GestionCapteurs {
     }
 
 
+    /**
+     * Permet de créer un graphique 
+     * @param yAxisName le nom de l'axe des ordonnées
+     * @param title le titre du graphique
+     * @return le graphique
+     */
 	public LineChart<Number, Number> createLineChart(String yAxisName, String title) {
         
         NumberAxis xAxis = new NumberAxis();
@@ -155,6 +187,15 @@ public class GestionCapteurs {
         return lineChart;
     }
 
+    /**
+     * Permet d'ajouter une série à un graphique
+     * @param capteurs les capteurs
+     * @param type le type de capteurs a mettre dans la série
+     * @param unite l'unité de mesure des capteurs
+     * @param lineChartGeneral le graphique général
+     * @param gridPane le gridpane ou ajouter le graphique 
+     * @param rowIndex l'index de la ligne ou ajouter le graphique
+     */
 	public void addSeriesToLineChart(DataCapteurs capteurs, String type, String unite, LineChart<Number, Number> lineChartGeneral, GridPane gridPane, int rowIndex) { 
 
 		LineChart<Number, Number> lineChartSeul = this.createLineChart(unite, type+" : "+capteurs.getname());
@@ -164,6 +205,13 @@ public class GestionCapteurs {
 
     }
      
+    /**
+     * Permet de créer une série pour un graphique
+     * @param capteurs les capteurs
+     * @param type le type de capteurs a mettre dans la série
+     * @param lineChart le graphique
+     * @param gridPane le gridpane ou ajouter le graphique
+     */
     private void createSeries(DataCapteurs capteurs, String type, LineChart<Number, Number> lineChart, GridPane gridPane) {
         XYChart.Series<Number, Number> series = new XYChart.Series<>();
         series.setName(capteurs.getname());
@@ -191,6 +239,11 @@ public class GestionCapteurs {
 		}
     }
 
+    /**
+     * Permet de convertir une date en millisecondes
+     * @param date la date a convertir
+     * @return la date en millisecondes
+     */
 	private long dateToMillis(String date) {
         try {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date).getTime();

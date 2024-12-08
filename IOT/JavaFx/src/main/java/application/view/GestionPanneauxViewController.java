@@ -37,16 +37,27 @@ public class GestionPanneauxViewController {
     LineChart<String, Number> lineChart;
 
 
+    /**
+     * Initialiser le contexte de la fenêtre de gestion des panneaux
+     * @param containingStage la fenêtre parente
+     * @param _rc le controlleur 
+     */
     public void initContext(Stage containingStage, GestionPanneaux _rc){
         this.containingStage = containingStage;
         this.rockPanneaux = _rc;
         this.configure();
     }
 
+    /**
+     * Afficher la fenêtre de gestion des panneaux
+     */
     public void showDialog(){
         this.containingStage.showAndWait();
     }
 
+    /**
+     * Configurer la fenêtre de gestion des panneaux
+     */
     private void configure(){
         this.oListPanneaux = FXCollections.observableArrayList();
         this.rockPanneaux.loadPanneaux(oListPanneaux);

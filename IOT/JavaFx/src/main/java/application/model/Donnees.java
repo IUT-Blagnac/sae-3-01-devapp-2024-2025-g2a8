@@ -1,10 +1,14 @@
 package application.model;
 
+/**
+ * Classe permettant de stocker les données des capteurs afin de pouvoir ajouter ces données dans une table
+ */
 public class Donnees {
     private String date;
     private double valeur;
     private String type;
     private String salle;
+
 
     public Donnees(String date, double valeur, String type, String salle) {
         this.date = date;

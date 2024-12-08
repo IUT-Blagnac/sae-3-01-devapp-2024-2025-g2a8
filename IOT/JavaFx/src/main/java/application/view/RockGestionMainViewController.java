@@ -10,7 +10,11 @@ public class RockGestionMainViewController {
 
     private RockGestionMain rockGestMain;
 
-
+    /**
+     * Initialiser le contexte de la fenêtre principale
+     * @param containingStage la fenêtre parente
+     * @param _rgm le controlleur
+     */
     public void initContext(Stage containingStage, RockGestionMain _rgm){
         this.containingStage = containingStage;
         this.rockGestMain = _rgm;

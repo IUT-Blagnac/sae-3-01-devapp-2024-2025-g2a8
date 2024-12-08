@@ -17,6 +17,11 @@ public class ConfigCapteursViewController {
     @FXML TextField nomFichierDonneesStrange;
 
 
+    /**
+     * Initialiser le contexte de la fenêtre de configuration
+     * @param containingStage la fenêtre parente
+     * @param _rc le controlleur 
+     */
     public void initContext(Stage containingStage, ConfigCapteurs _rc){
         this.containingStage = containingStage;
         this.configCapteurs = _rc;
@@ -28,15 +33,24 @@ public class ConfigCapteursViewController {
         this.nomFichierDonneesStrange.setText(configCapteurs.read("configTopic", "nomFichierDonneesStrange"));
     }
 
+    /**
+     * Afficher la fenêtre de configuration
+     */
     public void showDialog(){
         this.containingStage.showAndWait();
     }
 
+    /**
+     * Sauvegarder les configurations
+     */
     public void doSave(){
         configCapteurs.write(frequence.getText(), seuilTemperature.getText(), seuilHumidite.getText(), seuilCO2.getText(), nomFichierDonnees.getText(), nomFichierDonneesStrange.getText());
         this.containingStage.close();
     }
 
+    /**
+     * Quitter la fenêtre de configuration
+     */
     @FXML
     public void doQuitter(){
         this.containingStage.close();

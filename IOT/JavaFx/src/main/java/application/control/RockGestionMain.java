@@ -37,7 +37,10 @@ public class RockGestionMain extends Application {
     private Thread alerte;
     private boolean running = true;
 
-    
+    /**
+     * Lancer l'application
+     * @param primaryStage la fenêtre principale
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader;
@@ -75,26 +78,41 @@ public class RockGestionMain extends Application {
         launch();
     }
 
+    /**
+     * Ouvrir la fenêtre de gestion des capteurs
+     */
     public void capteurs(){
         GestionCapteurs gestionCapteurs = new GestionCapteurs(this.mainStage);
         gestionCapteurs.doCapteursDialog();
     }
 
+    /**
+     * Ouvrir la fenêtre de gestion des panneaux
+     */
     public void panneaux() {
         GestionPanneaux gestionPanneaux = new GestionPanneaux(this.mainStage);
         gestionPanneaux.doPanneauxDialog();
     }
 
+    /**
+     * Ouvrir la fenêtre de configuration
+     */
     public void openConfig() {
         ConfigCapteurs configCapteurs = new ConfigCapteurs(this.mainStage);
         configCapteurs.doConfigDialog();
     }
 
+    /**
+     * Relancer le script Python
+     */
     public void reloadPythonScript() {
         stopPythonScript();
         launchPythonScript();
     }
 
+    /**
+     * Lancer le script Python
+     */
     public void launchPythonScript(){
         pythonThread = new Thread(() -> {
             try {
@@ -134,6 +152,9 @@ public class RockGestionMain extends Application {
         pythonThread.start();
     }
 
+    /**
+     * Vérifie le JSON alerte pour afficher une alerte si une nouvelle valeur a été ajoutée dans celui-ci
+     */
     @SuppressWarnings("unchecked")
     public void alerte() {
         alerte = new Thread(() -> {
@@ -206,7 +227,9 @@ public class RockGestionMain extends Application {
         alerte.start();
     }
     
-    
+    /**
+     * Arrêter le script Python
+     */
     public void stopPythonScript(){
         if (pythonProcess != null && pythonThread.isAlive()) {
             pythonProcess.destroy();

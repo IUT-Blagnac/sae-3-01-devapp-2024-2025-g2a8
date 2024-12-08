@@ -31,6 +31,11 @@ public class GestionPanneaux {
     private boolean running = true;
 
 
+    /**
+     * Initialiser une fenêtre permettant de gérer les capteurs pour les panneaux solaires
+     * et l'associe à un controlleur qui gère la logique derrière 
+     * @param _parentStage la fenêtre parente 
+     */
     public GestionPanneaux(Stage _parentStage) {
 
 		try {
@@ -63,6 +68,13 @@ public class GestionPanneaux {
 		}
 	}
 
+        /**
+         * Permet de mettre à jour les données des panneaux solaires
+         * @param olCapteurs la liste des capteurs
+         * @param tablePanneau la table des données des panneaux
+         * @param lineChart le graphique des données des panneaux
+         * 
+         */    
         public void updateData(ObservableList<DataSolarPanel> olCapteurs, TableView<DataEnergy> tablePanneau, LineChart<String, Number> lineChart) {
             updatePanneaux = new Thread(() -> {      
                 while (running) {
@@ -91,12 +103,19 @@ public class GestionPanneaux {
             updatePanneaux.start();
         }
 
-    	    
+        /**
+         * Permet d'afficher la fenêtre de gestion des panneaux solaires
+         */
         void doPanneauxDialog(){
     		this.panneauxViewController.showDialog();
         }
 
 
+    /**
+     * Permet de charger les données des panneaux solaires dans la table
+     * @param tablePanneau la table des données des panneaux
+     * @param oListPanneaux la liste des panneaux solaires
+     */
     public void loadData(TableView<DataEnergy> tablePanneau, ObservableList<DataSolarPanel> oListPanneaux) {
         tablePanneau.getItems().clear();
         for (DataSolarPanel dataSolarPanel : oListPanneaux) {
@@ -109,6 +128,11 @@ public class GestionPanneaux {
     }
 
 
+    /**
+     * Permet de charger les données des panneaux solaires dans le graphique
+     * @param lineChart le graphique des données des panneaux
+     * @param oListPanneaux la liste des panneaux solaires
+     */
     public void loadLineChart(LineChart<String, Number> lineChart, ObservableList<DataSolarPanel> oListPanneaux) {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         for (DataSolarPanel dataSolarPanel : oListPanneaux) {
@@ -132,6 +156,10 @@ public class GestionPanneaux {
         }
      }
 
+    /**
+     * Permet de charger les panneaux solaires
+     * @param olCapteurs la liste des capteurs
+     */
 	public void loadPanneaux(ObservableList<DataSolarPanel> olCapteurs){
         olCapteurs.clear();
         DataLoader dataLoader = new DataLoader();
@@ -141,6 +169,12 @@ public class GestionPanneaux {
         olCapteurs.addAll(capteurs);
     }
 
+    /**
+     * Permet de lire les données du fichier de configuration
+     * @param section la section du fichier de configuration
+     * @param option l'option du fichier de configuration
+     * @return la valeur de l'option
+     */
     public String read(String section, String option){
 		try{
             Wini ini = new Wini(new File(new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + File.separator + "config.ini")); 

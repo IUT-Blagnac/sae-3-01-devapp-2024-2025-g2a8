@@ -16,7 +16,6 @@ public class ConfigCapteurs {
     
     private String fileEmplacement;
 
-
     public ConfigCapteurs(Stage _parentStage) {
 
 		try {
