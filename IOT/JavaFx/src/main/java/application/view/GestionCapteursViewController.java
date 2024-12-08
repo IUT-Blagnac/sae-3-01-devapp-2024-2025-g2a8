@@ -30,6 +30,8 @@ public class GestionCapteursViewController {
     // Données de la fenêtre
 	private ObservableList<DataCapteurs> oListCapteurs;
 
+    private String configFileName = "nomFichierDonnees";
+
   
     @FXML 
     ListView<DataCapteurs> listSalles;
@@ -144,7 +146,7 @@ public class GestionCapteursViewController {
     public void configureData(boolean listSallesUpdate){
     
         this.oListCapteurs = FXCollections.observableArrayList();
-        this.rockCapteurs.loadCapteurs(oListCapteurs);
+        this.rockCapteurs.loadCapteurs(oListCapteurs, this.configFileName);
         if(listSallesUpdate){
 
             List<DataCapteurs> selectedCapteurs = this.listSalles.getSelectionModel().getSelectedItems();
@@ -269,7 +271,7 @@ public class GestionCapteursViewController {
                     
                     if(this.oListCapteurs != null){
                         ObservableList <DataCapteurs> olCapteurs = FXCollections.observableArrayList();
-                        this.rockCapteurs.loadCapteurs(olCapteurs);
+                        this.rockCapteurs.loadCapteurs(olCapteurs, this.configFileName);
                         Platform.runLater(() -> {
 
                             if (this.oListCapteurs.size() == olCapteurs.size()) {
@@ -307,6 +309,23 @@ public class GestionCapteursViewController {
         return capteurs.getValues(type).size() == olCapteurs.getValues(type).size();
     }
     
+    @FXML
+    public void alertDialog(){
+        this.configFileName = "nomFichierDonneesStrange";
+
+        this.configureData(true);
+    }
+
+    @FXML
+    public void normalDialog(){
+        this.configFileName = "nomFichierDonnees";
+
+        this.configureData(true);
+    }
+
+    public String getConfigFileName() {
+        return configFileName;
+    }
 
 }
 

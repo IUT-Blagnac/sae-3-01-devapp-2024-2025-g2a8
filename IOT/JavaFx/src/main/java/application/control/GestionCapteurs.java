@@ -77,7 +77,7 @@ public class GestionCapteurs {
                         
                         if(this.oListCapteurs != null){
                         ObservableList <DataCapteurs> olCapteurs = FXCollections.observableArrayList();
-                        this.loadCapteurs(olCapteurs);
+                        this.loadCapteurs(olCapteurs, this.capViewController.getConfigFileName());
                         Platform.runLater(() -> {
 
                             if (this.oListCapteurs.size() == olCapteurs.size()) {
@@ -123,10 +123,10 @@ public class GestionCapteurs {
 		return null;
 	}
 
-	public void loadCapteurs(ObservableList<DataCapteurs> olCapteurs){
+	public void loadCapteurs(ObservableList<DataCapteurs> olCapteurs, String configFileName) {
         olCapteurs.clear();
         DataLoader dataLoader = new DataLoader();
-        String fileName = this.read("configTopic", "nomFichierDonnees");
+        String fileName = this.read("configTopic", configFileName);
         dataLoader.LoadDatasFromJson(fileName+".json");
         List<DataCapteurs> capteurs = dataLoader.getDataLoader();
         olCapteurs.addAll(capteurs);
