@@ -77,7 +77,7 @@ Suite à leur succès rapide, les fondateurs ont vite compris qu'ils auraient be
 
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc%20Technique.adoc[Doc Technique] + 
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc%20Utilisateur.adoc[Doc Utilisateur] + 
-https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc-Conception.adoc[Document de Conception]
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc-Conception.adoc[Document de Conception] +
 https://github.com/orgs/IUT-Blagnac/projects/271/views/8[Backlog Produit]
 
 == Communication 
@@ -98,7 +98,8 @@ https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Docume
 https://github.com/orgs/IUT-Blagnac/projects/271/views/7[Backlog Sprint#1] +
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Ordre%20du%20jour%20n%C2%B01.pdf[Ordre du jour] +
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Compte%20rendu%20n%C2%B01.pdf[Compte rendu]
-| Sprint #2 |https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Ordre%20du%20jour%20n%C2%B02.pdf[Ordre du jour]
+| Sprint #2 |https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Ordre%20du%20jour%20n%C2%B02.pdf[Ordre du jour] +
+https://github.com/orgs/IUT-Blagnac/projects/271/views/10?filterQuery=iteration%3A%22Sprint+%232%22[Backlog Sprint#2]
 |===
 
 === Evaluation bi-hebdomadaire
