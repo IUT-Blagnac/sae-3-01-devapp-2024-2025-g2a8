@@ -12,9 +12,13 @@ Numéro de téléphone :  (appel gratuit) 06 40 17 74 89
 Adresse électronique : info@rockworld.com
 
 
-N° de TVA intracommunautaire : FR10 482 930 278
+N° de TVA intracommunautaire : FR83 495 126 856
 
 # Conception :
+
+- Sitmul9, société anonyme à conseil d’administration, au capital social de 9 999 999,99 euros, immatriculée au registre du commerce et des sociétés de Carcassonne, sous le numéro 495 126 856, dont le siège social est situé Rte de Saint-Hilaire, 11000 Carcassonne.
+
+Adresse électronique : info@sitmul9.com
 
 # Hebergeur :
 
