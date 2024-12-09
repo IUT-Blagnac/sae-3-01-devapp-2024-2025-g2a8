@@ -90,14 +90,17 @@ public class GestionCapteurs {
 
                             if (this.oListCapteurs.size() == olCapteurs.size()) {
                                 for (int i = 0; i < olCapteurs.size(); i++) {
-                                    if (!this.isEqual(this.oListCapteurs.get(i), olCapteurs.get(i), "CO2")) {
+                                    if (!this.isEqual(this.oListCapteurs.get(i), olCapteurs.get(i), "CO2") || !this.isEqual(this.oListCapteurs.get(i), olCapteurs.get(i), "Temp") || !this.isEqual(this.oListCapteurs.get(i), olCapteurs.get(i), "Humidité")) { 
                                         this.capViewController.configureData(false);
                                     }
-                                }    
+                                    
+                                }   
                             } else {
                                 this.capViewController.configureData(true);
                             }
+                            
                         });
+                        
                     }
                     
 
@@ -105,6 +108,7 @@ public class GestionCapteurs {
                     e.printStackTrace();
                     Thread.currentThread().interrupt();
                 }
+                
             }
             
         });

@@ -129,9 +129,6 @@ public class GestionCapteursViewController {
         this.tableCapteurs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
         this.rockCapteurs.updateCapteurs(this.oListCapteurs);
-
-        //Mise à jour dynamique des données avec l'aide d'un thread
-        this.updateData();
    
     }
 
@@ -258,56 +255,6 @@ public class GestionCapteursViewController {
 
     }
 
-
-    /**
-     * Met à jour les données de la vue.
-     * Cette méthode crée un thread qui met à jour les données de la vue toutes les 5 secondes si nécessaire.
-     */
-    public void updateData() {
-        Thread updateCapteurs = new Thread(() -> {      
-            while (true) {
-                try {
-                    Thread.sleep(5000);
-                    
-                    if(this.oListCapteurs != null){
-                        ObservableList <DataCapteurs> olCapteurs = FXCollections.observableArrayList();
-                        this.rockCapteurs.loadCapteurs(olCapteurs, this.configFileName);
-                        Platform.runLater(() -> {
-
-                            if (this.oListCapteurs.size() == olCapteurs.size()) {
-                                for (int i = 0; i < olCapteurs.size(); i++) {
-                                    if (!this.isEqual(this.oListCapteurs.get(i), olCapteurs.get(i), "CO2")) {
-                                        this.configureData(false);
-                                    }
-                                }    
-                            } else {
-                                this.configureData(true);
-                            }
-                        });
-                    }
-                    
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Thread.currentThread().interrupt(); // Restore the interrupted status
-                }
-            }
-            
-        });
-        updateCapteurs.start();
-    }
-
-    /**
-     * Vérifie si les données des capteurs sont égales.
-     * 
-     * @param capteurs Les données des capteurs
-     * @param olCapteurs Les nouvelles données des capteurs
-     * @param type Le type de données à comparer
-     * @return true si les données sont égales, false sinon
-     */
-    private boolean isEqual(DataCapteurs capteurs, DataCapteurs olCapteurs, String type) {
-        return capteurs.getValues(type).size() == olCapteurs.getValues(type).size();
-    }
     
     @FXML
     public void alertDialog(){
