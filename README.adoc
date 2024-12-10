@@ -82,11 +82,15 @@ https://github.com/orgs/IUT-Blagnac/projects/271/views/8[Backlog Produit]
 http://193.54.227.208/~R2024SAE3006/[Lien vers le site E-Commerce de Rockworld]
 
 
-== Communication 
+== Communication EP
 
 === retour semaine 48 
 Pas d'ODJ , pas de CR !
 note : 0/3
+
+=== retour semaine 49
+ODJ : Ok mais manque Ecommerce !  CR: pb de date (22/11) au lieu de 4/12. Manque abs/Présent.  Manque analyse difficultés/Réussites, manque futur resp de la reunion semaine 50. Manque Point client Web (d'ailleurs peu d'infos sur la partie web).
+note : 1,83/3
 
 == Gestion de projet & Qualité
 
