@@ -10,7 +10,7 @@
     $userGet->execute();
 
     if($userGet->rowCount() != 1){
-        header("location:../connexion.php");
+        header("location:connexion.php");
         exit();
     }
 
@@ -24,10 +24,10 @@
 
         $_SESSION["user_id"] = $user['user_id'];
 
-        header("location:../index.php");
+        header("location:index.php");
         exit();
     } else {
-        header("location:../connexion.php");
+        header("location:connexion.php");
         exit();
     }
 ?>
