@@ -18,7 +18,9 @@
         
         <!-- Icônes -->
         <div class="d-flex align-items-center gap-3">
-            <img src='./icons/utilisateur.png' alt="utilisateur" width="30" height="30">
+            <a href="connexion.php">
+                <img src='./icons/utilisateur.png' alt="utilisateur" width="30" height="30">
+            </a>
             <img src='./icons/carte.png' alt="Panier" width="40" height="40">
         </div>
     </div>
