@@ -17,7 +17,7 @@
             <?php
                 foreach($categ->fetchAll(PDO::FETCH_ASSOC) as $cat){ ?>
                     <li class="nav-item display-navBar">
-                        <a class="nav-link" href="#.php"><?php echo $cat['nom_categorie'] ?></a>
+                        <a class="nav-link" href="sousCategorie.php?idSousCateg=<?php echo $cat['id_categorie']; ?>"><?php echo $cat['nom_categorie'] ?></a>
                         
                         <?php
                             $sousCateg = $conn->prepare("SELECT * FROM Categorie WHERE parent = :cat");
