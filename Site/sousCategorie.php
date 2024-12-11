@@ -35,7 +35,7 @@ require_once("./include/head.php");
                                 ?>
                                 <!-- changer les liens pour mettre un id en parametre et le nom image -->
                                 <a href="DetailProduit.php" class="noHoverLine"><div class="card productDetailsContainer" style="width: 18rem;">
-                                    <img src=<?php"./imagesProduits/prod".$id.".png"?> class="card-img-top" alt=<?php"./imagesProduits/prod".$id.".png"?>>
+                                    <img src="./imagesProduits/prod<?php echo $id; ?>.png" class="card-img-top" alt="Image de <?php echo $nom; ?>">
                                     <div class="card-body">
                                         <h5 class="card-title blackText"><?php echo $nom ?></h5>
                                         <p class="card-text blackText"><?php echo substr($description, 0, 83)."..."; ?></p>
