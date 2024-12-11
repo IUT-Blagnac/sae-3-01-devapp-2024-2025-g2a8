@@ -1,0 +1,30 @@
+/* On cache initialement le menu des catégories */
+#categories .dropdown-menu {
+    display: none;
+}
+
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.navBarToDisplay {
+    display: block;
+    position: absolute; 
+    z-index: 1000; 
+    width: 100%; 
+    left: 0;
+    border-top: 1px solid #000; 
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    justify-content: center;
+    
+}
+
+.display-navBar:hover .navBarToDisplay {
+    visibility: visible;
+    opacity: 1;
+}
+

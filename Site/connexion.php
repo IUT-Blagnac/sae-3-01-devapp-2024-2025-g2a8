@@ -18,7 +18,7 @@ require_once("./include/head.php");
     <div class="container flex-grow-1 text-center">
         <h1>Connexion</h1>
         <div class="form-signin w-100">
-            <form method="post" action="./include/traitConnexion.php">
+            <form method="post" action="include/traitConnexion.php">
                 <div class="form-floating">
                     <input type="email" class="form-control" id="mailConnexion" name="mail" placeholder="E-Mail">
                 </div>
@@ -30,7 +30,7 @@ require_once("./include/head.php");
                     <label class="form-check-label" for="checkRemember">
                         Se souvenir de moi
                     </label>
-                    <button class="btn btn-primary w-100 py-2" type="submit" name="valider">Sign in</button>
+                    <button class="btn btn-primary w-100 py-2" type="submit" name="Valider">Sign in</button>
             </form>
         </div>
     </div>
