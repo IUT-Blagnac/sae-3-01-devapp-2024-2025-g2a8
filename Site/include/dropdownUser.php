@@ -13,7 +13,7 @@ $user = getUserById($_SESSION['user_id']);
             <a class="dropdown-item" href="./compte.php">Mon Compte</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#">Deconnexion</a>
+            <a class="dropdown-item" href="./include/traitDeco.php">Deconnexion</a>
         </li>
     </ul>
 </div>
