@@ -49,7 +49,7 @@ require_once("./include/head.php");
         ?>
         <p onload="appendAlert('Mot de passe invalide', 'danger')"></p>
         <center>
-            <div class="form-signin w-50">
+            <div class="d-flex form-signin w-50 align-items-center">
                 <form method="post">
                     <div class="form-floating">
                         <input type="email" class="form-control" id="mailConnexion" name="mail" placeholder="E-Mail">
