@@ -31,7 +31,7 @@ require_once("./include/head.php");
             $cou = $userGet->rowCount();
 
             if ($userGet->rowCount() != 1) {
-                echo "<p>Compte introuvable</p>";
+                echo "<script>appendAlert('Compte introuvable', 'danger')</script>";
 
             } else {
                 $user = $userGet->fetch();
@@ -49,7 +49,6 @@ require_once("./include/head.php");
             }
         }
         ?>
-        <p onload="appendAlert('Mot de passe invalide', 'danger')"></p>
         <center>
             <div class="form-signin w-50 text-center">
                 <form method="post">
