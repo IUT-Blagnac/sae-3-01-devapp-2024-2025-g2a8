@@ -52,11 +52,11 @@ require_once("./include/head.php");
             <div class="form-signin w-50 text-center">
                 <form method="post">
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="mailConnexion" name="mail" placeholder="E-Mail">
+                        <input type="email" class="form-control" id="mailConnexion" name="mail" placeholder="E-Mail" required>
                     </div>
                     <div class="form-floating">
                         <input type="password" class="form-control" id="passwordConnexion" name="pass"
-                            placeholder="Mot de passe">
+                            placeholder="Mot de passe" required>
                     </div>
                     <div class="form-floating text-start my-3">
                         <input class="form-check-input" type="checkbox" value="remember-me" id="checkRemember"
