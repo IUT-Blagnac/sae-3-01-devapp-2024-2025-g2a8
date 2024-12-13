@@ -15,6 +15,86 @@ require_once("./include/head.php");
             <!-- Menu vertical sur la gauche -->
             <?php
                 require_once("./include/menu.php");
+
+                $userId = $_SESSION['user_id'];
+                //Informations de l'utilisateur
+                $user = $conn->prepare("SELECT * FROM Utilisateur WHERE user_id = :id");
+                $user->execute(array('id' => $userId));
+                $donneesUser = $user->fetch(PDO::FETCH_ASSOC);
+
+                $addressUser = $conn->prepare("SELECT * FROM Adresse WHERE user_id = :id");
+                $addressUser->execute(array('id' => $userId));
+                $adresse = $addressUser->fetch(PDO::FETCH_ASSOC);
+
+                $messageErreurMail = false;
+                $messageErreurTel = false;
+                $messageErreur = false;
+                if(isset($_POST['modifier'])){
+                    $nomPost = htmlentities($_POST['nom']);
+                    $prenomPost = htmlentities($_POST['prenom']);
+                    $emailPost = htmlentities($_POST['email']);
+
+                    $reqVerifUtilisateurExistant = $conn->prepare("SELECT * FROM Utilisateur WHERE mail = :email");
+                    $reqVerifUtilisateurExistant->execute(array("email" => $emailPost));
+
+                    if($reqVerifUtilisateurExistant->rowCount() > 0 && $emailPost != $donneesUser['mail']){
+                        $messageErreur = true;
+                        $messageErreurMail = true;
+                        $emailPost = $donneesUser['mail'];
+                    }
+
+                    $regexTel = "#^[0-9]{10}$#";
+
+                    $numeroPost = htmlentities($_POST['numero']);
+                    if (!preg_match($regexTel, $numeroPost)) {
+                        $messageErreur = true;
+                        $messageErreurTel = true;
+                        $numeroPost = $donneesUser['numero'];
+                    }
+
+                    $nomRuePost = htmlentities($_POST['nomRue']);
+                    $villePost = htmlentities($_POST['ville']);
+                    $codePostalPost = htmlentities($_POST['codePostal']);
+                    $numRuePost = htmlentities($_POST['numRue']);
+
+
+                    // if(!$messageErreur){
+                    //     $reqUpdateUser = $conn->prepare("UPDATE Utilisateur SET nom = :nom, prenom = :prenom, mail = :email, numero = :numero WHERE user_id = :id");
+                    //     $reqUpdateUser->execute(array('nom' => $nomPost, 'prenom' => $prenomPost, 'email' => $emailPost, 'numero' => $numeroPost, 'id' => $userId));
+                    //     if(!$adresse && $nomRuePost != "" && $villePost != "" && $codePostalPost != "" && $numRuePost != ""){
+                    //         "INSERT  INTO Adresse (user_id, numRue, nomRue, ville, codePostal, ) VALUES (:id, :numRue, :nomRue,:ville, :codePostal)";
+                    //     }else {
+                    //         $reqUpdateAdresse = $conn->prepare("UPDATE Adresse SET ville = :ville, codePostal = :codePostal, numRue = :numRue, nomRue = :nomRue WHERE id_adresse = :id");
+                    //         $reqUpdateAdresse->execute(array('ville' => $villePost, 'codePostal' => $codePostalPost, 'numRue' => $numRuePost, 'nomRue' => $nomRuePost, 'id' => $adresseId));
+    
+                    //     }
+                    // }
+                    
+                }
+
+                
+                //Récupération des données de l'utilisateur
+                $nom = $donneesUser['nom'];
+                $prenom = $donneesUser['prenom'];
+                $email = $donneesUser['mail'];
+                $numero = $donneesUser['numero'];
+
+                //Adresse de l'utilisateur
+                
+                if($adresse){
+                    $adresseId = $adresse['id_adresse'];
+                    $ville = $adresse['ville'];
+                    $codePostal = $adresse['codePostal'];
+                    $numRue = $adresse['numRue'];
+                    $nomRue = $adresse['nomRue'];
+                }else{
+                    $ville = "";
+                    $codePostal = "";
+                    $numRue = "";
+                    $nomRue = "";
+                }
+                
+
             ?>
 
             <!-- Contenu principal -->
@@ -28,8 +108,8 @@ require_once("./include/head.php");
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img src="icons/userCircleIcon.png" alt="Admin" class="rounded-circle p-1" width="110">
                                         <div class="mt-3">
-                                            <h4>John Doe</h4>
-                                            <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                            <?php echo "<h4>".$prenom." ".$nom."</h4>"; ?>
+                                            <?php echo "<p class='text-muted font-size-sm'>"." ".$numRue." ".$nomRue." ".$codePostal." ".$ville."</p>"; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -81,16 +161,16 @@ require_once("./include/head.php");
                                     <form method="post">
                                         <div class="row mb-3">
                                             <div class="col-sm-2">
-                                                <h6 class="mb-0">Nom</h6>
+                                                <h6 class='mb-0'>Nom</h6>
                                             </div>
                                             <div class="col-sm-4 text-secondary">
-                                                <input type="text" class="form-control" value="John Doe">
+                                                <input type="text" class="form-control" name="nom" value="<?php echo $messageErreur ? $_POST["nom"] : $nom; ?>" required>
                                             </div>
                                             <div class="col-sm-2">
                                                 <h6 class="mb-0">Prenom</h6>
                                             </div>
                                             <div class="col-sm-4 text-secondary">
-                                                <input type="text" class="form-control" value="John Doe">
+                                                <input type="text" class="form-control" name="prenom" value="<?php echo $messageErreur ? $_POST["prenom"] : $prenom;  ?>" required>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -98,23 +178,43 @@ require_once("./include/head.php");
                                                 <h6 class="mb-0">Email</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <input type="text" class="form-control" value="john@example.com">
+                                                <?php   if($messageErreur){
+                                                            if($messageErreurMail){
+                                                                echo "<p style='color: red' class='mt-0 mb-0'>L'adresse e-mail existe déjà</p>";
+                                                                echo "<input type='email' class='form-control' style=border-color:red; name='email' value= '".$_POST['email']."' required>";
+                                                            }else{
+                                                                echo "<input type='email' class='form-control' name='email' value= '".$_POST['email']."' required>";
+                                                            }
+                                                            
+                                                        }else{
+                                                            echo "<input type='email' class='form-control' name='email' value= '$email' required>";
+                                                        } ?>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-3">
-                                                <h6 class="mb-0">Phone</h6>
+                                                <h6 class="mb-0">Numéro de téléphone</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <input type="text" class="form-control" value="(239) 816-9029">
+                                                <?php   if($messageErreur){
+                                                            if($messageErreurTel){
+                                                                echo "<p style='color: red' class='mt-0 mb-0'>Le numéro de téléphone n'est pas valide</p>";
+                                                                echo "<input type='text' class='form-control' style=border-color:red; name='numero' value= '".$_POST['numero']."' required>";
+                                                            }else{
+                                                                echo "<input type='text' class='form-control' name='numero' value= '".$_POST['numero']."' required>";
+                                                            }
+                                                            
+                                                        }else{
+                                                            echo "<input type='text' class='form-control' name='numero' value= '$numero' required>";
+                                                        } ?>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-3">
-                                                <h6 class="mb-0">Address</h6>
+                                                <h6 class="mb-0">Adresse</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <input type="text" class="form-control" value="Bay Area, San Francisco, CA">
+                                                <input type="text" class="form-control" name="nomRue" value="<?php echo $messageErreur ? $_POST["nomRue"] : $nomRue; ?>" >
                                             </div>
                                         </div>
                                         <div class="form-row mb-3" style="align-items: center;">
@@ -122,19 +222,19 @@ require_once("./include/head.php");
                                                 <h6 class="mb-0">Ville</h6>
                                             </div>
                                             <div class="col-sm-3 text-secondary">
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="numRue" value="<?php echo $messageErreur ? $_POST["numRue"] : $numRue; ?>" >
                                             </div>
                                             <div class="col-sm-1">
                                                 <h6 class="mb-0">Code Postale</h6>
                                             </div>
                                             <div class="col-sm-3 text-secondary">
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="codePostal" value="<?php echo $messageErreur ? $_POST["codePostal"] : $codePostal; ?>" >
                                             </div>
                                             <div class="col-sm-1">
                                                 <h6 class="mb-0">N°Rue</h6>
                                             </div>
                                             <div class="col-sm-3 text-secondary">
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="ville" value="<?php echo $messageErreur ? $_POST["ville"] : $ville; ?>" >
                                             </div>
                                         </div>
                                         <div class="row">
