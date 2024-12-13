@@ -4,6 +4,7 @@ require_once("./include/head.php");
 ?>
 
 <body class="d-flex flex-column min-vh-100">
+    <script src="include_script/alert.js"></script> 
     <!-- En-tête -->
     <header class="bg-white border-bottom">
         <div class="container-fluid d-flex align-items-center py-3 px-3">
@@ -43,11 +44,9 @@ require_once("./include/head.php");
 
                     header("location:index.php");
                 } else {
-                    echo "<p onload=appendAlert(\"Mot de passe invalide\", \"danger\")'></p>";
+                    echo "<script>appendAlert('Mot de passe incorect', 'danger')</script>";
                 }
             }
-
-
         }
         ?>
         <p onload="appendAlert('Mot de passe invalide', 'danger')"></p>
@@ -80,22 +79,7 @@ require_once("./include/head.php");
     <!-- Pied de page -->
     <?php
     require_once("./include/footer.php")
-        ?>
-
-    <script>
-        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-        const appendAlert = (message, type) => {
-            const wrapper = document.createElement('div')
-            wrapper.innerHTML = [
-                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-                `   <div>${message}</div>`,
-                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-                '</div>'
-            ].join('')
-
-            alertPlaceholder.append(wrapper)
-        }
-    </script>
+    ?>
 </body>
 
 </html>
