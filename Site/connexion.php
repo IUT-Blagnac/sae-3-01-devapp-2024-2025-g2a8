@@ -58,7 +58,7 @@ require_once("./include/head.php");
                         <input type="password" class="form-control" id="passwordConnexion" name="pass"
                             placeholder="Mot de passe">
                     </div>
-                    <div class="form-check text-start my-3">
+                    <div class="form-floating text-start my-3">
                         <input class="form-check-input" type="checkbox" value="remember-me" id="checkRemember"
                             name="remember">
                         <label class="form-check-label" for="checkRemember">
