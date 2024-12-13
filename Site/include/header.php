@@ -18,9 +18,26 @@
         
         <!-- Icônes -->
         <div class="d-flex align-items-center gap-3">
-            <a href="connexion.php">
-                <img src='./icons/utilisateur.png' alt="utilisateur" width="30" height="30">
-            </a>
+            <?php
+                session_start();
+                if(isset($_SESSION['user_id'])){
+                    require('include/utility.php');
+
+                    $user = getUserById($_SESSION['user_id']);
+
+                    if($user != false){
+                        require("include/dropdownUser.php");
+                    } else {
+                        echo "<img src='./icons/utilisateur.png' alt='utilisateur' width='30' height='30'>";
+                    }
+                    
+                } else {
+                    echo "<a href='connexion.php'>
+                            <img src='./icons/utilisateur.png' alt='utilisateur' width='30' height='30'>
+                        </a>";
+                }
+            ?>
+            
             <img src='./icons/carte.png' alt="Panier" width="40" height="40">
         </div>
     </div>
