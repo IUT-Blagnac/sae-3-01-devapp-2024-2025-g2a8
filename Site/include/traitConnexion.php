@@ -1,33 +1,29 @@
-<?php 
+<?php
+
+function traitConnexion($mail, $pass){
     include("connect.inc.php");
 
-    $mail = htmlentities($_POST["mail"]);
-    $passBrute = htmlentities($_POST["pass"]);
-    $isRemember = htmlentities($_POST["remember"]);
+    $mailUser = htmlentities($mail);
 
-    $userGet = $conn->prepare("SELECT * FROM Utilisateur WHERE mail='$mail'");
+    $userGet = $conn->prepare("SELECT * FROM Utilisateur WHERE mail='$mailUser'");
 
     $userGet->execute();
+    $cou = $userGet->rowCount();
 
-    if($userGet->rowCount() != 1){
-        header("location:connexion.php");
-        exit();
+    if ($userGet->rowCount() != 1) {
+        return("Impossible de trouver votre compte $cou");
     }
 
     $user = $userGet->fetch();
 
-    $hashInput = password_hash($passBrute, PASSWORD_DEFAULT);
-
-    if($hashInput == $user['password']){
+    if (password_verify($pass, $user['password'])) {
         session_name($user['mail']);
         session_start();
 
         $_SESSION["user_id"] = $user['user_id'];
 
-        header("location:index.php");
-        exit();
+        return("OK");
     } else {
-        header("location:connexion.php");
-        exit();
+        return("Mot de passe invalide $pass, $mailUser");
     }
-?>
+}
