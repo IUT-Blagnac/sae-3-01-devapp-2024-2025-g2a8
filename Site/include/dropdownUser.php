@@ -10,7 +10,7 @@ $user = getUserById($_SESSION['user_id']);
     </a>
     <ul class="dropdown-menu">
         <li>
-            <a class="dropdown-item" href="#">Mon Compte</a>
+            <a class="dropdown-item" href="./compte.php">Mon Compte</a>
         </li>
         <li>
             <a class="dropdown-item" href="#">Deconnexion</a>

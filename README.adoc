@@ -91,6 +91,7 @@ note : 0/3
 === retour semaine 49
 ODJ : Ok mais manque Ecommerce !  CR: pb de date (22/11) au lieu de 4/12. Manque abs/Présent.  Manque analyse difficultés/Réussites, manque futur resp de la reunion semaine 50. Manque Point client Web (d'ailleurs peu d'infos sur la partie web).
 note : 1,83/3
+Note appel offre : 10/20
 
 == Gestion de projet & Qualité
 

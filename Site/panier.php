@@ -14,7 +14,6 @@ require_once("./include/head.php");
         <div class="container">
             
         </div>
-    </div>
 
     <!-- Pied de page -->
     <?php
