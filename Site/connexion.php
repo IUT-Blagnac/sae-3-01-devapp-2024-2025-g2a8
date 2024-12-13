@@ -1,5 +1,6 @@
 <?php
 require_once("./include/head.php");
+
 ?>
 
 <body class="d-flex flex-column min-vh-100">
@@ -15,30 +16,79 @@ require_once("./include/head.php");
     </header>
 
     <!-- Conteneur principal -->
-    <div class="container flex-grow-1 text-center">
+    <div class="container flex-grow-1 text-center w-50">
         <h1>Connexion</h1>
-        <div class="form-signin w-100">
-            <form method="post" action="include/traitConnexion.php">
+        <?php
+        if (isset($_POST["valider"]) and isset($_POST['mail']) and isset($_POST['pass'])) {
+            include("include/connect.inc.php");
+
+            $mailUser = htmlentities($_POST['mail']);
+
+            $userGet = $conn->prepare("SELECT * FROM Utilisateur WHERE mail='$mailUser'");
+
+            $userGet->execute();
+            $cou = $userGet->rowCount();
+
+            if ($userGet->rowCount() != 1) {
+                echo "<p>Compte introuvable</p>";
+            }
+
+            $user = $userGet->fetch();
+
+            if (password_verify($_POST['pass'], $user['password'])) {
+                session_start();
+                session_reset();
+
+                $_SESSION["user_id"] = $user['user_id'];
+
+                header("location:index.php");
+            } else {
+                echo "<p onload=appendAlert(\"Mot de passe invalide\", \"danger\")'></p>";
+            }
+        }
+        ?>
+        <p onload="appendAlert('Mot de passe invalide', 'danger')"></p>
+        <div class="form-signin w-50">
+            <form method="post">
                 <div class="form-floating">
                     <input type="email" class="form-control" id="mailConnexion" name="mail" placeholder="E-Mail">
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="passwordConnexion" name="pass" placeholder="Mot de passe">
+                    <input type="password" class="form-control" id="passwordConnexion" name="pass"
+                        placeholder="Mot de passe">
                 </div>
                 <div class="form-check text-start my-3">
-                    <input class="form-check-input" type="checkbox" value="remember-me" id="checkRemember" name="remember">
+                    <input class="form-check-input" type="checkbox" value="remember-me" id="checkRemember"
+                        name="remember">
                     <label class="form-check-label" for="checkRemember">
                         Se souvenir de moi
                     </label>
-                    <button class="btn btn-primary w-100 py-2" type="submit" name="Valider">Sign in</button>
+                    <button class="btn btn-primary w-100 py-2" type="submit" name="valider">Sign in</button>
+                </div>
             </form>
         </div>
+        <div id="liveAlertPlaceholder"></div>
     </div>
 
     <!-- Pied de page -->
     <?php
     require_once("./include/footer.php")
         ?>
+
+    <script>
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+        const appendAlert = (message, type) => {
+            const wrapper = document.createElement('div')
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>'
+            ].join('')
+
+            alertPlaceholder.append(wrapper)
+        }
+    </script>
 </body>
 
 </html>
