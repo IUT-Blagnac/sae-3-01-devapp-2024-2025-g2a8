@@ -78,7 +78,7 @@ require_once("./include/head.php");
                         <div class="col-lg-8 mt-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <form method="post" action="">
+                                    <form method="post">
                                         <div class="row mb-3">
                                             <div class="col-sm-2">
                                                 <h6 class="mb-0">Nom</h6>
@@ -117,30 +117,29 @@ require_once("./include/head.php");
                                                 <input type="text" class="form-control" value="Bay Area, San Francisco, CA">
                                             </div>
                                         </div>
-                                        <div class="form-row mb-3">
-                                            <div class="col-sm-3">
+                                        <div class="form-row mb-3" style="align-items: center;">
+                                            <div class="col-sm-1">
                                                 <h6 class="mb-0">Ville</h6>
                                             </div>
-                                            <div class="col-sm-3">
-                                                <input type="text" class="form-control" placeholder="Ville">
+                                            <div class="col-sm-3 text-secondary">
+                                                <input type="text" class="form-control">
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-1">
                                                 <h6 class="mb-0">Code Postale</h6>
                                             </div>
-                                            <div class="col-sm-3">
-                                                <input type="text" class="form-control" placeholder="Code Postale">
+                                            <div class="col-sm-3 text-secondary">
+                                                <input type="text" class="form-control">
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-1">
                                                 <h6 class="mb-0">N°Rue</h6>
                                             </div>
-                                            <div class="col-sm-3">
-                                                <input type="text" class="form-control" placeholder="Rue">
+                                            <div class="col-sm-3 text-secondary">
+                                                <input type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-3"></div>
-                                            <div class="col-sm-9 text-secondary">
-                                                <input type="button" class="btn btn-primary px-4" value="Save Changes">
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-primary px-4" name="modifier" style="border-radius: 5px;">Modifier</button>
                                             </div>
                                         </div>
                                     </form>
@@ -158,6 +157,9 @@ require_once("./include/head.php");
                                                             <div class="row d-flex justify-content-between mb-3">
                                                                 <div class="p-2">
                                                                     <h6 class="mb-0">Commande n°1</h6>
+                                                                </div>
+                                                                <div class="p-2">
+                                                                    <h6 class="mb-0 font-weight-bold">Total de la commande : 365.99 €</h6>
                                                                 </div>
                                                                 <div class="p-2">
                                                                     <h6 class="mb-0">Date : 16/05/2005</h6>
