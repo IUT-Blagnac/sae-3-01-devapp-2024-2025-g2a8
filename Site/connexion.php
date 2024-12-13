@@ -31,6 +31,8 @@ require_once("./include/head.php");
 
             if ($userGet->rowCount() != 1) {
                 echo "<p>Compte introuvable</p>";
+
+                exit();
             }
 
             $user = $userGet->fetch();
