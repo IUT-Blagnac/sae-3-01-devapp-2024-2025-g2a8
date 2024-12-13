@@ -32,21 +32,22 @@ require_once("./include/head.php");
             if ($userGet->rowCount() != 1) {
                 echo "<p>Compte introuvable</p>";
 
-                exit();
-            }
-
-            $user = $userGet->fetch();
-
-            if (password_verify($_POST['pass'], $user['password'])) {
-                session_start();
-                session_reset();
-
-                $_SESSION["user_id"] = $user['user_id'];
-
-                header("location:index.php");
             } else {
-                echo "<p onload=appendAlert(\"Mot de passe invalide\", \"danger\")'></p>";
+                $user = $userGet->fetch();
+
+                if (password_verify($_POST['pass'], $user['password'])) {
+                    session_start();
+                    session_reset();
+
+                    $_SESSION["user_id"] = $user['user_id'];
+
+                    header("location:index.php");
+                } else {
+                    echo "<p onload=appendAlert(\"Mot de passe invalide\", \"danger\")'></p>";
+                }
             }
+
+
         }
         ?>
         <p onload="appendAlert('Mot de passe invalide', 'danger')"></p>
@@ -54,7 +55,8 @@ require_once("./include/head.php");
             <div class="form-signin w-50 text-center">
                 <form method="post">
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="mailConnexion" name="mail" placeholder="E-Mail" required>
+                        <input type="email" class="form-control" id="mailConnexion" name="mail" placeholder="E-Mail"
+                            required>
                     </div>
                     <div class="form-floating">
                         <input type="password" class="form-control" id="passwordConnexion" name="pass"
