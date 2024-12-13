@@ -21,8 +21,8 @@ require_once("./include/head.php");
             <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
             <div class="container container-fluid">
                 <div class="main-body">
-                    <div class="row">
-                        <div class="col-lg-4">
+                    <div class="row align-items-start">
+                        <div class="col-md-4 d-flex flex-column gap-3 mt-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
@@ -34,56 +34,115 @@ require_once("./include/head.php");
                                     </div>
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="d-flex align-items-center">Vos produits favoris</h3>
+                                </div>
+                                <hr/>
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <!-- Colonne de l'image (réduite pour laisser plus d'espace à la description) -->
+                                    <div class="col-3">
+                                        <img src="./imagesProduits/prod42.png" class="w-100 h-auto ml-3" alt="Image de Produit 1">
+                                    </div>
+                                    <hr/>
+                                    <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
+                                    <div class="col-9">
+                                        <div>
+                                            <h4>RockMon dragon de feu</h4>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-weight-bold">99,99€</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row d-flex justify-content-between align-items-center mb-4">
+                                    <!-- Colonne de l'image (réduite pour laisser plus d'espace à la description) -->
+                                    <div class="col-3">
+                                        <img src="./imagesProduits/prod44.png" class="w-100 h-auto ml-3" alt="Image de Produit 1">
+                                    </div>
+                                    <hr/>
+                                    <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
+                                    <div class="col-9">
+                                        <div>
+                                            <h4>Bras</h4>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-weight-bold">299,99€</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
                         </div>
                         <div class="col-lg-8 mt-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Full Name</h6>
+                                    <form method="post">
+                                        <div class="row mb-3">
+                                            <div class="col-sm-2">
+                                                <h6 class="mb-0">Nom</h6>
+                                            </div>
+                                            <div class="col-sm-4 text-secondary">
+                                                <input type="text" class="form-control" value="John Doe">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <h6 class="mb-0">Prenom</h6>
+                                            </div>
+                                            <div class="col-sm-4 text-secondary">
+                                                <input type="text" class="form-control" value="John Doe">
+                                            </div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="John Doe">
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Email</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="text" class="form-control" value="john@example.com">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Email</h6>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Phone</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="text" class="form-control" value="(239) 816-9029">
+                                            </div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="john@example.com">
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Address</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="text" class="form-control" value="Bay Area, San Francisco, CA">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Phone</h6>
+                                        <div class="form-row mb-3" style="align-items: center;">
+                                            <div class="col-sm-1">
+                                                <h6 class="mb-0">Ville</h6>
+                                            </div>
+                                            <div class="col-sm-3 text-secondary">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <h6 class="mb-0">Code Postale</h6>
+                                            </div>
+                                            <div class="col-sm-3 text-secondary">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <h6 class="mb-0">N°Rue</h6>
+                                            </div>
+                                            <div class="col-sm-3 text-secondary">
+                                                <input type="text" class="form-control">
+                                            </div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="(239) 816-9029">
+                                        <div class="row">
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-primary px-4" name="modifier" style="border-radius: 5px;">Modifier</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Mobile</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="(320) 380-4539">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Address</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="Bay Area, San Francisco, CA">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-3"></div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="button" class="btn btn-primary px-4" value="Save Changes">
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="row">
@@ -100,23 +159,55 @@ require_once("./include/head.php");
                                                                     <h6 class="mb-0">Commande n°1</h6>
                                                                 </div>
                                                                 <div class="p-2">
+                                                                    <h6 class="mb-0 font-weight-bold">Total de la commande : 365.99 €</h6>
+                                                                </div>
+                                                                <div class="p-2">
                                                                     <h6 class="mb-0">Date : 16/05/2005</h6>
                                                                 </div>
                                                             </div>
-                                                            <div class="row mb-3">
-                                                                <div class="col-sm-3">
-                                                                    <img src="./imagesProduits/prod42.png" class="w-75 h-75" alt="Image de">
+                                                            <div class="row d-flex justify-content-between align-items-center">
+                                                                <!-- Colonne de l'image (réduite pour laisser plus d'espace à la description) -->
+                                                                <div class="col-2">
+                                                                    <img src="./imagesProduits/prod42.png" class="w-100 h-auto" alt="Image de Produit 1">
                                                                 </div>
-                                                                <div class="col-sm-9">
+                                                                
+                                                                <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
+                                                                <div class="col-3">
                                                                     <div>
-                                                                        <h3>Produit 1</h3>
-                                                                        <h3>99,99€</h3>
+                                                                        <h4>RockMon dragon de feu</h4>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h5 class="font-weight-bold">99,99€</h5>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col">
-                                                                    <p>description : djcsjjicjsidjcsdnchig gcisdhgc isci gsidc hiusuhdcius hihcdisdhcishc siuhdcjxhsc iuhihkhjh</p>
+                                                                
+                                                                <!-- Colonne de la description -->
+                                                                <div class="col-7">
+                                                                    <h3 class="font-weight-bold">Description : </h3>
+                                                                    <p>Les Yeux de Rockmon sont de petits yeux ronds, spécialement conçus pour donner vie à votre compagnon Rockmon. Avec leur surface bombée et leurs petites pupilles noires flottantes, ils ajoutent une touche de personnalité et d’expressivité. Faciles à fixer, ils permettent à chaque Rockmon de développer un "regard" unique, qu’il soit malicieux, curieux ou serein. Ces yeux sont parfaits pour donner un peu plus de caractère à votre caillou de compagnie.</p>
                                                                 </div>
-                                                                <div>
+                                                            </div>
+                                                            <hr/>
+                                                            <div class="row d-flex justify-content-between align-items-center">
+                                                                <!-- Colonne de l'image (réduite pour laisser plus d'espace à la description) -->
+                                                                <div class="col-2">
+                                                                    <img src="./imagesProduits/prod45.png" class="w-100 h-auto" alt="Image de Produit 1">
+                                                                </div>
+                                                                
+                                                                <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
+                                                                <div class="col-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <h4>Jambes</h4>
+                                                                    </div class="d-flex align-items-center">
+                                                                    <div>
+                                                                        <h5 class="font-weight-bold">199,99€</h5>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <!-- Colonne de la description -->
+                                                                <div class="col-7">
+                                                                    <h3 class="font-weight-bold">Description : </h3>
+                                                                    <p>Les Yeux de Rockmon sont de petits yeux ronds, spécialement conçus pour donner vie à votre compagnon Rockmon. Avec leur surface bombée et leurs petites pupilles noires flottantes, ils ajoutent une touche de personnalité et d’expressivité. Faciles à fixer, ils permettent à chaque Rockmon de développer un "regard" unique, qu’il soit malicieux, curieux ou serein. Ces yeux sont parfaits pour donner un peu plus de caractère à votre caillou de compagnie.</p>
                                                                 </div>
                                                             </div>
                                                         </div>

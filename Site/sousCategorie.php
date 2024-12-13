@@ -22,7 +22,6 @@ if(!isset($_GET['idSousCateg'])){
             <!-- Menu vertical sur la gauche -->
             <?php
                 require_once("./include/menu.php");
-                require_once("./include/connect.inc.php");
             ?>
 
             <!-- Contenu principal -->
@@ -33,7 +32,6 @@ if(!isset($_GET['idSousCateg'])){
                             header("location:index.php");
                             exit();
                         }
-
                         $id = htmlentities($_GET['idSousCateg']);
                         $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie = $id");
                         $prods->execute();
@@ -46,6 +44,7 @@ if(!isset($_GET['idSousCateg'])){
                                 $prix = $produits['prix'];
                                 $stock = $produits['stock'];
                                 ?>
+                                <!-- changer les liens pour mettre un id en parametre et le nom image -->
                                 <a href="DetailProduit.php?idProduit=<?php echo $id; ?>" class="noHoverLine"><div class="card productDetailsContainer" style="width: 18rem;">
                                     <img src="./imagesProduits/prod<?php echo $id; ?>.png" class="card-img-top" alt="Image de <?php echo $nom; ?>">
                                     <div class="card-body">
@@ -54,7 +53,6 @@ if(!isset($_GET['idSousCateg'])){
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item bold blackText"><?php echo $prix."€" ?></li>
-
                                         <li class="list-group-item greenText">Expédié en 48/72 heures</li>
                                         <li class="list-group-item blueText"><?php echo $stock." en stock" ?></li>
                                     </ul>
@@ -65,6 +63,7 @@ if(!isset($_GET['idSousCateg'])){
                             $prods->closeCursor();
                         }
                     ?>
+
 
                 </div>
             
