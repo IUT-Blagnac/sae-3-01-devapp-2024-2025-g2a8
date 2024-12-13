@@ -58,20 +58,37 @@ require_once("./include/head.php");
                     $numRuePost = htmlentities($_POST['numRue']);
 
 
-                    // if(!$messageErreur){
-                    //     $reqUpdateUser = $conn->prepare("UPDATE Utilisateur SET nom = :nom, prenom = :prenom, mail = :email, numero = :numero WHERE user_id = :id");
-                    //     $reqUpdateUser->execute(array('nom' => $nomPost, 'prenom' => $prenomPost, 'email' => $emailPost, 'numero' => $numeroPost, 'id' => $userId));
-                    //     if(!$adresse && $nomRuePost != "" && $villePost != "" && $codePostalPost != "" && $numRuePost != ""){
-                    //         "INSERT  INTO Adresse (user_id, numRue, nomRue, ville, codePostal, ) VALUES (:id, :numRue, :nomRue,:ville, :codePostal)";
-                    //     }else {
-                    //         $reqUpdateAdresse = $conn->prepare("UPDATE Adresse SET ville = :ville, codePostal = :codePostal, numRue = :numRue, nomRue = :nomRue WHERE id_adresse = :id");
-                    //         $reqUpdateAdresse->execute(array('ville' => $villePost, 'codePostal' => $codePostalPost, 'numRue' => $numRuePost, 'nomRue' => $nomRuePost, 'id' => $adresseId));
-    
-                    //     }
-                    // }
+                    if(!$messageErreur){
+                        $reqUpdateUser = $conn->prepare("UPDATE Utilisateur SET nom = :nom, prenom = :prenom, mail = :email, numero = :numero WHERE user_id = :id");
+                        $reqUpdateUser->execute(array('nom' => $nomPost, 'prenom' => $prenomPost, 'email' => $emailPost, 'numero' => $numeroPost, 'id' => $userId));
+                        try{
+                            if(!$adresse && ($nomRuePost != "" || $villePost != "" || $codePostalPost != "" || $numRuePost != "")){
+                                    $reqInsertAdress = $conn->prepare("INSERT INTO Adresse (user_id, numRue, nomRue, ville, codePostal) VALUES (:user_id, :numRue, :nomRue, :ville, :codePostal)");
+                                    $reqInsertAdress->execute(array('user_id' => $userId, 'numRue' => $numRuePost, 'nomRue' => $nomRuePost, 'ville' => $villePost, 'codePostal' => $codePostalPost));
+                                
+                            }else{
+                                $reqUpdateAdresse = $conn->prepare("UPDATE Adresse SET ville = :ville, codePostal = :codePostal, numRue = :numRue, nomRue = :nomRue WHERE id_adresse = :id");
+                                $reqUpdateAdresse->execute(array('ville' => $villePost, 'codePostal' => $codePostalPost, 'numRue' => $numRuePost, 'nomRue' => $nomRuePost, 'id' => $adresse['id_adresse']));
+        
+                            }
+                        }catch(PDOException $e){
+                            $error = "Veuillez vérifier les informations saisies pour l'adresse";
+                            $messageErreur = true;
+                        }
+                    }
                     
                 }
 
+                $user->closeCursor();
+                $addressUser->closeCursor();
+
+                $user = $conn->prepare("SELECT * FROM Utilisateur WHERE user_id = :id");
+                $user->execute(array('id' => $userId));
+                $donneesUser = $user->fetch(PDO::FETCH_ASSOC);
+
+                $addressUser = $conn->prepare("SELECT * FROM Adresse WHERE user_id = :id");
+                $addressUser->execute(array('id' => $userId));
+                $adresse = $addressUser->fetch(PDO::FETCH_ASSOC);
                 
                 //Récupération des données de l'utilisateur
                 $nom = $donneesUser['nom'];
@@ -93,6 +110,10 @@ require_once("./include/head.php");
                     $numRue = "";
                     $nomRue = "";
                 }
+
+                $user->closeCursor();
+                $addressUser->closeCursor();
+
                 
 
             ?>
@@ -219,7 +240,7 @@ require_once("./include/head.php");
                                         </div>
                                         <div class="form-row mb-3" style="align-items: center;">
                                             <div class="col-sm-1">
-                                                <h6 class="mb-0">Ville</h6>
+                                                <h6 class="mb-0">N°Rue</h6>
                                             </div>
                                             <div class="col-sm-3 text-secondary">
                                                 <input type="text" class="form-control" name="numRue" value="<?php echo $messageErreur ? $_POST["numRue"] : $numRue; ?>" >
@@ -231,16 +252,22 @@ require_once("./include/head.php");
                                                 <input type="text" class="form-control" name="codePostal" value="<?php echo $messageErreur ? $_POST["codePostal"] : $codePostal; ?>" >
                                             </div>
                                             <div class="col-sm-1">
-                                                <h6 class="mb-0">N°Rue</h6>
+                                                <h6 class="mb-0">Ville</h6>
                                             </div>
                                             <div class="col-sm-3 text-secondary">
                                                 <input type="text" class="form-control" name="ville" value="<?php echo $messageErreur ? $_POST["ville"] : $ville; ?>" >
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row d-flex justify-content-between mb-3">
                                             <div class="col">
                                                 <button type="submit" class="btn btn-primary px-4" name="modifier" style="border-radius: 5px;">Modifier</button>
                                             </div>
+                                            <?php if(isset($error)) {
+                                                    echo "<div class='col'>";
+                                                    echo "<p style='color: red'>".$error."</p>";
+                                                    echo "</div>";
+                                                }
+                                                ?>
                                         </div>
                                     </form>
                                 </div>
