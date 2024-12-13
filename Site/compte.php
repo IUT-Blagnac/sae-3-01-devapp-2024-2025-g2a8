@@ -21,9 +21,9 @@ require_once("./include/head.php");
             <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
             <div class="container container-fluid">
                 <div class="main-body">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="card position-sticky" style="top: 0; z-index: 100;">
+                    <div class="row align-items-start">
+                        <div class="col-md-4 d-flex flex-column gap-3 mt-4">
+                            <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img src="icons/userCircleIcon.png" alt="Admin" class="rounded-circle p-1" width="110">
@@ -34,61 +34,116 @@ require_once("./include/head.php");
                                     </div>
                                 </div>
                             </div>
-                            <div class="card position-sticky" style="top: 160px; z-index: 99;">
+                            <div class="card">
                                 <div class="card-body">
-                                    <h3 class="d-flex align-items-center mb-3">Vos produits favoris</h3>
+                                    <h3 class="d-flex align-items-center">Vos produits favoris</h3>
                                 </div>
+                                <hr/>
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <!-- Colonne de l'image (réduite pour laisser plus d'espace à la description) -->
+                                    <div class="col-3">
+                                        <img src="./imagesProduits/prod42.png" class="w-100 h-auto ml-3" alt="Image de Produit 1">
+                                    </div>
+                                    <hr/>
+                                    <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
+                                    <div class="col-9">
+                                        <div>
+                                            <h4>RockMon dragon de feu</h4>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-weight-bold">99,99€</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row d-flex justify-content-between align-items-center mb-4">
+                                    <!-- Colonne de l'image (réduite pour laisser plus d'espace à la description) -->
+                                    <div class="col-3">
+                                        <img src="./imagesProduits/prod44.png" class="w-100 h-auto ml-3" alt="Image de Produit 1">
+                                    </div>
+                                    <hr/>
+                                    <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
+                                    <div class="col-9">
+                                        <div>
+                                            <h4>Bras</h4>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-weight-bold">299,99€</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                         <div class="col-lg-8 mt-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Full Name</h6>
+                                    <form method="post" action="">
+                                        <div class="row mb-3">
+                                            <div class="col-sm-2">
+                                                <h6 class="mb-0">Nom</h6>
+                                            </div>
+                                            <div class="col-sm-4 text-secondary">
+                                                <input type="text" class="form-control" value="John Doe">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <h6 class="mb-0">Prenom</h6>
+                                            </div>
+                                            <div class="col-sm-4 text-secondary">
+                                                <input type="text" class="form-control" value="John Doe">
+                                            </div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="John Doe">
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Email</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="text" class="form-control" value="john@example.com">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Email</h6>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Phone</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="text" class="form-control" value="(239) 816-9029">
+                                            </div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="john@example.com">
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Address</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="text" class="form-control" value="Bay Area, San Francisco, CA">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Phone</h6>
+                                        <div class="form-row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Ville</h6>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" placeholder="Ville">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Code Postale</h6>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" placeholder="Code Postale">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">N°Rue</h6>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" placeholder="Rue">
+                                            </div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="(239) 816-9029">
+                                        <div class="row">
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="button" class="btn btn-primary px-4" value="Save Changes">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Mobile</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="(320) 380-4539">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Address</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="Bay Area, San Francisco, CA">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-3"></div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="button" class="btn btn-primary px-4" value="Save Changes">
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="row">
@@ -117,10 +172,10 @@ require_once("./include/head.php");
                                                                 <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
                                                                 <div class="col-3">
                                                                     <div>
-                                                                        <h3>RockMon dragon de feu</h3>
+                                                                        <h4>RockMon dragon de feu</h4>
                                                                     </div>
                                                                     <div>
-                                                                        <h3 class="font-weight-bold">99,99€</h3>
+                                                                        <h5 class="font-weight-bold">99,99€</h5>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -140,10 +195,10 @@ require_once("./include/head.php");
                                                                 <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
                                                                 <div class="col-3">
                                                                     <div class="d-flex align-items-center">
-                                                                        <h3>Jambes</h3>
+                                                                        <h4>Jambes</h4>
                                                                     </div class="d-flex align-items-center">
                                                                     <div>
-                                                                        <h3 class="font-weight-bold">199,99€</h3>
+                                                                        <h5 class="font-weight-bold">199,99€</h5>
                                                                     </div>
                                                                 </div>
                                                                 
