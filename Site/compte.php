@@ -59,8 +59,13 @@ require_once("./include/head.php");
 
 
                     if(!$messageErreur){
-                        $reqUpdateUser = $conn->prepare("UPDATE Utilisateur SET nom = :nom, prenom = :prenom, mail = :email, numero = :numero WHERE user_id = :id");
-                        $reqUpdateUser->execute(array('nom' => $nomPost, 'prenom' => $prenomPost, 'email' => $emailPost, 'numero' => $numeroPost, 'id' => $userId));
+                        try{
+                            $reqUpdateUser = $conn->prepare("UPDATE Utilisateur SET nom = :nom, prenom = :prenom, mail = :email, numero = :numero WHERE user_id = :id");
+                            $reqUpdateUser->execute(array('nom' => $nomPost, 'prenom' => $prenomPost, 'email' => $emailPost, 'numero' => $numeroPost, 'id' => $userId));
+                        }catch(PDOException $e){
+                            $error = "Veuillez vérifier les informations saisies pour l'utilisateur";
+                            $messageErreur = true;
+                        }
                         try{
                             if(!$adresse && ($nomRuePost != "" || $villePost != "" || $codePostalPost != "" || $numRuePost != "")){
                                     $reqInsertAdress = $conn->prepare("INSERT INTO Adresse (user_id, numRue, nomRue, ville, codePostal) VALUES (:user_id, :numRue, :nomRue, :ville, :codePostal)");
@@ -178,6 +183,7 @@ require_once("./include/head.php");
                         <div class="col-lg-8 mt-4">
                             <div class="card">
                                 <div class="card-body">
+                                    <h4 class="d-flex align-items-center mb-4">Vos informations personnelles</h4>
                                     <form method="post">
                                         <div class="row mb-3">
                                             <div class="col-sm-2">
@@ -242,13 +248,13 @@ require_once("./include/head.php");
                                                 <h6 class="mb-0">N°Rue</h6>
                                             </div>
                                             <div class="col-sm-3 text-secondary">
-                                                <input type="text" class="form-control" name="numRue" value="<?php echo $messageErreur ? $_POST["numRue"] : $numRue; ?>" <?php echo isset($messageErreurAdresse) ?"style=border-color:red;" : "" ?>>
+                                                <input type="number" class="form-control" name="numRue" value="<?php echo $messageErreur ? $_POST["numRue"] : $numRue; ?>" <?php echo isset($messageErreurAdresse) ?"style=border-color:red;" : "" ?>>
                                             </div>
                                             <div class="col-sm-1">
                                                 <h6 class="mb-0">Code Postale</h6>
                                             </div>
                                             <div class="col-sm-3 text-secondary">
-                                                <input type="text" class="form-control" name="codePostal" value="<?php echo $messageErreur ? $_POST["codePostal"] : $codePostal; ?>" <?php echo isset($messageErreurAdresse) ?"style=border-color:red;" : "" ?>>
+                                                <input type="number" class="form-control" name="codePostal" value="<?php echo $messageErreur ? $_POST["codePostal"] : $codePostal; ?>" <?php echo isset($messageErreurAdresse) ?"style=border-color:red;" : "" ?>>
                                             </div>
                                             <div class="col-sm-1">
                                                 <h6 class="mb-0">Ville</h6>
