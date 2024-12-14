@@ -3,7 +3,6 @@ require_once("./include/head.php");
 ?>
 
 <body class="d-flex flex-column min-vh-100">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- En-tête -->
     <?php    
         require_once("./include/header.php");
