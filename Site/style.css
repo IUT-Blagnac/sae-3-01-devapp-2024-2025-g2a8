@@ -157,3 +157,19 @@
   box-shadow: none;
   transform: translateY(0);
 }
+
+.filterBar {
+    display: flex;
+    transition: all 0.3s ease;
+    flex-grow: 1;
+}
+
+.filterBar:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 4px 7.5px;
+    transform: translateY(-1px);
+  }
+  
+.filterBar:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
