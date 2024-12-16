@@ -1,28 +1,28 @@
-<footer class="bg-light text-dark pt-4">
+<footer class="bg-secondary text-white pt-4">
         <div class="container">
             <div class="row">
                 <!-- Section : À propos -->
                 <div class="col-md-4 mb-3">
                     <h5 class="text-uppercase">À propos de Nous</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-dark">Qui sommes-nous et nos engagements</a></li>
-                        <li><a href="#" class="text-decoration-none text-dark">Mentions légales</a></li>
+                        <li><a href="#" class="text-decoration-none text-white">Qui sommes-nous et nos engagements</a></li>
+                        <li><a href="#" class="text-decoration-none text-white">Mentions légales</a></li>
                     </ul>
                 </div>
                 <!-- Section : Aide & Contact -->
                 <div class="col-md-4 mb-3">
                     <h5 class="text-uppercase">Aide & Contact</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-dark">Besoin d'aide</a></li>
-                        <li><a href="#" class="text-decoration-none text-dark">Avis clients</a></li>
+                        <li><a href="#" class="text-decoration-none text-white">Besoin d'aide</a></li>
+                        <li><a href="#" class="text-decoration-none text-white">Avis clients</a></li>
                     </ul>
                 </div>
                 <!-- Section : Social et Partenaires -->
                 <div class="col-md-4 mb-3">
                     <h5 class="text-uppercase">Nos réseaux</h5>
                     <div class="d-flex flex-column gap-3">
-                        <a href="#" class="text-dark"><i class="bi bi-twitter"></i>X</a>
-                        <a href="#" class="text-dark"><i class="bi bi-instagram"></i>Instagram</a>
+                        <a href="#" class="text-white"><i class="bi bi-twitter"></i>X</a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram"></i>Instagram</a>
                     </div>
                 </div>
             </div>
