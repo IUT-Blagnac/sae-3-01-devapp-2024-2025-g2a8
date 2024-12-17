@@ -21,76 +21,92 @@ require_once("./include/head.php");
                             </div>
                             <div class="card-body">
                                 <!-- Single item -->
-                                
+
 
                                 <hr class="my-4" />
 
-                                <!-- Single item -->
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                                        <!-- Image -->
-                                        <div class="bg-image hover-overlay hover-zoom ripple rounded"
-                                            data-mdb-ripple-color="light">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
-                                                class="w-100" />
-                                            <a href="#!">
-                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)">
+                                <?php
+                                require("include/connect.inc.php");
+
+                                session_start();
+
+                                $userId = $_SESSION["user_id"];
+                                $productList = $conn->prepare("SELECT * FROM Produit P INNER JOIN Panier PA ON P.id_produit = PA.id_produit WHERE user_id = $userId");
+
+                                $productList->execute();
+
+                                if ($productList->rowCount() > 0) {
+                                    foreach ($productList->fetchAll(PDO::FETCH_ASSOC) as $produit) {
+                                        $prodId = $produit['id_produit'];
+                                        $prodNom = $produit['nom'];
+                                        $prodPrix = $produit['prix'];
+                                        $prodQuant = $produit['quantiter']
+
+                                            ?>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                                <!-- Image -->
+                                                <div class="bg-image hover-overlay hover-zoom ripple rounded"
+                                                    data-mdb-ripple-color="light">
+                                                    <img src="imagesProduits/prod<?php echo $prodId; ?>" class="w-100" />
+                                                    <a href="#!">
+                                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)">
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </a>
-                                        </div>
-                                        <!-- Image -->
-                                    </div>
-
-                                    <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                                        <!-- Data -->
-                                        <p><strong>Red hoodie</strong></p>
-                                        <p>Color: red</p>
-                                        <p>Size: M</p>
-
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                            class="btn btn-primary btn-sm me-1 mb-2" data-mdb-tooltip-init
-                                            title="Remove item">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                            class="btn btn-danger btn-sm mb-2" data-mdb-tooltip-init
-                                            title="Move to the wish list">
-                                            <i class="fas fa-heart"></i>
-                                        </button>
-                                        <!-- Data -->
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                                        <!-- Quantity -->
-                                        <div class="d-flex mb-4" style="max-width: 300px">
-                                            <button data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-primary px-3 me-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-
-                                            <div data-mdb-input-init class="form-outline">
-                                                <input id="form1" min="0" name="quantity" value="1" type="number"
-                                                    class="form-control" />
-                                                <label class="form-label" for="form1">Quantity</label>
+                                                <!-- Image -->
                                             </div>
 
-                                            <button data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-primary px-3 ms-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                        <!-- Quantity -->
+                                            <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                                <!-- Data -->
+                                                <p><strong><?php echo $prodNom; ?></strong></p>
 
-                                        <!-- Price -->
-                                        <p class="text-start text-md-center">
-                                            <strong>$17.99</strong>
-                                        </p>
-                                        <!-- Price -->
-                                    </div>
-                                </div>
-                                <!-- Single item -->
+                                                <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                    class="btn btn-primary btn-sm me-1 mb-2" data-mdb-tooltip-init
+                                                    title="Remove item">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                                <!-- Data -->
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                                <!-- Quantity -->
+                                                <div class="d-flex mb-4" style="max-width: 300px">
+                                                    <button data-mdb-button-init data-mdb-ripple-init
+                                                        class="btn btn-primary px-3 me-2"
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+
+                                                    <div data-mdb-input-init class="form-outline">
+                                                        <input id="form1" min="0" name="quantity"
+                                                            value="<?php echo $prodQuant ?>" type="number" class="form-control"
+                                                            disabled />
+                                                        <label class="form-label" for="form1">Quantity</label>
+                                                    </div>
+
+                                                    <button data-mdb-button-init data-mdb-ripple-init
+                                                        class="btn btn-primary px-3 ms-2"
+                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                                <!-- Quantity -->
+
+                                                <!-- Price -->
+                                                <p class="text-start text-md-center">
+                                                    <strong><?php $prodPrix; ?></strong>
+                                                </p>
+                                                <!-- Price -->
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+
+                                } else {
+                                    echo "<h3>Aucun produit n'est disponible pour cette catégorie</h3";
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
