@@ -62,7 +62,7 @@ require_once("./include/head.php");
                                                 <button type="button" data-mdb-button-init data-mdb-ripple-init
                                                     class="btn btn-primary btn-sm me-1 mb-2" data-mdb-tooltip-init
                                                     title="Remove item">
-                                                    <i class="fas fa-trash"></i>
+                                                    Supprimer
                                                 </button>
                                                 <!-- Data -->
                                             </div>
@@ -73,7 +73,7 @@ require_once("./include/head.php");
                                                     <button data-mdb-button-init data-mdb-ripple-init
                                                         class="btn btn-primary px-3 me-2"
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                        <i class="fas fa-minus"></i>
+                                                        -
                                                     </button>
 
                                                     <div data-mdb-input-init class="form-outline">
@@ -86,7 +86,7 @@ require_once("./include/head.php");
                                                     <button data-mdb-button-init data-mdb-ripple-init
                                                         class="btn btn-primary px-3 ms-2"
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                        <i class="fas fa-plus"></i>
+                                                        +
                                                     </button>
                                                 </div>
                                                 <!-- Quantity -->
@@ -102,7 +102,7 @@ require_once("./include/head.php");
                                     }
 
                                 } else {
-                                    echo "<h3>Aucun produit n'est disponible pour cette catégorie</h3";
+                                    echo "<h3>Aucun produit n'est disponible pour cette catégorie</h3>";
                                 }
                                 ?>
                             </div>
