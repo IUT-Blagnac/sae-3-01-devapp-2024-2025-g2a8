@@ -6,7 +6,24 @@ require_once("./include/head.php");
     <!-- En-tête -->
     <?php
     require_once("./include/header.php");
+    require("include/connect.inc.php");
     include("./include/verifConnexion.php");
+    ?>
+
+    <!-- form respond -->
+    <?php
+        if(isset($_POST["action"])){
+            $actionType = $_POST["typeAction"];
+            $idP = $_POST["prodId"];
+
+            if($actionType == "suppr"){
+                $delReq = $conn->prepare("DELETE FROM Panier WHERE id_produit = $idP");
+                
+                if(! $delReq->execute()){
+                    $error = "Impossible de supprimer le produit $idP";
+                }
+            }
+        }
     ?>
 
     <!-- Conteneur principal -->
@@ -24,7 +41,6 @@ require_once("./include/head.php");
                                 <!-- Single item -->
 
                                 <?php
-                                require("include/connect.inc.php");
 
                                 $userId = $_SESSION["user_id"];
                                 $productList = $conn->prepare("SELECT * FROM Produit P INNER JOIN Panier PA ON P.id_produit = PA.id_produit WHERE user_id = $userId");
@@ -62,9 +78,10 @@ require_once("./include/head.php");
 
                                                 <form method="post">
                                                     <input type="hidden" value="<?php echo $prodId?>" name="prodId"/>
+                                                    <input type="hidden" value="suppr" name="typeAction"/>
                                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                                         class="btn btn-primary btn-sm me-1 mb-2" data-mdb-tooltip-init
-                                                        title="Remove item" name="suppr">
+                                                        title="Remove item" name="action">
                                                         Supprimer
                                                     </button>
                                                 </form>
