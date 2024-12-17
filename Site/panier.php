@@ -22,9 +22,6 @@ require_once("./include/head.php");
                             <div class="card-body">
                                 <!-- Single item -->
 
-
-                                <hr class="my-4" />
-
                                 <?php
                                 require("include/connect.inc.php");
 
@@ -99,6 +96,12 @@ require_once("./include/head.php");
                                             </div>
                                         </div>
                                         <?php
+
+                                        $nbProdFor += 1;
+
+                                        if($nbProdFor <= $productList->rowCount()){
+                                            echo "<hr class='my-4'>";
+                                        }
                                     }
 
                                 } else {
