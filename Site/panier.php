@@ -45,7 +45,7 @@ require_once("./include/head.php");
                                                 <!-- Image -->
                                                 <div class="bg-image hover-overlay hover-zoom ripple rounded"
                                                     data-mdb-ripple-color="light">
-                                                    <img src="imagesProduits/prod<?php echo $prodId; ?>" class="w-100" />
+                                                    <img src="imagesProduits/prod<?php echo $prodId; ?>.png" class="w-100" />
                                                     <a href="#!">
                                                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)">
                                                         </div>
