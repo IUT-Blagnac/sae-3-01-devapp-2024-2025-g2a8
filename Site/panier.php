@@ -12,18 +12,27 @@ require_once("./include/head.php");
 
     <!-- form respond -->
     <?php
-        if(isset($_POST["action"])){
-            $actionType = $_POST["typeAction"];
-            $idP = $_POST["prodId"];
+    if (isset($_POST["action"])) {
+        $actionType = $_POST["typeAction"];
+        $idP = $_POST["prodId"];
+        $uId = $_POST["userId"];
 
-            if($actionType == "suppr"){
-                $delReq = $conn->prepare("DELETE FROM Panier WHERE id_produit = $idP");
-                
-                if(! $delReq->execute()){
-                    $error = "Impossible de supprimer le produit $idP";
-                }
+        if ($actionType == "suppr") {
+            $delReq = $conn->prepare("DELETE FROM Panier WHERE id_produit = $idP");
+
+            if (!$delReq->execute()) {
+                $error = "Impossible de supprimer le produit $idP";
             }
         }
+
+        if ($actionType == "del") {
+            $decReq = $conn->prepare("CALL DecPanier($uId, $idP)");
+
+            if (!$decReq->execute()) {
+                $error = "Impossible de supprimer le produit $idP";
+            }
+        }
+    }
     ?>
 
     <!-- Conteneur principal -->
@@ -77,8 +86,9 @@ require_once("./include/head.php");
                                                 <p><strong><?php echo $prodNom; ?></strong></p>
 
                                                 <form method="post">
-                                                    <input type="hidden" value="<?php echo $prodId?>" name="prodId"/>
-                                                    <input type="hidden" value="suppr" name="typeAction"/>
+                                                    <input type="hidden" value="<?php echo $prodId ?>" name="prodId" />
+                                                    <input type="hidden" value="<?php echo $userId ?>" name="userId" />
+                                                    <input type="hidden" value="suppr" name="typeAction" />
                                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                                         class="btn btn-primary btn-sm me-1 mb-2" data-mdb-tooltip-init
                                                         title="Remove item" name="action">
@@ -92,11 +102,15 @@ require_once("./include/head.php");
                                             <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                                                 <!-- Quantity -->
                                                 <div class="d-flex mb-4" style="max-width: 300px">
-                                                    <button data-mdb-button-init data-mdb-ripple-init
-                                                        class="btn btn-primary px-3 me-2"
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                        -
-                                                    </button>
+                                                    <form method="post">
+                                                        <input type="hidden" value="<?php echo $prodId ?>" name="prodId" />
+                                                        <input type="hidden" value="del" name="typeAction" />
+                                                        <input type="hidden" value="<?php echo $userId ?>" name="userId" />
+                                                        <button type="submit" data-mdb-ripple-init
+                                                            class="btn btn-primary px-3 me-2" name="action">
+                                                            -
+                                                        </button>
+                                                    </form>
 
                                                     <div data-mdb-input-init class="form-outline">
                                                         <input id="form1" min="0" name="quantity"
@@ -130,7 +144,7 @@ require_once("./include/head.php");
                                     }
 
                                 } else {
-                                    echo "<h3>Aucun produit n'est disponible pour cette catégorie</h3>";
+                                    echo "<h3>Aucun produit dans le panier</h3>";
                                 }
                                 ?>
                             </div>
