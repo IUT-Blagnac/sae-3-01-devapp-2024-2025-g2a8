@@ -32,7 +32,7 @@ require_once("./include/head.php");
 
                                 if ($productList->rowCount() > 0) {
                                     $nbProdFor = 0;
-                                    
+
                                     foreach ($productList->fetchAll(PDO::FETCH_ASSOC) as $produit) {
                                         $prodId = $produit['id_produit'];
                                         $prodNom = $produit['nom'];
@@ -101,7 +101,7 @@ require_once("./include/head.php");
 
                                         $nbProdFor += 1;
 
-                                        if($nbProdFor <= $productList->rowCount()){
+                                        if($nbProdFor < $productList->rowCount()){
                                             echo "<hr class='my-4'>";
                                         }
                                     }
