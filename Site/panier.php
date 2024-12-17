@@ -17,7 +17,8 @@ require_once("./include/head.php");
                     <div class="col-md-8">
                         <div class="card mb-4">
                             <div class="card-header py-3">
-                                <h5 class="mb-0">Panier - <?php echo getItemCartNumber($_SESSION['user_id'])?> Produit</h5>
+                                <h5 class="mb-0">Panier - <?php echo getItemCartNumber($_SESSION['user_id']) ?> Produit
+                                </h5>
                             </div>
                             <div class="card-body">
                                 <!-- Single item -->
@@ -45,7 +46,8 @@ require_once("./include/head.php");
                                                 <!-- Image -->
                                                 <div class="bg-image hover-overlay hover-zoom ripple rounded"
                                                     data-mdb-ripple-color="light">
-                                                    <img src="imagesProduits/prod<?php echo $prodId; ?>.png" class="w-100" alt="Image <?php echo $prodNom; ?>"/>
+                                                    <img src="imagesProduits/prod<?php echo $prodId; ?>.png" class="w-100"
+                                                        alt="Image <?php echo $prodNom; ?>" />
                                                     <a href="#!">
                                                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)">
                                                         </div>
@@ -58,11 +60,14 @@ require_once("./include/head.php");
                                                 <!-- Data -->
                                                 <p><strong><?php echo $prodNom; ?></strong></p>
 
-                                                <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                    class="btn btn-primary btn-sm me-1 mb-2" data-mdb-tooltip-init
-                                                    title="Remove item">
-                                                    Supprimer
-                                                </button>
+                                                <form method="post">
+                                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                                                        class="btn btn-primary btn-sm me-1 mb-2" data-mdb-tooltip-init
+                                                        title="Remove item">
+                                                        Supprimer
+                                                    </button>
+                                                </form>
+
                                                 <!-- Data -->
                                             </div>
 
@@ -101,7 +106,7 @@ require_once("./include/head.php");
 
                                         $nbProdFor += 1;
 
-                                        if($nbProdFor < $productList->rowCount()){
+                                        if ($nbProdFor < $productList->rowCount()) {
                                             echo "<hr class='my-4'>";
                                         }
                                     }
