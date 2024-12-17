@@ -57,7 +57,8 @@
     flex-wrap: wrap;
     flex-direction:row;
     justify-content: center;
-    width: 100%;    
+    justify-items: left; 
+    width: 100%;   
 
 }
 
@@ -76,6 +77,15 @@
     flex-grow: 1;
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
 }
+
+
+.productDetailsContainer img {
+    width: 100%;              /* L'image occupe toute la largeur disponible */
+    height: 200px;            /* Hauteur fixe pour toutes les images */
+    object-fit: cover;        /* L'image remplira le conteneur sans se déformer */
+    border-radius: 10px;      /* Coins arrondis pour l'image */
+}
+
 
 .productDetailsContainer:hover {
     transform: scale(1.1);
