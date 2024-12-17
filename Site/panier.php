@@ -61,9 +61,10 @@ require_once("./include/head.php");
                                                 <p><strong><?php echo $prodNom; ?></strong></p>
 
                                                 <form method="post">
+                                                    <input type="hidden" value="<?php echo $prodId?>" name="prodId"/>
                                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                                         class="btn btn-primary btn-sm me-1 mb-2" data-mdb-tooltip-init
-                                                        title="Remove item">
+                                                        title="Remove item" name="suppr">
                                                         Supprimer
                                                     </button>
                                                 </form>
