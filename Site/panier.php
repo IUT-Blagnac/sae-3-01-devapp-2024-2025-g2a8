@@ -7,7 +7,6 @@ require_once("./include/head.php");
     <?php
     require_once("./include/header.php");
     include("./include/verifConnexion.php");
-    include("include/utility.php")
     ?>
 
     <!-- Conteneur principal -->
