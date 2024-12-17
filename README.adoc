@@ -109,6 +109,7 @@ https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Docume
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/CompteRendu_n%C2%B02.pdf[Compte Rendu] +
 https://github.com/orgs/IUT-Blagnac/projects/271/views/10?filterQuery=iteration%3A%22Sprint+%232%22[Backlog Sprint#2]
 | Sprint #3 |https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/ODJ_n%C2%B03.pdf[Ordre du jour] +
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/CompteRenduN%C2%B03.pdf[Compte Rendu] + 
 https://github.com/orgs/IUT-Blagnac/projects/271/views/14[Backlog sprint #3]
 |===
 

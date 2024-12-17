@@ -1,10 +1,6 @@
 <?php
 require_once("./include/head.php");
 
-if(!isset($_GET['idSousCateg'])){
-    header("location:index.php");
-    exit();
-}
 ?>
 
 <body class="d-flex flex-column min-vh-100">
@@ -28,13 +24,22 @@ if(!isset($_GET['idSousCateg'])){
             <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
                 <div class = "productContainer">
                     <?php
-                        if(!isset($_GET['idSousCateg'])){
-                            header("location:index.php");
-                            exit();
+                        if(!isset($_GET['idSousCateg']) || empty($_GET['idSousCateg'])){
+                            $prods = $conn->prepare("SELECT * FROM Produit");
+                            $prods->execute();
+                        }else{
+                            $id = htmlentities($_GET['idSousCateg']);
+                            $categorie = $conn->prepare("SELECT * FROM Categorie WHERE id_categorie = $id");
+                            $categorie->execute();
+                            $donnees = $categorie->fetch(PDO::FETCH_ASSOC);
+                            if($donnees && htmlspecialchars($donnees['parent']) == NULL){
+                                $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie IN (SELECT id_categorie FROM Categorie WHERE parent = $id)");
+                                $prods->execute();
+                            }else{
+                                $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie = $id");
+                                $prods->execute();
+                            }                                    
                         }
-                        $id = htmlentities($_GET['idSousCateg']);
-                        $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie = $id");
-                        $prods->execute();
                         if ($prods->rowCount() > 0) {
                             foreach($prods->fetchAll(PDO::FETCH_ASSOC) as $produits){ 
                                 /* Récupération des données du produits */ 
