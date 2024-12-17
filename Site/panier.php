@@ -31,6 +31,8 @@ require_once("./include/head.php");
                                 $productList->execute();
 
                                 if ($productList->rowCount() > 0) {
+                                    $nbProdFor = 0;
+                                    
                                     foreach ($productList->fetchAll(PDO::FETCH_ASSOC) as $produit) {
                                         $prodId = $produit['id_produit'];
                                         $prodNom = $produit['nom'];
