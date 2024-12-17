@@ -23,32 +23,34 @@ require_once("./include/head.php");
                 <div class="card-header py-3">
                     <h1 class="mb-0">Connexion</h1>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="form-signin w-50 text-center">
-                    <form method="post">
-                        <div class="form-floating">
-                            <input type="email" class="form-control" id="mailConnexion" name="mail" placeholder="E-Mail"
-                                required>
-                        </div>
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="passwordConnexion" name="pass"
-                                placeholder="Mot de passe" required>
-                        </div>
-                        <div class="form-floating text-start my-3">
-                            <input class="form-check-input" type="checkbox" value="remember-me" id="checkRemember"
-                                name="remember">
-                            <label class="form-check-label" for="checkRemember">
-                                Se souvenir de moi
-                            </label>
-                            <button class="btn btn-primary w-100 py-2" type="submit" name="valider">Connexion</button>
-                        </div>
-                    </form>
-                    <a href="CreaCompte.php" class="btn btn-secondary w-100 py-2">
-                        S'inscrire
-                    </a>
+                <div class="card-body">
+                    <div class="form-signin w-50 text-center">
+                        <form method="post">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="mailConnexion" name="mail"
+                                    placeholder="E-Mail" required>
+                            </div>
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="passwordConnexion" name="pass"
+                                    placeholder="Mot de passe" required>
+                            </div>
+                            <div class="form-floating text-start my-3">
+                                <input class="form-check-input" type="checkbox" value="remember-me" id="checkRemember"
+                                    name="remember">
+                                <label class="form-check-label" for="checkRemember">
+                                    Se souvenir de moi
+                                </label>
+                                <button class="btn btn-primary w-100 py-2" type="submit"
+                                    name="valider">Connexion</button>
+                            </div>
+                        </form>
+                        <a href="CreaCompte.php" class="btn btn-secondary w-100 py-2">
+                            S'inscrire
+                        </a>
+                    </div>
                 </div>
             </div>
+
 
         </center>
 
