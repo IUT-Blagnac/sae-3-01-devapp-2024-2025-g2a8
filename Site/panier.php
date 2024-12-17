@@ -32,6 +32,14 @@ require_once("./include/head.php");
                 $error = "Impossible de supprimer le produit $idP";
             }
         }
+
+        if ($actionType == "add") {
+            $decReq = $conn->prepare("CALL IncPanier($uId, $idP)");
+
+            if (!$decReq->execute()) {
+                $error = "Impossible de supprimer le produit $idP";
+            }
+        }
     }
     ?>
 
@@ -118,12 +126,15 @@ require_once("./include/head.php");
                                                             disabled />
                                                         <label class="form-label" for="form1">Quantity</label>
                                                     </div>
-
-                                                    <button data-mdb-button-init data-mdb-ripple-init
-                                                        class="btn btn-primary px-3 ms-2"
-                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                        +
-                                                    </button>
+                                                    <form method="post">
+                                                        <input type="hidden" value="<?php echo $prodId ?>" name="prodId" />
+                                                        <input type="hidden" value="add" name="typeAction" />
+                                                        <input type="hidden" value="<?php echo $userId ?>" name="userId" />
+                                                        <button type="submit" data-mdb-ripple-init
+                                                            class="btn btn-primary px-3 me-2" name="action">
+                                                            +
+                                                        </button>
+                                                    </form>
                                                 </div>
                                                 <!-- Quantity -->
 
