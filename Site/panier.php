@@ -28,8 +28,6 @@ require_once("./include/head.php");
                                 <?php
                                 require("include/connect.inc.php");
 
-                                session_start();
-
                                 $userId = $_SESSION["user_id"];
                                 $productList = $conn->prepare("SELECT * FROM Produit P INNER JOIN Panier PA ON P.id_produit = PA.id_produit WHERE user_id = $userId");
 
