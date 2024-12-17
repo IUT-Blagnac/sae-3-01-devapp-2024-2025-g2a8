@@ -7,6 +7,7 @@ require_once("./include/head.php");
     <?php
     require_once("./include/header.php");
     include("./include/verifConnexion.php");
+    include("include/utility.php")
     ?>
 
     <!-- Conteneur principal -->
@@ -17,7 +18,7 @@ require_once("./include/head.php");
                     <div class="col-md-8">
                         <div class="card mb-4">
                             <div class="card-header py-3">
-                                <h5 class="mb-0">Cart - 2 items</h5>
+                                <h5 class="mb-0">Panier - <?php echo getItemCartNumber($_SESSION['user_id'])?> Produit</h5>
                             </div>
                             <div class="card-body">
                                 <!-- Single item -->
