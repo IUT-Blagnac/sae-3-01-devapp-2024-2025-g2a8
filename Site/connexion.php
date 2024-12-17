@@ -39,7 +39,7 @@ require_once("./include/head.php");
                         <button class="btn btn-primary w-100 py-2" type="submit" name="valider">Sign in</button>
                     </div>
                 </form>
-                <a href="CreaCompte.php">
+                <a href="CreaCompte.php" class="btn btn-primary w-100 py-2">
                     S'inscrire
                 </a>
             </div>
