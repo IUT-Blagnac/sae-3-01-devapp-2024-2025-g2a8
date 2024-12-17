@@ -19,12 +19,12 @@ require_once("./include/head.php");
     <!-- Conteneur principal -->
     <div class="container flex-grow-1 text-center w-50">
         <center>
-            <div class="card mb-4">
+            <div class="card mb-4 mt-4">
                 <div class="card-header py-3">
                     <h1 class="mb-0">Connexion</h1>
                 </div>
-                <div class="card-body">
-                    <div class="form-signin w-50 text-center">
+                <div class="card-body w-75">
+                    <div class="form-signin w-75 text-center">
                         <form method="post">
                             <div class="form-floating">
                                 <input type="email" class="form-control" id="mailConnexion" name="mail"
