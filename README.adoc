@@ -131,3 +131,7 @@ Penser à mettre les rôles dans le readme. A présenter le client. On peut alle
 === retour semaine 48
 
 Backlog produit : je n'ai pas de lien vers le backlog produit; Des US sans finalité (afin de) et sans critères d'acceptabilité, manque compléxité. Backlog sprint : Je n'en ai pas ... Les US traitées dans un sprint devraient au moins avoir un milestone à jour (sprint 1 par ex). Je n'ai que le spint 1 qui devrait être fini depuis un moment, ou est le sprint 2 ?Tasks : Elles doivent être rattachées à des US, assignées, avec un milestone. Il y en a peu ... impossible de suivre où vous en êtes du projet ! TESTS : pas de cahier de tests DOC: liens mais peu d'éléments notamment dans la doc de conception qui devrait être terminée !! release : Pas de release, pas de site en construction visible, pas de dates de livrable.
+
+=== retour semaine 50
+Des progrès , le sprint 3 se rapproche des attendus mais les tâches doivent être rattachées aux US. Après j'ai très peu de US et d'issue, il manque la plupart des tâches techniques.  Toujours pas de cahier de tests !  Doc tech et user juste initialisée et conception au même stade que la dernière fois !  Site web en demo ok , j'ai une release IOT mais pas Web.
+Pensez à raffraichir la page pour voir le graphique des évaluations.
