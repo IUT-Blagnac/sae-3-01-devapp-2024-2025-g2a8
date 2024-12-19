@@ -93,6 +93,10 @@ ODJ : Ok mais manque Ecommerce !  CR: pb de date (22/11) au lieu de 4/12. Manque
 note : 1,83/3
 Note appel offre : 10/20
 
+=== retour semaine 50
+odj OK; CR : Il manque le retour reunion client et analyse réussites/difficultés (techniques et organisationnelles). Peu d'avancement sur le site ce qui vous pénalise sur la note GPO, c'est dommage.  Je n'ai pas vu les jours de télétravail attention aux UAS en fin de projet.
+NOTE : 2,24/3
+
 == Gestion de projet & Qualité
 
 [cols="1,3"]
