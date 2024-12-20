@@ -12,9 +12,23 @@ $user = getUserById($_SESSION['user_id']);
         <li>
             <a class="dropdown-item" href="./compte.php">Mon Compte</a>
         </li>
+        <?php 
+            $admin = $conn->prepare("SELECT * FROM Utilisateur WHERE user_id = :user_id AND role = 'A'");
+            $admin->execute(['user_id' => $_SESSION['user_id']]);
+            if($admin->rowCount() > 0){
+                
+        ?>
         <li>
-            <a class="dropdown-item" href="./include/traitDeco.php">Deconnexion</a>
+            <a class="dropdown-item" href="ajoutCat.php">Admin</a>
         </li>
+        <?php
+        }
+        $admin->closeCursor();
+        ?>
+        <li>
+            <a class="dropdown-item" href="deconnexion.php">Deconnexion</a>
+        </li>
+        
     </ul>
 </div>
 

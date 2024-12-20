@@ -27,7 +27,7 @@
     left: 0;
     transition: all .3s ease-in-out;
     height: 0;
-    
+    z-index: 1001;   
 }
 
 .display-navBar:hover .navBarToDisplay {
@@ -57,8 +57,7 @@
     flex-wrap: wrap;
     flex-direction:row;
     justify-content: center;
-    justify-items: left; 
-    width: 100%;   
+    width: 100%;    
 
 }
 
@@ -78,14 +77,13 @@
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
-
 .productDetailsContainer img {
-    width: 100%;              /* L'image occupe toute la largeur disponible */
-    height: 200px;            /* Hauteur fixe pour toutes les images */
-    object-fit: cover;        /* L'image remplira le conteneur sans se déformer */
-    border-radius: 10px;      /* Coins arrondis pour l'image */
+    height: 100%;
+    min-height: 200px;
+    min-width: auto;
+    max-height: 200px;
+    max-width: auto;
 }
-
 
 .productDetailsContainer:hover {
     transform: scale(1.1);
@@ -168,10 +166,14 @@
   transform: translateY(0);
 }
 
+
 .filterBar {
     display: flex;
     transition: all 0.3s ease;
     flex-grow: 1;
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
 }
 
 .filterBar:hover {
@@ -183,3 +185,6 @@
     box-shadow: none;
     transform: translateY(0);
   }
+
+
+  
