@@ -1,5 +1,7 @@
 <?php
 require_once("./include/head.php");
+
+
 ?>
 
 <body class="d-flex flex-column min-vh-100">
@@ -298,14 +300,24 @@ require_once("./include/head.php");
                                                                             <div class="p-2">
                                                                                 <h6 class="mb-0"><?php echo "Commande n°".$commande['id_commande'] ?></h6>
                                                                             </div>
+                                                                            <?php 
+                                                                            $reqTotalCommande = $conn->prepare("CALL CoutCommande(:idCommande, @cout)");
+                                                                            $reqTotalCommande->execute(array('idCommande' => $commande['id_commande']));
+
+                                                                            $totalCommande = $conn->query("SELECT @cout as cout");
+                                                                            $prixCommande = $totalCommande->fetch(PDO::FETCH_ASSOC);
+                                                                            ?>
                                                                             <div class="p-2">
-                                                                                <h6 class="mb-0 font-weight-bold">Total de la commande : 365.99 € (procedure a faire)</h6>
+                                                                                <h6 class="mb-0 font-weight-bold">Total de la commande : <?php echo $prixCommande['cout'] ?>€</h6>
                                                                             </div>
                                                                             <div class="p-2">
                                                                                 <h6 class="mb-0"><?php echo "Date : ".$commande['date'] ?></h6>
                                                                             </div>
                                                                         </div>
                                                                         <?php 
+                                                                            $reqTotalCommande->closeCursor();
+                                                                            $totalCommande->closeCursor();
+
                                                                             $reqCommandeProds = $conn->prepare("SELECT * FROM ProduitCommander PC, Produit P WHERE id_commande = :idCommande AND PC.id_produit = P.id_produit");
                                                                             $reqCommandeProds->execute(array('idCommande'=>$commande['id_commande']));
 
