@@ -11,7 +11,7 @@ require_once("./include/head.php");
     <?php    
             require_once("./include/header.php");
             require_once("./include/verifConnexion.php");
-            // require_once("./include/verifAdmin.php");
+            require_once("./include/verifAdmin.php");
         ?>
 
         <!-- Conteneur principal -->
@@ -22,8 +22,14 @@ require_once("./include/head.php");
                 if(isset($_POST['ajouter'])){
                     $nomCategAdd = $_POST['nomCategAdd'];
                     $categParenteAdd = ($_POST['categParenteAdd'] == 'NULL') ? NULL : $_POST['categParenteAdd'];
-                    $ajoutCateg = $conn->prepare("INSERT INTO Categorie (nom_categorie, parent) VALUES (:nom, :parent_id)");
-                    $ajoutCateg->execute(['nom' => $nomCategAdd, 'parent_id' => $categParenteAdd]);
+                    try{
+                        $ajoutCateg = $conn->prepare("INSERT INTO Categorie (nom_categorie, parent) VALUES (:nom, :parent_id)");
+                        $ajoutCateg->execute(['nom' => $nomCategAdd, 'parent_id' => $categParenteAdd]);
+                    }catch(PDOException $e){
+                        $reussite = "<div class='alert alert-danger'>Erreur : Veuillez saisir des informations correctes</div>";
+                        die();
+                    }
+                    
                     $reussite =  "<div class='alert alert-success'>La catégorie a bien été ajoutée</div>";
                 }
 
@@ -36,7 +42,7 @@ require_once("./include/head.php");
                         $supprCateg->execute(['id_categorie' => $categSuppr]);
                         $reussite = "<div class='alert alert-success'>La catégorie a bien été supprimée</div>";
                     }catch(PDOException $e){
-                        $erreurSuppr = "Veuillez d'abord supprimer les sous-catégories";
+                        $erreurSuppr = "Veuillez d'abord supprimer les sous-catégories/ou tous les produits de la catégorie";
                     }
                 }
                 
@@ -62,7 +68,7 @@ require_once("./include/head.php");
                                 <div class="col-sm-8">
                                     <select name="categParenteAdd" class="form-control">
                                         <?php 
-                                        $categParente = $conn->prepare("SELECT * FROM Categorie WHERE parent IS NULL");
+                                        $categParente = $conn->prepare("SELECT * FROM Categorie WHERE parent IS NULL ORDER BY nom_categorie ASC");
                                         $categParente->execute();
                                         ?>
                                         <option value="NULL">Aucune</option>
@@ -81,39 +87,6 @@ require_once("./include/head.php");
                 </div>
 
                 <div class="card w-50 mt-5 mx-auto">
-                    <div class="card-body">
-                        
-                        <h4 class="d-flex align-items-center mb-4">Modifier une categorie</h4>
-                        <div class="row mb-3">
-                                <label for="description" class="col-sm-4 col-form-label">Catégorie</label>
-                                <div class="col-sm-8">
-                                    <select name="categModif" class="form-control">
-                                        <option value="2">Mystique</option>
-                                    </select>
-                                </div>
-                            </div>
-                        <form method="post">
-                            <div class="row mb-3">
-                                <label for="nom" class="col-sm-4 col-form-label">Nom catégorie</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="nom" name="nomCategModif" required>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="description" class="col-sm-4 col-form-label">Catégorie parente</label>
-                                <div class="col-sm-8">
-                                    <select name="categParenteModif" class="form-control">
-                                        <option value="NULL">Aucune</option>
-                                        <option value="2">Mystique</option>
-                                    </select>
-                                </div>
-                            </div>  
-                            <button type="submit" class="button-28 mt-3" name="modifier">Modifier</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card w-50 mt-5 mx-auto">
                     <div class="card-body" style= <?php isset($erreurSuppr) ? 'border-color: red;' : "" ?>>
                         <h4 class="d-flex align-items-center mb-4">Supprimer une categorie</h4>
                         <?php if(isset($erreurSuppr)) echo "<div class='alert alert-danger'>$erreurSuppr</div>"; ?>
@@ -123,7 +96,7 @@ require_once("./include/head.php");
                                 <div class="col-sm-8">
                                     <select name="categSuppr" class="form-control">
                                     <?php 
-                                        $categParente = $conn->prepare("SELECT * FROM Categorie");
+                                        $categParente = $conn->prepare("SELECT * FROM Categorie ORDER BY nom_categorie ASC");
                                         $categParente->execute();
                                         ?>
                                         <?php 

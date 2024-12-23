@@ -47,7 +47,7 @@ require_once("./include/head.php");
                     $categorie->execute();
                     $donnees = $categorie->fetch(PDO::FETCH_ASSOC);
                     if($donnees && htmlspecialchars($donnees['parent']) == NULL){
-                        $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie IN (SELECT id_categorie FROM Categorie WHERE parent = $id) AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
+                        $prods = $conn->prepare("SELECT * FROM Produit WHERE (id_categorie IN (SELECT id_categorie FROM Categorie WHERE parent = $id) OR id_categorie = $id )AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
                         $prods->execute();
                     }else{
                         $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie = $id AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
