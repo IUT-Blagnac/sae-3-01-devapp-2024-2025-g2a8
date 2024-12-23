@@ -4,7 +4,7 @@ require_once("./include/head.php");
 ?>
 
 <body class="d-flex flex-column min-vh-100">
-    <script src="include_script/alert.js"></script> 
+    <script src="include_script/alert.js"></script>
     <!-- En-tête -->
     <header class="bg-white border-bottom">
         <div class="container-fluid d-flex align-items-center py-3 px-3">
@@ -18,28 +18,40 @@ require_once("./include/head.php");
 
     <!-- Conteneur principal -->
     <div class="container flex-grow-1 text-center w-50">
-        <h1>Connexion</h1>
         <center>
-            <div class="form-signin w-50 text-center">
-                <form method="post">
-                    <div class="form-floating">
-                        <input type="email" class="form-control" id="mailConnexion" name="mail" placeholder="E-Mail"
-                            required>
+            <div class="card mb-4 mt-4">
+                <div class="card-header py-3">
+                    <h1 class="mb-0">Connexion</h1>
+                </div>
+                <div class="card-body w-75">
+                    <div class="form-signin w-75 text-center">
+                        <form method="post">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="mailConnexion" name="mail"
+                                    placeholder="E-Mail" required>
+                            </div>
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="passwordConnexion" name="pass"
+                                    placeholder="Mot de passe" required>
+                            </div>
+                            <div class="form-floating text-start my-3">
+                                <input class="form-check-input" type="checkbox" value="remember-me" id="checkRemember"
+                                    name="remember">
+                                <label class="form-check-label" for="checkRemember">
+                                    Se souvenir de moi
+                                </label>
+                                <button class="btn btn-primary w-100 py-2" type="submit"
+                                    name="valider">Connexion</button>
+                            </div>
+                        </form>
+                        <a href="CreaCompte.php" class="btn btn-secondary w-100 py-2">
+                            S'inscrire
+                        </a>
                     </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="passwordConnexion" name="pass"
-                            placeholder="Mot de passe" required>
-                    </div>
-                    <div class="form-floating text-start my-3">
-                        <input class="form-check-input" type="checkbox" value="remember-me" id="checkRemember"
-                            name="remember">
-                        <label class="form-check-label" for="checkRemember">
-                            Se souvenir de moi
-                        </label>
-                        <button class="btn btn-primary w-100 py-2" type="submit" name="valider">Sign in</button>
-                    </div>
-                </form>
+                </div>
             </div>
+
+
         </center>
 
         <div id="liveAlertPlaceholder"></div>
@@ -79,7 +91,7 @@ require_once("./include/head.php");
     <!-- Pied de page -->
     <?php
     require_once("./include/footer.php")
-    ?>
+        ?>
 </body>
 
 </html>

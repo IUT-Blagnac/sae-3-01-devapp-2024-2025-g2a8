@@ -38,21 +38,27 @@ require_once("./include/head.php");
                     $ordreAvec = htmlentities($_POST['ordreAvec']);
                 }
 
-                if(!isset($_GET['idSousCateg']) || empty($_GET['idSousCateg'])){
-                    $prods = $conn->prepare("SELECT * FROM Produit WHERE prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
+                if (isset($_GET["searchBar"])) {
+                    $search = htmlentities($_GET["searchBar"]);
+                    $prods = $conn->prepare("SELECT * FROM Produit WHERE ( nom LIKE '%$search%' OR description LIKE '%$search%' ) AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
                     $prods->execute();
-                }else{
-                    $id = htmlentities($_GET['idSousCateg']);
-                    $categorie = $conn->prepare("SELECT * FROM Categorie WHERE id_categorie = $id");
-                    $categorie->execute();
-                    $donnees = $categorie->fetch(PDO::FETCH_ASSOC);
-                    if($donnees && htmlspecialchars($donnees['parent']) == NULL){
-                        $prods = $conn->prepare("SELECT * FROM Produit WHERE (id_categorie IN (SELECT id_categorie FROM Categorie WHERE parent = $id) OR id_categorie = $id )AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
+                } else {
+                    if(!isset($_GET['idSousCateg']) || empty($_GET['idSousCateg'])){
+                        $prods = $conn->prepare("SELECT * FROM Produit WHERE prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
                         $prods->execute();
                     }else{
-                        $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie = $id AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
-                        $prods->execute();
-                    }                                    
+                        $id = htmlentities($_GET['idSousCateg']);
+                        $categorie = $conn->prepare("SELECT * FROM Categorie WHERE id_categorie = $id");
+                        $categorie->execute();
+                        $donnees = $categorie->fetch(PDO::FETCH_ASSOC);
+                        if($donnees && htmlspecialchars($donnees['parent']) == NULL){
+                            $prods = $conn->prepare("SELECT * FROM Produit WHERE (id_categorie IN (SELECT id_categorie FROM Categorie WHERE parent = $id) OR id_categorie = $id ) AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
+                            $prods->execute();
+                        }else{
+                            $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie = $id AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
+                            $prods->execute();
+                        }                                    
+                    }
                 }
 
 
@@ -64,7 +70,7 @@ require_once("./include/head.php");
                             <div class="row">
                                 <div class='col'>
                                     <label for="prixMin">Prix Minimum</label>
-                                    <input type="number" class="form-control" id="prixMin" name="prixMin" value="0" min="0" placeholder="Prix Minimum">
+                                    <input type="number" class="form-control" id="prixMin" name="prixMin" value=<?php echo $prixMin ?> min="0" placeholder="Prix Minimum">
                                 </div>
                                 <div class='col'>
                                     <label for="prixMax">Prix Maximum</label>

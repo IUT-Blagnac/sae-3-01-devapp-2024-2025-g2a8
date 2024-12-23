@@ -15,3 +15,12 @@ function getUserById($id){
         return false;
     }
 }
+
+function getItemCartNumber($id){
+    require("connect.inc.php");
+
+    $panierGet = $conn->prepare("SELECT * FROM Panier WHERE user_id = $id");
+    $panierGet->execute();
+
+    return $panierGet->rowCount();
+}

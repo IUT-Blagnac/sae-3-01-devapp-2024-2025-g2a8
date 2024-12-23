@@ -1,4 +1,7 @@
 <header class="bg-white border-bottom">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
     <div class="container-fluid d-flex align-items-center py-3 px-3">
         <!-- Logo -->
         <div class="me-auto">
@@ -6,7 +9,7 @@
         </div>
         
         <!-- Barre de recherche -->
-        <form class="d-flex flex-grow-1 mx-3" action="recherche.php">
+        <form class="d-flex flex-grow-1 mx-3" method="POST">
             <input 
                 class="form-control me-2 rounded-pill" 
                 type="search" 
@@ -15,6 +18,13 @@
                 aria-label="Rechercher"
                 >
         </form>
+
+        <?php
+            if (isset($_POST['query'])) {
+                $query = $_POST['query'];
+                header("location:sousCategorie.php?searchBar=$query");
+            }
+        ?>
         
         <!-- Icônes -->
         <div class="d-flex align-items-center gap-3">
@@ -28,7 +38,7 @@
                     if($user != false){
                         require("include/dropdownUser.php");
                     } else {
-                        echo "<img src='./icons/utilisateur.png' alt='utilisateur' width='30' height='30'>";
+                        echo "<i class='bi bi-person'></i>";
                     }
                     
                 } else {
