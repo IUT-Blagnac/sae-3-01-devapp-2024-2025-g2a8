@@ -35,10 +35,13 @@ require_once("./include/head.php");
                         try{
                             $modifProd = $conn->prepare("UPDATE Produit SET nom = :nom, description = :description, id_categorie = :categ, prix = :prix, stock = :stock WHERE id_produit = :idProduit");
                             $modifProd->execute(['nom' => $nomProd, 'description' => $description, 'categ' => $categ, 'prix' => $prix, 'stock' => $stock, 'idProduit' => $_GET['idProduit']]);
-                            $message =  "<div class='alert alert-success'>Le produit a bien été modifié</div>";
+                            echo '<div class="alert alert-success" role="alert">';
+                            echo 'Le produit a bien été modifié';
+                            echo '</div>';
                         }catch(PDOException $e){
-                            $message = "<div class='alert alert-danger'>Erreur : Veuillez saisir des informations correctes</div>";
-                            die();
+                            echo '<div class="alert alert-danger" role="alert">';
+                            echo 'Erreur : Veuillez saisir des informations correctes';
+                            echo '</div>';
                         }
 
                         if (!empty($_FILES['imageProduit']) AND $_FILES['imageProduit']['error'] == 0) {
