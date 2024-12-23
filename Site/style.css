@@ -27,7 +27,7 @@
     left: 0;
     transition: all .3s ease-in-out;
     height: 0;
-    
+    z-index: 1001;   
 }
 
 .display-navBar:hover .navBarToDisplay {
@@ -184,4 +184,5 @@
 .filterBar:active {
     box-shadow: none;
     transform: translateY(0);
-  }
+}
+
