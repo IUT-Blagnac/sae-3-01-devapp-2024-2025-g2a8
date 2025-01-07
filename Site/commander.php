@@ -124,12 +124,12 @@ require_once("./include/head.php");
                         </div>
 
                         <div class="row">
-                            <div class="mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="numRue">Numero de rue</label>
                                 <input type="text" class="form-control" id="numRue" placeholder="1"
                                     required>
                             </div>
-                            <div class="mb-3">
+                            <div class="col-md-9 mb-3 mb-3">
                                 <label for="nomRue">Nom de rue</label>
                                 <input type="text" class="form-control" id="nomRue" placeholder="Rue du fort"
                                     required>
@@ -137,7 +137,8 @@ require_once("./include/head.php");
                         </div>
 
                         <div class="mb-3">
-                            <label for="compadresse">Complement d'adresse</label>
+                            <label for="compadresse">Complement d'adresse (Optionnel)</label>
+                            <small class="text-muted">Num d'appartement, code interphone, ...</small>
                             <input type="text" class="form-control" id="compadresse" placeholder="1234 Main St"
                                 required>
                         </div>
