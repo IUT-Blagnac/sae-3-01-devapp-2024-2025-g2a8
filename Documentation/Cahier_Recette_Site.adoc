@@ -91,12 +91,125 @@ Ce cas de test valide l'ajout et l'affichage des avis
 |Objectif 4+|Vérifier que les produits de la catégorie soient présents
 5+|
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|1 ^|Cliquer sur une catégorie ^|Un formulaire s'affiche pour permettre d'ajouter un avis ^|L'utilisateur a acheté le produit. ^|OK
-^|2 ^|Valider l'avis ^|La page du produit se recharge et l'avis de l'utilisateur est présent dans la section "Avis Clients" ^|L'utilisateur a entré des informations valides pour ajouter un avis ^|OK
-^|3 ^|Aucune ^|Les avis de tous les utilisateurs sont affichés dans la section "Avis Clients" ^|Le produit possède des avis ^|OK
+^|1 ^|Cliquer sur une catégorie du menu  ^|Tous les produits de la catégorie s'affichent ^|Il y a des produits dans la catégorie. ^|OK
+^|2 ^|Cliquer sur une catégorie du menu ^|Un message s'affiche pour prévenir qu'il n'y a aucun produit dans la catégorie ^|Il n'y a aucun produits dans la catégorie. ^|OK
+^|3 ^|Tentative de modification du lien ^|Tous les produits s'affichent ^|L'utilisateur modifie le lien ^|OK
 5+|
 5+|Commentaire :
-Ce cas de test valide l'ajout et l'affichage des avis
+Ce cas de test valide l'affichage du catalogue produit
+|====
+
+=== I.6. Ajouter produit (LIONARDO Matthias)
+- **Description :** Tester L'ajout d'un produit
+- **Cas de test :**
+
+|====
+|Titre 4+|Ajouter un produit
+|Objectif 4+|Vérifier que le produit est bien ajouté
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Cliquer sur le bouton ajouter produit  ^|Un message s'affiche pour prévenir que le produit a été ajouté ^|Être connecté sur un compte administrateur/ remplir tous les champs. ^|OK
+5+|
+5+|Commentaire :
+Ce cas de test valide l'ajout d'un produit
+|====
+
+=== I.7. Supprimer produit (LIONARDO Matthias)
+- **Description :** Tester La suppression d'un produit
+- **Cas de test :**
+
+|====
+|Titre 4+|Supprimer produit
+|Objectif 4+|Vérifier que le produit soit bien supprimé
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Appuyer sur le bouton supprimer  ^|Supprime le produit ^|Être connecté sur un compte administrateur. ^|OK
+^|2 ^|Appuyer sur le bouton supprimer  ^|Supprime le produit ^|Être connecté sur un compte administrateur/ Le produit est dans une commande ou le panier d'un utilisateur. ^|Le produit n'est pas supprimé. ^|
+5+|
+5+|Commentaire :
+Ce cas de test valide la suppression d'un produit
+|====
+
+=== I.8. Modifier produit (LIONARDO Matthias)
+- **Description :** Tester La modification d'un produit
+- **Cas de test :**
+
+|====
+|Titre 4+|Modifier produit
+|Objectif 4+|Vérifier que le produit soit bien modifié
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Cliquer sur le bouton modifier  ^|Modifie le produit ^|Être connecté sur un compte administrateur. ^|OK
+5+|
+5+|Commentaire :
+Ce cas de test valide la modification d'un produit
+|====
+
+=== I.9. Ajouter Categorie (LIONARDO Matthias)
+- **Description :** Tester L'ajout d'une catégorie
+- **Cas de test :**
+
+|====
+|Titre 4+|Ajouter Catégorie
+|Objectif 4+|Vérifier que la catégorie est bien ajoutée
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Cliquer le bouton "Ajouter"  ^|Ajoute la catégorie et affiche un message ^|Être connecté sur un compte administrateur. ^|OK
+5+|
+5+|Commentaire :
+Ce cas de test valide l'ajout d'une catégorie
+|====
+
+=== I.10. Supprimer Categorie (LIONARDO Matthias)
+- **Description :** Tester la suppression d'une catégorie
+- **Cas de test :**
+
+|====
+|Titre 4+|Supprimer une catégorie
+|Objectif 4+|Vérifier qu'une catégorie peut être supprimée
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Cliquer sur le bouton "Supprimer" d'une catégorie  ^|La catégorie est supprimée ^|Être connecté sur un compte administrateur. ^|OK
+^|2 ^|Cliquer sur le bouton "Supprimer" d'une catégorie  ^|Un message d'erreur s'affiche ^|Être connecté sur un compte administrateur/ La categorie a des sous categories. ^|OK
+^|3 ^|Cliquer sur le bouton "Supprimer" d'une catégorie  ^|Un message d'erreur s'affiche ^|Être connecté sur un compte administrateur/ La categorie a des produits. ^|OK
+5+|
+5+|Commentaire :
+Ce cas de test valide la suppression d'une catégorie
+|====
+
+
+=== I.11. Modifier Compte Client (LIONARDO Matthias)
+- **Description :** Tester la modification d'un compte client
+- **Cas de test :**
+
+|====
+|Titre 4+|Modifier Compte Client
+|Objectif 4+|Vérifier que le compte client est bien modifié
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Cliquer sur le bouton "Modifier" ^|Le compte est modifié ^|Être connecté en tant qu'utilisateur ^|OK
+^|2 ^|Cliquer sur le bouton "Modifier" ^|Le compte n'est pas modifié et les champs posant problème sont mis en rouge ^|Être connecté en tant qu'utilisateur/ L'adresse e-mail existe déja ou les champs renseignés ne sont pas valide ^|OK
+5+|
+5+|Commentaire :
+Ce cas de test valide la modification d'un compte client
+|====
+
+=== I.12. Afficher Commande Compte Client (LIONARDO Matthias)
+- **Description :** Tester l'affichage d'un compte client
+- **Cas de test :**
+
+|====
+|Titre 4+|Afficher Compte Client
+|Objectif 4+|Vérifier que le compte client s'affiche correctement
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Aucune ^|Les produits favoris s'affichent ^|Être connecté en tant qu'utilisateur/ avoir des produits favoris ^|OK
+^|2 ^|Aucune ^|un message "Aucun produit favoris" s'affiche ^|Être connecté en tant qu'utilisateur/ n'avoir aucun produit en favoris ^|OK
+^|3 ^|Aucune ^|Les produits commandé s'affichent ^|Être connecté en tant qu'utilisateur/ avoir des produits commandés ^|OK
+^|4 ^|Aucune ^|un message "Aucun produit commandés" s'affiche ^|Être connecté en tant qu'utilisateur/ n'avoir aucun produit commandés ^|OK
+5+|
+5+|Commentaire :
+Ce cas de test valide l'affichage d'un compte client
 |====
 
 
