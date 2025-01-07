@@ -185,7 +185,7 @@ require_once("./include/head.php");
                         </div>
                         <hr class="mb-4">
                         <button class="btn btn-primary btn-lg btn-block" type="submit"
-                            name="commande">Commander</button>
+                            name="commande" value="commande">Commander</button>
                     </form>
                 </div>
             </div>
