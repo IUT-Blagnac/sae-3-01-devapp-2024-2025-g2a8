@@ -71,7 +71,7 @@ require_once("./include/head.php");
                 </div>
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Adresse de livraison</h4>
-                    <form class="needs-validation" novalidate method="post">
+                    <form class="needs-validation" method="post">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">Nom</label>
@@ -212,7 +212,6 @@ require_once("./include/head.php");
                 echo "<script>appendAlert('Pays obligatoire !', 'danger')</script>";
 
             } else if(!isset($_POST["cp"])){
-                echo "eeuuuuh";
                 echo "<script>appendAlert('Code postale obligatoire !', 'danger')</script>";
 
             } else if(!isset($_POST["ville"])){
