@@ -212,6 +212,7 @@ require_once("./include/head.php");
                 echo "<script>appendAlert('Pays obligatoire !', 'danger')</script>";
 
             } else if(!isset($_POST["cp"])){
+                echo "eeuuuuh";
                 echo "<script>appendAlert('Code postale obligatoire !', 'danger')</script>";
 
             } else if(!isset($_POST["ville"])){
