@@ -79,7 +79,8 @@ https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Docume
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc%20Utilisateur.adoc[Doc Utilisateur] + 
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc-Conception.adoc[Document de Conception] +
 https://github.com/orgs/IUT-Blagnac/projects/271/views/8[Backlog Produit] +
-http://193.54.227.208/~R2024SAE3006/[Lien vers le site E-Commerce de Rockworld]
+http://193.54.227.208/~R2024SAE3006/[Lien vers le site E-Commerce de Rockworld] +
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Cahier_Recette_Site.adoc[Cahier de recette]
 
 
 == Communication EP
