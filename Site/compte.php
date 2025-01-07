@@ -146,39 +146,52 @@ require_once("./include/head.php");
                                     <h3 class="d-flex align-items-center">Vos produits favoris</h3>
                                 </div>
                                 <hr/>
-                                <div class="row d-flex justify-content-between align-items-center">
-                                    <!-- Colonne de l'image (réduite pour laisser plus d'espace à la description) -->
-                                    <div class="col-3">
-                                        <img src="./imagesProduits/prod42.png" class="w-100 h-auto ml-3" alt="Image de Produit 1">
-                                    </div>
-                                    <hr/>
-                                    <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
-                                    <div class="col-9">
-                                        <div>
-                                            <h4>RockMon dragon de feu</h4>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-weight-bold">99,99€</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div class="row d-flex justify-content-between align-items-center mb-4">
-                                    <!-- Colonne de l'image (réduite pour laisser plus d'espace à la description) -->
-                                    <div class="col-3">
-                                        <img src="./imagesProduits/prod44.png" class="w-100 h-auto ml-3" alt="Image de Produit 1">
-                                    </div>
-                                    <hr/>
-                                    <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
-                                    <div class="col-9">
-                                        <div>
-                                            <h4>Bras</h4>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-weight-bold">299,99€</h5>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php 
+                                    $reqProdFav = $conn->prepare("SELECT * FROM Favoris WHERE id_user = :id");
+                                    $reqProdFav->execute(array('id' => $userId));
+
+                                    if($reqProdFav->rowCount() == 0){
+                                        echo "<h5 class='mx-3'>Vous n'avez pas de produits favoris</h5>";
+                                        
+                                    }else{
+                                ?>
+                                <?php 
+                                    $cpt = 0;
+                                    $nbProdFav = $reqProdFav->rowCount();
+                                    foreach($reqProdFav->fetchAll(PDO::FETCH_ASSOC) as $produitFav){
+                                        $reqProduit = $conn->prepare("SELECT * FROM Produit WHERE id_produit = :idProd");
+                                        $reqProduit->execute(array('idProd' => $produitFav['id_produit']));
+                                        $produit = $reqProduit->fetch(PDO::FETCH_ASSOC);
+                                ?>
+                                        <a href="DetailProduit.php?idProduit=<?php echo $produit['id_produit']; ?>" class="noHoverLine" style="color:black;"><div class="row d-flex justify-content-between align-items-center mb-4">
+                                            <!-- Colonne de l'image (réduite pour laisser plus d'espace à la description) -->
+                                            <div class="col-3">
+                                                <img src="./imagesProduits/prod<?php echo $produit['id_produit'] ?>.png" class="w-100 h-auto ml-3" alt="Image de <?php echo $produit['nom'] ?>">
+                                            </div>
+                                            <hr/>
+                                            <!-- Colonne du produit et du prix (mis l'un sous l'autre) -->
+                                            <div class="col-9">
+                                                <div>
+                                                    <?php echo "<h4>".$produit['nom']."</h4>"; ?> 
+                                                </div>
+                                                <div>
+                                                    <?php echo "<h5 class='font-weight-bold'>".$produit['prix']."€</h5>"; ?>
+                                                </div>
+                                            </div>
+                                        </div></a>
+                                        <?php 
+                                        if($cpt != $nbProdFav - 1){
+                                            echo "<hr/>";
+                                        } 
+                                        $cpt++;
+                                        ?> 
+
+                                <?php 
+                                    $reqProduit->closeCursor();
+                                    } 
+                                }
+                                $reqProdFav->closeCursor();
+                                ?>
                                 
                             </div>
                         </div>
