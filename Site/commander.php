@@ -211,6 +211,22 @@ require_once("./include/head.php");
                 echo "<script>appendAlert('Une erreur est survenu lors de votre commande', 'danger')</script>";
                 die();
             }
+
+            $insertCard = $conn->prepare("INSERT INTO CarteBancaire (numCb, user_id, crypto, date_exp) VALUES (:numCb, :userId, :cvv, :exp)");
+
+            $insertCard->bindParam(":numCb", $_POST["cc-number"], PDO::PARAM_STR);
+            $insertCard->bindParam(":userId", $_POST["user_id"], PDO::PARAM_INT);
+            $insertCard->bindParam(":cvv", $_POST["cc-cvv"], PDO::PARAM_STR);
+            $insertCard->bindParam(":exp", $_POST["cc-expiration"], PDO::PARAM_STR);
+
+            if($insertCard->execute()){
+                $insertCbId = $conn->lastInsertId();
+                echo "<script>appendAlert('id cb, adresse = $insertCbId, $insertAdresseId', 'danger')</script>";
+            } else {
+                echo "<script>appendAlert('Une erreur est survenu lors de votre commande', 'danger')</script>";
+                die();
+            }
+
         }
     ?>
         <!-- Pied de page -->
