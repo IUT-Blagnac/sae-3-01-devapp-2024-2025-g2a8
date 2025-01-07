@@ -268,7 +268,7 @@ require_once("./include/head.php");
             }
 
             foreach($prodPanier->fetchAll(PDO::FETCH_ASSOC) as $prod) {
-                $insertProd = $conn->prepare("INSERT INTO ProduitCommander (id_produit, id_commande, quantiter) VALUES (:prodId, :commandeId, :quant");
+                $insertProd = $conn->prepare("INSERT INTO ProduitCommander (id_produit, id_commande, quantiter) VALUES (:prodId, :commandeId, :quant)");
 
                 $insertProd->bindParam(":prodId", $prod["id_produit"], PDO::PARAM_INT);
                 $insertProd->bindParam(":commandeId", $insertCommandId, PDO::PARAM_INT);
