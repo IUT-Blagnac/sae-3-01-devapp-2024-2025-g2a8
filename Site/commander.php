@@ -193,6 +193,24 @@ require_once("./include/head.php");
                 echo "<script>appendAlert('Date d'expiration de la carte invalide', 'danger')</script>";
                 die();
             }
+
+            $insertAdresse = $conn->prepare("INSERT INTO Adresse (user_id, numRue, nomRue, ville, codePostal, nom, prenom) VALUES (:userId, :numRue, :nomRue, :ville, :codePostale, :nom, :prenom)");
+
+            $insertAdresse->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
+            $insertAdresse->bindParam(":numRue", $_POST["numRue"], PDO::PARAM_STR);
+            $insertAdresse->bindParam(":nomRue", $_POST["nomRue"], PDO::PARAM_STR);
+            $insertAdresse->bindParam(":ville", $_POST["ville"], PDO::PARAM_STR);
+            $insertAdresse->bindParam(":codePostale", $_POST["cp"], PDO::PARAM_STR);
+            $insertAdresse->bindParam(":nom", $_POST["firstName"], PDO::PARAM_STR);
+            $insertAdresse->bindParam(":prenom", $_POST["lastName"], PDO::PARAM_STR);
+
+            if($insertAdresse->execute()){
+                $insertAdresseId = $conn->lastInsertId();
+                echo "<script>appendAlert('id adresse = $insertAdresseId', 'danger')</script>";
+            } else {
+                echo "<script>appendAlert('Une erreur est survenu lors de votre commande', 'danger')</script>";
+                die();
+            }
         }
     ?>
         <!-- Pied de page -->
