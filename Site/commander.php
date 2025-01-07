@@ -192,7 +192,7 @@ require_once("./include/head.php");
         </div>
         <?php
         if (isset($_POST["commande"])) {
-            echo $_POST;
+            echo $_POST["numRue"];
             if(!isset($_POST["firstName"])){
                 echo "<script>appendAlert('Nom obligatoire !', 'danger')</script>";
 
