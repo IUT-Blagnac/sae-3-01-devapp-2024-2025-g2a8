@@ -215,7 +215,7 @@ require_once("./include/head.php");
             $insertCard = $conn->prepare("INSERT INTO CarteBancaire (numCb, user_id, crypto, date_exp) VALUES (:numCb, :userId, :cvv, :exp)");
 
             $insertCard->bindParam(":numCb", $_POST["cc-number"], PDO::PARAM_STR);
-            $insertCard->bindParam(":userId", $_POST["user_id"], PDO::PARAM_INT);
+            $insertCard->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
             $insertCard->bindParam(":cvv", $_POST["cc-cvv"], PDO::PARAM_STR);
             $insertCard->bindParam(":exp", $_POST["cc-expiration"], PDO::PARAM_STR);
 
