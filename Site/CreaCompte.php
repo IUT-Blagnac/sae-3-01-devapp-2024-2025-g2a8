@@ -16,8 +16,10 @@ require_once("./include/head.php");
             $regexTel = "#^[0-9]{10}$#";
 
             if (!preg_match($regexTel, $tel)) {
-                $error = "<p style='color: red'>Le numéro de téléphone n'est pas valide</p></br>";
+                $error = "Le numéro de téléphone n'est pas valide";
+                echo "<div class='alert alert-danger' role='alert'>";
                 echo $error;
+                echo "</div>";
             } else {
                 $reqVerifUtilisateurExistant = $conn->prepare(
                     "SELECT * FROM Utilisateur WHERE mail = :email"
@@ -25,8 +27,10 @@ require_once("./include/head.php");
                 $reqVerifUtilisateurExistant->execute(array("email" => $email));
 
                 if ($reqVerifUtilisateurExistant->rowcount() >= 1) {
-                    $error = "<p style='color: red'>L'adresse e-mail existe déjà</p>";
+                    $error = "L'adresse e-mail existe déjà";
+                    echo "<div class='alert alert-danger' role='alert'>";
                     echo $error;
+                    echo "</div>";
                 } else {
                     $mdpHash = password_hash($mdp, null);
                     $reqInsertCompte = $conn->prepare("
@@ -53,10 +57,6 @@ require_once("./include/head.php");
             <main role="main" class="px-4 d-flex justify-content-center align-items-center" style="min-height: 50vh;">
                 <div class="text-center">
                 <h2 class="text-center mb-4" style="font-weight: 400;">Création Compte</h2>
-
-                
-
-
                 <form method="POST">
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -82,7 +82,7 @@ require_once("./include/head.php");
                         <label for="inputTel">Numéro de téléphone</label>
                         <input type="text" class="form-control" id="inputTel" name="tel" required>
                     </div>
-                    <button type="submit" name="Valider" class="btn btn-primary">S'inscrire</button>
+                    <button type="submit" name="Valider" class="button-28">S'inscrire</button>
                 </form>
                 </div>
             </main>

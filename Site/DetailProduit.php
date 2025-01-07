@@ -24,6 +24,7 @@ require_once("./include/head.php");
             <!-- Contenu principal -->
             <main role="main" class="" style="min-height: 50vh;">
                 <?php
+                    $moyenneAvis = 0;
 
                     //modifier produit
                     if(isset($_POST['modifProduit'])){
@@ -104,6 +105,7 @@ require_once("./include/head.php");
                         echo '</div>';
                     }
 
+
                     // Ajout d'un avis
                     if (isset($_POST["ValiderAvis"])) {
                         if ($_POST["Note"] < 0 || $_POST["Note"] > 5) {
@@ -122,6 +124,49 @@ require_once("./include/head.php");
                                 echo '<div class="alert alert-warning" role="alert">';
                                 echo 'Une erreur est survenue lors de l\'ajout de votre avis';
                                 echo '</div>';
+                            }
+                        }
+                    }
+
+                    // Ajout aux favoris
+                    $isFavoris = false;
+                    if (isset($_SESSION["user_id"])) {
+                        $reqFavoris = $conn->prepare("SELECT * FROM Favoris WHERE id_user = :idUser AND id_produit = :idProduit");
+                        $reqFavoris->execute(array("idUser" => $_SESSION["user_id"], "idProduit" => $_GET["idProduit"]));
+
+                        if ($reqFavoris->rowCount() == 1) {
+                            $isFavoris = true;
+                        }
+
+                        if (isset($_POST["Favoris"])) {
+                            if ($isFavoris) {
+                                $reqSupprFavoris = $conn->prepare("DELETE FROM Favoris WHERE id_user = :idUser AND id_produit = :idProduit");
+                                $reqSupprFavoris->execute(array("idUser" => $_SESSION["user_id"], "idProduit" => $_GET["idProduit"]));
+
+                                if ($reqSupprFavoris->rowCount() == 1) {
+                                    echo '<div class="alert alert-success" role="alert">';
+                                    echo 'Le produit a bien été retiré de vos favoris';
+                                    echo '</div>';
+                                    $isFavoris = false;
+                                } else {
+                                    echo '<div class="alert alert-warning" role="alert">';
+                                    echo 'Une erreur est survenue lors de la suppression du produit de vos favoris';
+                                    echo '</div>';
+                                }
+                            } else {
+                                $reqAjoutFavoris = $conn->prepare("INSERT INTO Favoris (id_user, id_produit) VALUES (:idUser, :idProduit)");
+                                $reqAjoutFavoris->execute(array("idUser" => $_SESSION["user_id"], "idProduit" => $_GET["idProduit"]));
+
+                                if ($reqAjoutFavoris->rowCount() == 1) {
+                                    echo '<div class="alert alert-success" role="alert">';
+                                    echo 'Le produit a bien été ajouté à vos favoris';
+                                    echo '</div>';
+                                    $isFavoris = true;
+                                } else {
+                                    echo '<div class="alert alert-warning" role="alert">';
+                                    echo 'Une erreur est survenue lors de l\'ajout du produit à vos favoris';
+                                    echo '</div>';
+                                }
                             }
                         }
                     }
@@ -145,6 +190,7 @@ require_once("./include/head.php");
                     </div>
                     <?php 
                         $admin = $conn->prepare("SELECT * FROM Utilisateur WHERE user_id = :user_id AND role = 'A'");
+                        if (isset($_SESSION['user_id'])) {
                         $admin->execute(['user_id' => $_SESSION['user_id']]);
                         if($admin->rowCount() > 0){
                             
@@ -157,6 +203,7 @@ require_once("./include/head.php");
                     <?php 
                         }
                         $admin->closeCursor();
+                    }
                     ?>
                 </div>
 
@@ -246,13 +293,47 @@ require_once("./include/head.php");
                     <img src="<?php echo file_exists("imagesProduits/prod" . $infoProduit["id_produit"] . ".png") ? "imagesProduits/prod" . $infoProduit["id_produit"] . ".png" : "imagesProduits/noImage.png"; ?>" class="img-fluid w-50 h-65 d-block mx-start" alt="RockMons Produit">
                     <div class="container mt-5">
                         <div class="card shadow-sm p-4">
-                            <h3 class="card-title"><?php echo $infoProduit["nom"] ?></h3>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="card-title"><?php echo $infoProduit["nom"] ?></h3>
+                                <?php 
+                                    if (isset($_SESSION["user_id"])) {
+                                        echo '<form method="post" class="">
+                                                <button type="submit" name="Favoris" class="btn btn-link">
+                                                    <i class="' . ($isFavoris ? 'bi bi-star-fill text-warning' : 'bi bi-star text-secondary') . '"></i>
+                                                </button>
+                                              </form>';
+                                    }                                    
+                                ?>
+                            </div>
 
                             <p><a href="#Description" class="text-decoration-underline">Description détaillée</a></p>
 
                             <div class="mb-2">
                                 <h4 class="fw-bold my-3" style="font-weight: 400;"><?php echo $infoProduit["prix"] ?>€</h4>
                             </div>
+
+                            <?php
+                                $reqAvis = $conn->prepare("SELECT * FROM Avis WHERE id_produit = :idProduit");
+                                $reqAvis->execute(array("idProduit" => $_GET["idProduit"]));
+
+                                echo '<div class="mb-2">';
+                                if ($reqAvis->rowCount() != 0) {
+                                    while ($infoAvis = $reqAvis->fetch()) {
+                                        $moyenneAvis += $infoAvis["note"];
+                                    }
+                                    $moyenneAvis /= $reqAvis->rowCount();
+
+                                    for ($i = 0; $i < 5; $i++) {
+                                        if ($i < $moyenneAvis) {
+                                            echo '<i class="bi bi-star-fill text-warning"></i>';
+                                        } else {
+                                            echo '<i class="bi bi-star text-warning"></i>';
+                                        }
+                                    }
+                                    echo "<span class='text-muted ml-1'>(" . ceil($moyenneAvis) . "/5)</span>";
+                                }
+                                echo '</div>';
+                            ?>
 
                             <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded mb-3">
                                 <span class="text-success fw-bold">✔ Livraison gratuite</span>
@@ -264,9 +345,16 @@ require_once("./include/head.php");
                                     <form method="post">
                                         <div class="input-group" style="width: 125px;">
                                             <select class="form-select" name="quantite">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                                <?php
+                                                    $max = $infoProduit["stock"] > 9 ? 9 : $infoProduit["stock"];
+                                                    if ($infoProduit["stock"] > 0) {
+                                                        for ($i = 1; $i <= $max; $i++) {
+                                                            echo "<option value='$i'>$i</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value='0'>Rupture de stock</option>";
+                                                    }
+                                                ?>
                                             </select>
                                             <p class="<?php echo $infoProduit['stock'] == 0 ? 'text-danger' : 'text-success' ?>">
                                                 <?php echo $infoProduit['stock'] == 0 ? 'Rupture de stock' : "Encore {$infoProduit['stock']} en stock" ?>
@@ -274,6 +362,7 @@ require_once("./include/head.php");
                                         </div>
                                         <button class="button-28 p-2 px-5" name="AjoutPanier" <?php echo $infoProduit["stock"] <= 0 ? "disabled" : "" ?>>Ajouter au Panier</button>
                                     </form>
+                                    
                                 </div>
                             </div>
                         </div>
