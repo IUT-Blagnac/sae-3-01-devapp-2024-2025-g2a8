@@ -177,6 +177,7 @@ require_once("./include/head.php");
                             <div class="col-md-6 mb-3">
                                 <label for="cc-number">Numero de carte</label>
                                 <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                <small class="text-muted">Le numero au devant de la carte</small>
                                 <div class="invalid-feedback">
                                     Numero requis
                                 </div>
@@ -186,6 +187,7 @@ require_once("./include/head.php");
                             <div class="col-md-3 mb-3">
                                 <label for="cc-expiration">Expiration</label>
                                 <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                <small class="text-muted">Date d'expiration au format MM/AA</small>
                                 <div class="invalid-feedback">
                                     Expiration requise
                                 </div>
@@ -193,6 +195,7 @@ require_once("./include/head.php");
                             <div class="col-md-3 mb-3">
                                 <label for="cc-expiration">CVV</label>
                                 <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                <small class="text-muted">3 numero au dos de la carte</small>
                                 <div class="invalid-feedback">
                                     Code de securité requis
                                 </div>
