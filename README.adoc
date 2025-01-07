@@ -120,7 +120,7 @@ https://github.com/orgs/IUT-Blagnac/projects/271/views/14[Backlog sprint #3] +
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Cahier_Recette_Site.adoc[Cahier de recette]
 |===
 | Sprint #4 |[Ordre du jour] +
-[Compte Rendu] + 
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Compte%20rendu%20n%C2%B04.pdf[Compte Rendu] + 
 https://github.com/orgs/IUT-Blagnac/projects/271/views/16?groupedBy%5BcolumnId%5D=&sliceBy%5Bvalue%5D=Sprint+%234[Backlog sprint #4] +
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Cahier_Recette_Site.adoc[Cahier de recette]
 |===
