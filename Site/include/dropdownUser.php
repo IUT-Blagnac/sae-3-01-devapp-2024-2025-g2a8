@@ -8,13 +8,30 @@ $user = getUserById($_SESSION['user_id']);
             <img src='./icons/utilisateur_claire.png' title='<?php echo ($user['nom']) ?>' width='30' height='30'>
             <p><?php echo ($user['prenom']); ?></p>
     </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" style="z-index: 1002;">
         <li>
             <a class="dropdown-item" href="./compte.php">Mon Compte</a>
         </li>
+        <?php 
+            $admin = $conn->prepare("SELECT * FROM Utilisateur WHERE user_id = :user_id AND role = 'A'");
+            $admin->execute(['user_id' => $_SESSION['user_id']]);
+            if($admin->rowCount() > 0){
+                
+        ?>
         <li>
-            <a class="dropdown-item" href="./include/traitDeco.php">Deconnexion</a>
+            <a class="dropdown-item" href="ajoutCat.php">Ajouter/Supprimer catégorie</a>
         </li>
+        <li>
+            <a class="dropdown-item" href="ajoutProd.php">Ajouter un produit</a>
+        </li>
+        <?php
+        }
+        $admin->closeCursor();
+        ?>
+        <li>
+            <a class="dropdown-item" href="deconnexion.php">Deconnexion</a>
+        </li>
+        
     </ul>
 </div>
 
