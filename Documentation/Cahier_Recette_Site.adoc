@@ -1,0 +1,85 @@
+= Cahier de Recette
+:toc-title: Table des matières
+:toc: macro
+
+*Par :* _BESSE Ethan, CHEFAI Tristan, LIONARDO Matthias, SERRE Lohan_ +
+*Pour :* _RockWorld_ +
+*Équipe : 2A8* 
+
+---
+toc::[]
+---
+== Introduction
+
+== I. 
+
+=== I.1. Création d'un nouveau compte (SERRE Lohan)
+- **Description :** Tester la fonctionnalité de création de compte.
+- **Cas de test :**
+
+|====
+|Titre 4+|Créer un compte utilisateur
+|Objectif 4+|Vérifier qu'un nouvel utilisateur peut s'inscrire avec succès.
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Accéder à la page d'inscription. ^|La page du formulaire d'inscription s'affiche correctement. ^|Aucune ^|OK
+^|2 ^|Remplir le formulaire d'inscription avec des informations valides et cliquer sur "S'inscrire". ^|Le compte est créé et l'utilisateur est redirigé vers la page de connexion^|Les informations sont valides ^|OK
+^|3 ^|Remplir le formulaire d'inscription avec des informations non valides et cliquer sur "S'inscrire". ^|Une erreur s'affiche^|Les informations ne sont pas valides ^|OK
+^|4 ^|Remplir le formulaire d'inscription avec une adresse mail déjà existante. ^|Une erreur s'affiche et la création de compte s'annule^|L'adresse mail est associé à un autre compte ^|OK
+5+|
+5+|Commentaire :
+Ce cas de test valide la procédure complète de création de compte d'un nouvel utilisateur.
+|====
+
+=== I.2. Détails d'un produit (SERRE Lohan)
+- **Description :** Tester la consultation des détails d'un produit.
+- **Cas de test :**
+
+|====
+|Titre 4+|Visualiser les détails d'un produit
+|Objectif 4+|Vérifier que les informations de la page correspondent au produit sélectionné.
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Accéder à la page des informations des produits. ^|Les informations du produit (Nom, Description, Fil d'ariane, Stock, Prix, Avis) sont présentes et correctes ^|Le produit possède les informations principales ^|OK
+^|2 ^|Affichage de la photo du produit ^|La photo du produit est affichée et correspond au produit ^|Le produit possède une photo associée ^|OK
+^|3 ^|Affichage de la rupture de stock d'un produit ^|"Rupture de stock" est affiché en rouge ^|Le produit est en rupture de stock ^|OK
+
+5+|
+5+|Commentaire :
+Ce cas de test valide l'affichage des informations d'un produit
+|====
+
+=== I.3. Barre de recherche (SERRE Lohan)
+- **Description :** Tester la recherche d'un produit avec la barre de recherche
+- **Cas de test :**
+
+|====
+|Titre 4+|Rechercher un produit
+|Objectif 4+|Vérifier qu'un utilisateur peut rechercher un produit 
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Entrer un mot-clé correspondant au produit qu'on veut rechercher ^|Les produits correspondants s'affichent avec les filtres ^|Des produits existent correspondant aux mot-clés saisis ^|OK
+5+|
+5+|Commentaire :
+Ce cas de test valide la recherche d'un produit
+|====
+
+=== I.4. Avis (SERRE Lohan)
+- **Description :** Tester l'ajout et l'affichage des avis
+- **Cas de test :**
+
+|====
+|Titre 4+|Ajout et affichage des avis
+|Objectif 4+|Vérifier qu'un utilisateur peut voir et ajouter des avis 
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Cliquer sur le bouton "Donner votre avis" ^|Un formulaire s'affiche pour permettre d'ajouter un avis ^|L'utilisateur a acheté le produit. ^|OK
+^|2 ^|Valider l'avis ^|La page du produit se recharge et l'avis de l'utilisateur est présent dans la section "Avis Clients" ^|L'utilisateur a entré des informations valides pour ajouter un avis ^|OK
+^|3 ^|Aucune ^|Les avis de tous les utilisateurs sont affichés dans la section "Avis Clients" ^|Le produit possède des avis ^|OK
+5+|
+5+|Commentaire :
+Ce cas de test valide l'ajout et l'affichage des avis
+|====
+
+
+

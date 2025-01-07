@@ -79,7 +79,9 @@ https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Docume
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc%20Utilisateur.adoc[Doc Utilisateur] + 
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc-Conception.adoc[Document de Conception] +
 https://github.com/orgs/IUT-Blagnac/projects/271/views/8[Backlog Produit] +
-http://193.54.227.208/~R2024SAE3006/[Lien vers le site E-Commerce de Rockworld]
+http://193.54.227.208/~R2024SAE3006/[Lien vers le site E-Commerce de Rockworld] +
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Cahier_Recette_Site.adoc[Cahier de recette] + 
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/FicheConseilsJuridiques.pdf[Fiche de conseils juridiques et de sécurité]
 
 
 == Communication EP
@@ -92,6 +94,10 @@ note : 0/3
 ODJ : Ok mais manque Ecommerce !  CR: pb de date (22/11) au lieu de 4/12. Manque abs/Présent.  Manque analyse difficultés/Réussites, manque futur resp de la reunion semaine 50. Manque Point client Web (d'ailleurs peu d'infos sur la partie web).
 note : 1,83/3
 Note appel offre : 10/20
+
+=== retour semaine 50
+odj OK; CR : Il manque le retour reunion client et analyse réussites/difficultés (techniques et organisationnelles). Peu d'avancement sur le site ce qui vous pénalise sur la note GPO, c'est dommage.  Je n'ai pas vu les jours de télétravail attention aux UAS en fin de projet.
+NOTE : 2,24/3
 
 == Gestion de projet & Qualité
 
@@ -110,7 +116,8 @@ https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Docume
 https://github.com/orgs/IUT-Blagnac/projects/271/views/10?filterQuery=iteration%3A%22Sprint+%232%22[Backlog Sprint#2]
 | Sprint #3 |https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/ODJ_n%C2%B03.pdf[Ordre du jour] +
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/CompteRenduN%C2%B03.pdf[Compte Rendu] + 
-https://github.com/orgs/IUT-Blagnac/projects/271/views/14[Backlog sprint #3]
+https://github.com/orgs/IUT-Blagnac/projects/271/views/14[Backlog sprint #3] +
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Cahier_Recette_Site.adoc[Cahier de recette]
 |===
 
 === Evaluation bi-hebdomadaire
@@ -131,3 +138,7 @@ Penser à mettre les rôles dans le readme. A présenter le client. On peut alle
 === retour semaine 48
 
 Backlog produit : je n'ai pas de lien vers le backlog produit; Des US sans finalité (afin de) et sans critères d'acceptabilité, manque compléxité. Backlog sprint : Je n'en ai pas ... Les US traitées dans un sprint devraient au moins avoir un milestone à jour (sprint 1 par ex). Je n'ai que le spint 1 qui devrait être fini depuis un moment, ou est le sprint 2 ?Tasks : Elles doivent être rattachées à des US, assignées, avec un milestone. Il y en a peu ... impossible de suivre où vous en êtes du projet ! TESTS : pas de cahier de tests DOC: liens mais peu d'éléments notamment dans la doc de conception qui devrait être terminée !! release : Pas de release, pas de site en construction visible, pas de dates de livrable.
+
+=== retour semaine 50
+Des progrès , le sprint 3 se rapproche des attendus mais les tâches doivent être rattachées aux US. Après j'ai très peu de US et d'issue, il manque la plupart des tâches techniques.  Toujours pas de cahier de tests !  Doc tech et user juste initialisée et conception au même stade que la dernière fois !  Site web en demo ok , j'ai une release IOT mais pas Web.
+Pensez à raffraichir la page pour voir le graphique des évaluations.

@@ -4,9 +4,6 @@ require_once("./include/head.php");
 ?>
 
 <body class="d-flex flex-column min-vh-100">
-    <!-- a mettre dans le head -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- En-tête -->
     <?php    
         require_once("./include/header.php");
@@ -18,28 +15,93 @@ require_once("./include/head.php");
             <!-- Menu vertical sur la gauche -->
             <?php
                 require_once("./include/menu.php");
+                
             ?>
 
             <!-- Contenu principal -->
-            <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
-                <div class = "productContainer">
-                    <?php
-                        if(!isset($_GET['idSousCateg']) || empty($_GET['idSousCateg'])){
-                            $prods = $conn->prepare("SELECT * FROM Produit");
+            <main role="main" class="w-100 px-4">
+                
+            <?php
+                if(!isset($_POST['filtrer'])){
+                    $prixMin = 0;
+                    $ordre = "ASC";
+                    $ordreAvec = "prix";
+                    $reqPrixMax = $conn->prepare("SELECT MAX(prix) as prixMax FROM Produit");
+                    $reqPrixMax->execute();
+                    $prixMaxProds = $reqPrixMax->fetch(PDO::FETCH_ASSOC);
+                    $prixMax = $prixMaxProds['prixMax'];
+                    $reqPrixMax->closeCursor();
+                }else{
+                    $prixMax = htmlentities($_POST['prixMax']);
+                    $prixMin = htmlentities($_POST['prixMin']);
+                    $ordre = htmlentities($_POST['ordre']);
+                    $ordreAvec = htmlentities($_POST['ordreAvec']);
+                }
+
+                if (isset($_GET["searchBar"])) {
+                    $search = htmlentities($_GET["searchBar"]);
+                    $prods = $conn->prepare("SELECT * FROM Produit WHERE ( nom LIKE '%$search%' OR description LIKE '%$search%' ) AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
+                    $prods->execute();
+                } else {
+                    if(!isset($_GET['idSousCateg']) || empty($_GET['idSousCateg'])){
+                        $prods = $conn->prepare("SELECT * FROM Produit WHERE prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
+                        $prods->execute();
+                    }else{
+                        $id = htmlentities($_GET['idSousCateg']);
+                        $categorie = $conn->prepare("SELECT * FROM Categorie WHERE id_categorie = $id");
+                        $categorie->execute();
+                        $donnees = $categorie->fetch(PDO::FETCH_ASSOC);
+                        if($donnees && htmlspecialchars($donnees['parent']) == NULL){
+                            $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie IN (SELECT id_categorie FROM Categorie WHERE parent = $id) AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
                             $prods->execute();
                         }else{
-                            $id = htmlentities($_GET['idSousCateg']);
-                            $categorie = $conn->prepare("SELECT * FROM Categorie WHERE id_categorie = $id");
-                            $categorie->execute();
-                            $donnees = $categorie->fetch(PDO::FETCH_ASSOC);
-                            if($donnees && htmlspecialchars($donnees['parent']) == NULL){
-                                $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie IN (SELECT id_categorie FROM Categorie WHERE parent = $id)");
-                                $prods->execute();
-                            }else{
-                                $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie = $id");
-                                $prods->execute();
-                            }                                    
-                        }
+                            $prods = $conn->prepare("SELECT * FROM Produit WHERE id_categorie = $id AND prix BETWEEN $prixMin AND $prixMax ORDER BY $ordreAvec $ordre");
+                            $prods->execute();
+                        }                                    
+                    }
+                }
+
+
+                ?>
+
+                <div class="card w-100 mt-4 mb-1 filterBar">
+                    <div class="card-body justify-content-between">
+                        <form method='Post'>
+                            <div class="row">
+                                <div class='col'>
+                                    <label for="prixMin">Prix Minimum</label>
+                                    <input type="number" class="form-control" id="prixMin" name="prixMin" value=<?php echo $prixMin ?> min="0" placeholder="Prix Minimum">
+                                </div>
+                                <div class='col'>
+                                    <label for="prixMax">Prix Maximum</label>
+                                    <input type="number" class="form-control" id="prixMax" name="prixMax" value=<?php echo $prixMax ?> min="0" placeholder="Prix Maximum">
+                                </div>
+                                <div class='col'>
+                                    <label for="ordreAvec">Trier par : </label>
+                                    <select id="ordreAvec" name="ordreAvec" class="form-control">
+                                        <option value="NULL" <?php echo (!isset($_POST['ordreAvec']) || $_POST['ordreAvec'] == "NULL") ? "selected" : ""; ?>>Par défaut</option>
+                                        <option value="nom" <?php echo (isset($_POST['ordreAvec']) && $_POST['ordreAvec'] == "nom") ? "selected" : ""; ?>>Nom</option>
+                                        <option value="prix" <?php echo (isset($_POST['ordreAvec']) && $_POST['ordreAvec'] == "prix") ? "selected" : ""; ?>>Prix</option>
+                                    </select>
+                                </div>
+                                <div class='col'>
+                                    <label for="ordre">Trier par ordre : </label>
+                                    <select id="ordre" name="ordre" class="form-control">
+                                        <option value="ASC" <?php echo (isset($_POST['ordre']) && $_POST['ordre'] == "ASC") ? "selected" : ""; ?>>Croissant</option>
+                                        <option value="DESC" <?php echo (isset($_POST['ordre']) && $_POST['ordre'] == "DESC") ? "selected" : ""; ?>>Décroissant</option>
+                                    </select>
+                                </div>
+                                <div class='col'>
+                                    <button type="submit" class="button-28 mt-4" name='filtrer'>Filtrer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class = "productContainer">
+                        <?php
+                        
                         if ($prods->rowCount() > 0) {
                             foreach($prods->fetchAll(PDO::FETCH_ASSOC) as $produits){ 
                                 /* Récupération des données du produits */ 
@@ -64,9 +126,10 @@ require_once("./include/head.php");
                                 </div></a>
                             <?php }
                         }else{
-                            echo "<h3>Aucun produit n'est disponible pour cette catégorie</h3";
-                            $prods->closeCursor();
+                            echo "<h3 class='mt-3'>Aucun produit n'est disponible pour cette catégorie</h3";
                         }
+                        
+                        $prods->closeCursor();
                     ?>
 
 
