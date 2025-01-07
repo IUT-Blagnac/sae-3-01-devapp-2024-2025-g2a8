@@ -82,4 +82,21 @@ Ce cas de test valide l'ajout et l'affichage des avis
 |====
 
 
+=== I.5. Affichage du catalogue produit (LIONARDO Matthias)
+- **Description :** Tester L'affichage du catalogue produit
+- **Cas de test :**
+
+|====
+|Titre 4+|Afficher catalogue produit
+|Objectif 4+|Vérifier que les produits de la catégorie soient présents
+5+|
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|1 ^|Cliquer sur une catégorie ^|Un formulaire s'affiche pour permettre d'ajouter un avis ^|L'utilisateur a acheté le produit. ^|OK
+^|2 ^|Valider l'avis ^|La page du produit se recharge et l'avis de l'utilisateur est présent dans la section "Avis Clients" ^|L'utilisateur a entré des informations valides pour ajouter un avis ^|OK
+^|3 ^|Aucune ^|Les avis de tous les utilisateurs sont affichés dans la section "Avis Clients" ^|Le produit possède des avis ^|OK
+5+|
+5+|Commentaire :
+Ce cas de test valide l'ajout et l'affichage des avis
+|====
+
 
