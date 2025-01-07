@@ -90,7 +90,7 @@ require_once("./include/head.php");
                         ?>
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total (EUR)</span>
-                            <strong><?php echo $prixTotal€?></strong>
+                            <strong><?php echo $prixTotal?>€</strong>
                         </li>
                     </ul>
                 </div>
