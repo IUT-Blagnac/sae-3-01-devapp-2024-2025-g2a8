@@ -77,17 +77,11 @@ require_once("./include/head.php");
                                 <label for="firstName">Nom</label>
                                 <input type="text" class="form-control" id="firstName"
                                     value="<?php echo $userCommande["nom"] ?>" name="firstName" required>
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Prenom</label>
                                 <input type="text" class="form-control" id="lastName"
                                     value="<?php echo $userCommande["prenom"] ?>" name="lastName" required>
-                                <div class="invalid-feedback">
-                                    Valid last name is required.
-                                </div>
                             </div>
                         </div>
 
@@ -95,9 +89,6 @@ require_once("./include/head.php");
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email"
                                 value="<?php echo $userCommande["mail"] ?>" name="email">
-                            <div class="invalid-feedback">
-                                Mail invalide !
-                            </div>
                         </div>
 
                         <div class="row">
@@ -117,7 +108,7 @@ require_once("./include/head.php");
                             <label for="compadresse">Complement d'adresse (Optionnel)</label>
                             <small class="text-muted">Num d'appartement, code interphone, ...</small>
                             <input type="text" class="form-control" id="compadresse" placeholder="Appartement 18"
-                                name="compadresse" required>
+                                name="compadresse">
                         </div>
 
                         <div class="row">
@@ -130,9 +121,6 @@ require_once("./include/head.php");
                             <div class="col-md-3 mb-3">
                                 <label for="cp">Code postale</label>
                                 <input type="text" class="form-control" id="cp" placeholder="11800" name="cp" required>
-                                <div class="invalid-feedback">
-                                    Code postale requis
-                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="ville">Ville</label>
@@ -150,18 +138,12 @@ require_once("./include/head.php");
                                 <input type="text" class="form-control" id="cc-name" placeholder="" name="cc-name"
                                     required>
                                 <small class="text-muted">Votre nom sur la carte</small>
-                                <div class="invalid-feedback">
-                                    Nom du titulaire requis
-                                </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="cc-number">Numero de carte</label>
                                 <input type="text" class="form-control" id="cc-number" placeholder="" name="cc-number"
                                     required>
                                 <small class="text-muted">Le numero au devant de la carte</small>
-                                <div class="invalid-feedback">
-                                    Numero requis
-                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -170,17 +152,11 @@ require_once("./include/head.php");
                                 <input type="text" class="form-control" id="cc-expiration" name="cc-expiration"
                                     required>
                                 <small class="text-muted">Date d'expiration au format MM/AA</small>
-                                <div class="invalid-feedback">
-                                    Expiration requise
-                                </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="cc-expiration">CVV</label>
                                 <input type="text" class="form-control" id="cc-cvv" name="cc-cvv" required>
                                 <small class="text-muted">3 numero au dos de la carte</small>
-                                <div class="invalid-feedback">
-                                    Code de securité requis
-                                </div>
                             </div>
                         </div>
                         <hr class="mb-4">
@@ -192,46 +168,7 @@ require_once("./include/head.php");
         </div>
         <?php
         if (isset($_POST["commande"])) {
-            echo $_POST["numRue"];
-            if(!isset($_POST["firstName"])){
-                echo "<script>appendAlert('Nom obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["lastName"])){
-                echo "<script>appendAlert('Prenom obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["email"])){
-                echo "<script>appendAlert('Mail obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["numRue"])){
-                echo "<script>appendAlert('Numero de rue obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["nomRue"])){
-                echo "<script>appendAlert('Nom de rue obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["pays"])){
-                echo "<script>appendAlert('Pays obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["cp"])){
-                echo "<script>appendAlert('Code postale obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["ville"])){
-                echo "<script>appendAlert('Ville obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["cc-name"])){
-                echo "<script>appendAlert('Titulaire de carte obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["cc-number"])){
-                echo "<script>appendAlert('Numero de carte obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["cc-expiration"])){
-                echo "<script>appendAlert('Date d'expiration de carte obligatoire !', 'danger')</script>";
-
-            } else if(!isset($_POST["cc-cvv"])){
-                echo "<script>appendAlert('Code de securité obligatoire !', 'danger')</script>";
-
-            } else {
-
-            }
+            
         }
     ?>
         <!-- Pied de page -->
