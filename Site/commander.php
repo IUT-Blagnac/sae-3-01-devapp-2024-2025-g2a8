@@ -174,6 +174,17 @@ require_once("./include/head.php");
             $reg_cvv = "#^[0-9]{3}$#";
             $reg_exp = "#^(0[1-9]|1[0-2])\/?([0-9]{2})$#";
 
+            $prodPanier = $conn->prepare("SELECT id_produit, quantiter FROM Panier WHERE user_id = :userId");
+
+            $prodPanier->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
+
+            $prodPanier->execute();
+
+            if($prodPanier->rowCount() <= 0){
+                echo "<script>appendAlert('Votre panier est vide !', 'danger')</script>";
+                die();
+            }
+
             if (!preg_match($reg_numRue, $_POST["numRue"])) {
                 echo "<script>appendAlert('Numero de rue invalide', 'danger')</script>";
                 die();
@@ -194,6 +205,7 @@ require_once("./include/head.php");
                 die();
             }
 
+        
             $insertAdresse = $conn->prepare("INSERT INTO Adresse (user_id, numRue, nomRue, ville, codePostal, nom, prenom) VALUES (:userId, :numRue, :nomRue, :ville, :codePostale, :nom, :prenom)");
 
             $insertAdresse->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
@@ -254,6 +266,24 @@ require_once("./include/head.php");
                 echo "<script>appendAlert('Une erreur est survenu lors de votre commande', 'danger')</script>";
                 die();
             }
+
+            foreach($prodPanier->fetchAll(PDO::FETCH_ASSOC) as $prod) {
+                $insertProd = $conn->prepare("INSERT INTO ProduitCommander (id_produit, id_commande, quantiter) VALUES (:prodId, :commandeId, :quant");
+
+                $insertProd->bindParam(":prodId", $prod["id_produit"], PDO::PARAM_INT);
+                $insertProd->bindParam(":commandeId", $insertCommandId, PDO::PARAM_INT);
+                $insertProd->bindParam(":quant", $prod["quantiter"], PDO::PARAM_INT);
+
+                $insertProd->execute();
+
+                $deleteProdPanier = $conn->prepare("DELETE FROM Panier WHERE user_id = :userId AND id_produit = :prodId");
+
+                $deleteProdPanier->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
+                $deleteProdPanier->bindParam(":prodId", $prod["id_produit"], PDO::PARAM_INT);
+
+                $deleteProdPanier->execute();
+            }
+            
         }
         ?>
         <!-- Pied de page -->
