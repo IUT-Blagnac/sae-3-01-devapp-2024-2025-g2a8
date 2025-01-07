@@ -15,7 +15,7 @@ require_once("./include/head.php");
 
     <?php
     $userCommande = getUserById($_SESSION['user_id'])
-    ?>
+        ?>
 
     <!-- Conteneur principal -->
     <div class="container-fluid flex-grow-1">
@@ -161,8 +161,8 @@ require_once("./include/head.php");
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit"
-                            name="commande" value="commande">Commander</button>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit" name="commande"
+                            value="commande">Commander</button>
                     </form>
                 </div>
             </div>
@@ -174,22 +174,22 @@ require_once("./include/head.php");
             $reg_cvv = "#^[0-9]{3}$#";
             $reg_exp = "#^(0[1-9]|1[0-2])\/?([0-9]{2})$#";
 
-            if(!preg_match($reg_numRue, $_POST["numRue"])){
+            if (!preg_match($reg_numRue, $_POST["numRue"])) {
                 echo "<script>appendAlert('Numero de rue invalide', 'danger')</script>";
                 die();
             }
 
-            if(!preg_match($reg_cp, $_POST["cp"])){
+            if (!preg_match($reg_cp, $_POST["cp"])) {
                 echo "<script>appendAlert('Code postale invalide', 'danger')</script>";
                 die();
             }
 
-            if(!preg_match($reg_cvv, $_POST["cc-cvv"])){
+            if (!preg_match($reg_cvv, $_POST["cc-cvv"])) {
                 echo "<script>appendAlert('Code de securité invalide', 'danger')</script>";
                 die();
             }
 
-            if(!preg_match($reg_exp, $_POST["cc-expiration"])){
+            if (!preg_match($reg_exp, $_POST["cc-expiration"])) {
                 echo "<script>appendAlert('Date d'expiration de la carte invalide', 'danger')</script>";
                 die();
             }
@@ -204,7 +204,7 @@ require_once("./include/head.php");
             $insertAdresse->bindParam(":nom", $_POST["firstName"], PDO::PARAM_STR);
             $insertAdresse->bindParam(":prenom", $_POST["lastName"], PDO::PARAM_STR);
 
-            if($insertAdresse->execute()){
+            if ($insertAdresse->execute()) {
                 $insertAdresseId = $conn->lastInsertId();
                 echo "<script>appendAlert('id adresse = $insertAdresseId', 'danger')</script>";
             } else {
@@ -212,23 +212,33 @@ require_once("./include/head.php");
                 die();
             }
 
-            $insertCard = $conn->prepare("INSERT INTO CarteBancaire (numCb, user_id, crypto, date_exp) VALUES (:numCb, :userId, :cvv, :exp)");
+            $getActCard = $conn->prepare("SELECT numCb FROM CarteBancaire WHERE user_id=:userId");
 
-            $insertCard->bindParam(":numCb", $_POST["cc-number"], PDO::PARAM_STR);
-            $insertCard->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
-            $insertCard->bindParam(":cvv", $_POST["cc-cvv"], PDO::PARAM_STR);
-            $insertCard->bindParam(":exp", $_POST["cc-expiration"], PDO::PARAM_STR);
+            $getActCard->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
 
-            if($insertCard->execute()){
-                $insertCbId = $conn->lastInsertId();
-                echo "<script>appendAlert('id cb, adresse = $insertCbId, $insertAdresseId', 'danger')</script>";
+            $getActCard->execute();
+
+            if ($getActCard->rowCount() > 0) {
+                $card = $getActCard->fetch();
+                $insertCbId = $card["numCb"];
             } else {
-                echo "<script>appendAlert('Une erreur est survenu lors de votre commande', 'danger')</script>";
-                die();
-            }
+                $insertCard = $conn->prepare("INSERT INTO CarteBancaire (numCb, user_id, crypto, date_exp) VALUES (:numCb, :userId, :cvv, :exp)");
 
+                $insertCard->bindParam(":numCb", $_POST["cc-number"], PDO::PARAM_STR);
+                $insertCard->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
+                $insertCard->bindParam(":cvv", $_POST["cc-cvv"], PDO::PARAM_STR);
+                $insertCard->bindParam(":exp", $_POST["cc-expiration"], PDO::PARAM_STR);
+
+                if ($insertCard->execute()) {
+                    $insertCbId = $_POST["cc-number"];
+                    echo "<script>appendAlert('id cb, adresse = $insertCbId, $insertAdresseId', 'danger')</script>";
+                } else {
+                    echo "<script>appendAlert('Une erreur est survenu lors de votre commande', 'danger')</script>";
+                    die();
+                }
+            }
         }
-    ?>
+        ?>
         <!-- Pied de page -->
         <?php
         require_once("./include/footer.php")
