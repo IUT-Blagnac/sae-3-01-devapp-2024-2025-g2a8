@@ -237,6 +237,23 @@ require_once("./include/head.php");
                     die();
                 }
             }
+
+            $actDate = date("Y-m-d");
+
+            $insertCommande = $conn->prepare("INSERT INTO Commande (user_id, numCb, id_adresse, date) VALUES (:userId, :numCb, :adresseId, :date)");
+
+            $insertCommande->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
+            $insertCommande->bindParam(":numCb", $insertCbId, PDO::PARAM_STR);
+            $insertCommande->bindParam(":adresseId", $insertAdresseId, PDO::PARAM_INT);
+            $insertCommande->bindParam(":date", $actDate, PDO::PARAM_STR);
+
+            if ($insertCommande->execute()) {
+                $insertCommandId = $conn->lastInsertId();
+                echo "<script>appendAlert('id cb, adresse, commande = $insertCbId, $insertAdresseId, $insertCommandId', 'danger')</script>";
+            } else {
+                echo "<script>appendAlert('Une erreur est survenu lors de votre commande', 'danger')</script>";
+                die();
+            }
         }
         ?>
         <!-- Pied de page -->
