@@ -64,6 +64,8 @@ require_once("./include/head.php");
 
                                 $productList->execute();
 
+                                $prixTotal = 0;
+
                                 if ($productList->rowCount() > 0) {
                                     $nbProdFor = 0;
 
@@ -71,7 +73,9 @@ require_once("./include/head.php");
                                         $prodId = $produit['id_produit'];
                                         $prodNom = $produit['nom'];
                                         $prodPrix = $produit['prix'];
-                                        $prodQuant = $produit['quantiter']
+                                        $prodQuant = $produit['quantiter'];
+
+                                        $prixTotal += ($prodPrix*$prodQuant);
 
                                             ?>
                                         <div class="row">
@@ -164,28 +168,28 @@ require_once("./include/head.php");
                     <div class="col-md-4">
                         <div class="card mb-4">
                             <div class="card-header py-3">
-                                <h5 class="mb-0">Summary</h5>
+                                <h5 class="mb-0">Résumé</h5>
                             </div>
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
                                     <li
                                         class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                        Products
-                                        <span>$53.98</span>
+                                        Produits
+                                        <span><?php echo $prixTotal?>€</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                        Shipping
-                                        <span>Gratis</span>
+                                        Livraison
+                                        <span>Gratuite</span>
                                     </li>
                                     <li
                                         class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                         <div>
-                                            <strong>Total amount</strong>
+                                            <strong>Cout total</strong>
                                             <strong>
                                                 <p class="mb-0">(including VAT)</p>
                                             </strong>
                                         </div>
-                                        <span><strong>$53.98</strong></span>
+                                        <span><strong><?php echo $prixTotal?>€</strong></span>
                                     </li>
                                 </ul>
 
