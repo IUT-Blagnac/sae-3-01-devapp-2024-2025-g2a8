@@ -9,6 +9,7 @@ require_once("./include/head.php");
     require("include/connect.inc.php");
     include("./include/verifConnexion.php");
     ?>
+    <script src="include_script/alert.js"></script>
 
     <!-- form respond -->
 
