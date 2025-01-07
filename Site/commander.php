@@ -50,7 +50,8 @@ require_once("./include/head.php");
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Votre panier</span>
-                        <span class="badge badge-secondary badge-pill"><?php echo getItemCartNumber($_SESSION['user_id']) ?></span>
+                        <span
+                            class="badge badge-secondary badge-pill"><?php echo getItemCartNumber($_SESSION['user_id']) ?></span>
                     </h4>
                     <ul class="list-group mb-3">
                         <?php
@@ -90,23 +91,23 @@ require_once("./include/head.php");
                         ?>
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total (EUR)</span>
-                            <strong><?php echo $prixTotal?>€</strong>
+                            <strong><?php echo $prixTotal ?>€</strong>
                         </li>
                     </ul>
                 </div>
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Adresse de livraison</h4>
-                    <form class="needs-validation" novalidate>
+                    <form class="needs-validation" novalidate method="post">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">First name</label>
+                                <label for="firstName">Nom</label>
                                 <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="lastName">Last name</label>
+                                <label for="lastName">Prenom</label>
                                 <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
                                 <div class="invalid-feedback">
                                     Valid last name is required.
@@ -122,9 +123,17 @@ require_once("./include/head.php");
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="address">Adresse</label>
-                            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="numRue">Numero de rue</label>
+                                <input type="text" class="form-control" id="numRue" placeholder="1"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nomRue">Nom de rue</label>
+                                <input type="text" class="form-control" id="nomRue" placeholder="Rue du fort"
+                                    required>
+                            </div>
                         </div>
 
                         <div class="mb-3">
