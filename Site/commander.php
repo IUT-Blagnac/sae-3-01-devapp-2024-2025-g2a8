@@ -53,48 +53,46 @@ require_once("./include/head.php");
                         <span class="badge badge-secondary badge-pill">3</span>
                     </h4>
                     <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Second product</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Third item</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$5</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <h6 class="my-0">Promo code</h6>
-                                <small>EXAMPLECODE</small>
-                            </div>
-                            <span class="text-success">-$5</span>
-                        </li>
+                        <?php
+
+                        $userId = $_SESSION["user_id"];
+                        $productList = $conn->prepare("SELECT * FROM Produit P INNER JOIN Panier PA ON P.id_produit = PA.id_produit WHERE user_id = $userId");
+
+                        $productList->execute();
+
+                        $prixTotal = 0;
+
+                        if ($productList->rowCount() > 0) {
+
+                            foreach ($productList->fetchAll(PDO::FETCH_ASSOC) as $produit) {
+                                $prodId = $produit['id_produit'];
+                                $prodNom = $produit['nom'];
+                                $prodPrix = $produit['prix'];
+                                $prodQuant = $produit['quantiter'];
+
+                                $prixTotal += ($prodPrix * $prodQuant);
+
+                                ?>
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0"><?php echo $prodNom ?></h6>
+                                        <small class="text-muted">Quantiter : <?php echo $prodQuant ?></small>
+                                    </div>
+                                    <span class="text-muted"><?php echo ($prodPrix * $prodQuant) ?>€</span>
+                                </li>
+                                <?php
+
+                            }
+
+                        } else {
+                            echo "<h3>Aucun produit dans le panier</h3>";
+                        }
+                        ?>
                         <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (USD)</span>
-                            <strong>$20</strong>
+                            <span>Total (EUR)</span>
+                            <strong><?php echo $prixTotal€?></strong>
                         </li>
                     </ul>
-
-                    <form class="card p-2">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Promo code">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-secondary">Redeem</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Adresse de livraison</h4>
@@ -151,8 +149,7 @@ require_once("./include/head.php");
                             </div>
                             <div class="mb-3">
                                 <label for="ville">Ville</label>
-                                <input type="text" class="form-control" id="ville" placeholder="Barbaira"
-                                    required>
+                                <input type="text" class="form-control" id="ville" placeholder="Barbaira" required>
                             </div>
                         </div>
                         <hr class="mb-4">
