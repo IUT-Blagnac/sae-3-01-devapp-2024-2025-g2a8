@@ -12,35 +12,13 @@ require_once("./include/head.php");
 
     <!-- form respond -->
     <?php
-    if (isset($_POST["action"])) {
-        $actionType = $_POST["typeAction"];
-        $idP = $_POST["prodId"];
-        $uId = $_POST["userId"];
-
-        if ($actionType == "suppr") {
-            $delReq = $conn->prepare("DELETE FROM Panier WHERE id_produit = $idP");
-
-            if (!$delReq->execute()) {
-                $error = "Impossible de supprimer le produit $idP";
-            }
-        }
-
-        if ($actionType == "del") {
-            $decReq = $conn->prepare("CALL DecPanier($uId, $idP)");
-
-            if (!$decReq->execute()) {
-                $error = "Impossible de supprimer le produit $idP";
-            }
-        }
-
-        if ($actionType == "add") {
-            $decReq = $conn->prepare("CALL IncPanier($uId, $idP)");
-
-            if (!$decReq->execute()) {
-                $error = "Impossible de supprimer le produit $idP";
-            }
-        }
+    if (isset($_POST["commande"])) {
+        
     }
+    ?>
+
+    <?php
+        $userCommande = getUserById($_SESSION['user_id'])
     ?>
 
     <!-- Conteneur principal -->
@@ -86,7 +64,7 @@ require_once("./include/head.php");
                             }
 
                         } else {
-                            echo "<h3>Aucun produit dans le panier</h3>";
+                            echo "<h6>Aucun produit dans le panier</h6>";
                         }
                         ?>
                         <li class="list-group-item d-flex justify-content-between">
@@ -101,14 +79,14 @@ require_once("./include/head.php");
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">Nom</label>
-                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="firstName" value="<?php echo $userCommande["nom"]?>" name="firstName" required>
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Prenom</label>
-                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="lastName" value="<?php echo $userCommande["prenom"]?>" name="lastName" required>
                                 <div class="invalid-feedback">
                                     Valid last name is required.
                                 </div>
@@ -117,7 +95,7 @@ require_once("./include/head.php");
 
                         <div class="mb-3">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                            <input type="email" class="form-control" id="email" value="<?php echo $userCommande["mail"]?>" name="email">
                             <div class="invalid-feedback">
                                 Mail invalide !
                             </div>
@@ -126,12 +104,12 @@ require_once("./include/head.php");
                         <div class="row">
                             <div class="col-md-3 mb-3">
                                 <label for="numRue">Numero de rue</label>
-                                <input type="text" class="form-control" id="numRue" placeholder="1"
+                                <input type="text" class="form-control" id="numRue" placeholder="1" name="numRue"
                                     required>
                             </div>
                             <div class="col-md-9 mb-3 mb-3">
                                 <label for="nomRue">Nom de rue</label>
-                                <input type="text" class="form-control" id="nomRue" placeholder="Rue du fort"
+                                <input type="text" class="form-control" id="nomRue" placeholder="Rue du fort" name="nomRue"
                                     required>
                             </div>
                         </div>
@@ -139,34 +117,28 @@ require_once("./include/head.php");
                         <div class="mb-3">
                             <label for="compadresse">Complement d'adresse (Optionnel)</label>
                             <small class="text-muted">Num d'appartement, code interphone, ...</small>
-                            <input type="text" class="form-control" id="compadresse" placeholder="1234 Main St"
+                            <input type="text" class="form-control" id="compadresse" placeholder="Appartement 18" name="compadresse"
                                 required>
                         </div>
 
                         <div class="row">
                             <div class="col-md-5 mb-3">
                                 <label for="pays">Pays</label>
-                                <select class="custom-select d-block w-100" id="pays" required>
+                                <select class="custom-select d-block w-100" id="pays" name="pays" required>
                                     <option value="France" selected>France</option>
                                 </select>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="cp">Code postale</label>
-                                <input type="text" class="form-control" id="cp" placeholder="11800" required>
+                                <input type="text" class="form-control" id="cp" placeholder="11800" name="cp" required>
                                 <div class="invalid-feedback">
                                     Code postale requis
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="ville">Ville</label>
-                                <input type="text" class="form-control" id="ville" placeholder="Barbaira" required>
+                                <input type="text" class="form-control" id="ville" placeholder="Barbaira" name="ville" required>
                             </div>
-                        </div>
-                        <hr class="mb-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="save-info">
-                            <label class="custom-control-label" for="save-info">Save this information for next
-                                time</label>
                         </div>
                         <hr class="mb-4">
 
@@ -175,7 +147,7 @@ require_once("./include/head.php");
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="cc-name">Nom du titulaire</label>
-                                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                                <input type="text" class="form-control" id="cc-name" placeholder="" name="cc-name" required>
                                 <small class="text-muted">Votre nom sur la carte</small>
                                 <div class="invalid-feedback">
                                     Nom du titulaire requis
@@ -183,7 +155,7 @@ require_once("./include/head.php");
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="cc-number">Numero de carte</label>
-                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                <input type="text" class="form-control" id="cc-number" placeholder="" name="cc-number" required>
                                 <small class="text-muted">Le numero au devant de la carte</small>
                                 <div class="invalid-feedback">
                                     Numero requis
@@ -193,7 +165,7 @@ require_once("./include/head.php");
                         <div class="row">
                             <div class="col-md-3 mb-3">
                                 <label for="cc-expiration">Expiration</label>
-                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                <input type="text" class="form-control" id="cc-expiration" name="cc-expiration" required>
                                 <small class="text-muted">Date d'expiration au format MM/AA</small>
                                 <div class="invalid-feedback">
                                     Expiration requise
@@ -201,7 +173,7 @@ require_once("./include/head.php");
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="cc-expiration">CVV</label>
-                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                <input type="text" class="form-control" id="cc-cvv" name="cc-cvv" required>
                                 <small class="text-muted">3 numero au dos de la carte</small>
                                 <div class="invalid-feedback">
                                     Code de securité requis
@@ -209,7 +181,7 @@ require_once("./include/head.php");
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Commander</button>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit" name="commande">Commander</button>
                     </form>
                 </div>
             </div>
