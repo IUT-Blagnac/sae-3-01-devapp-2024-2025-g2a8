@@ -168,7 +168,30 @@ require_once("./include/head.php");
         </div>
         <?php
         if (isset($_POST["commande"])) {
-            
+            $reg_numRue = "#^[1-9][0-9]{0,}$#";
+            $reg_cp = "#^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$#";
+            $reg_cvv = "#^[0-9]{3}$#";
+            $reg_exp = "^(0[1-9]|1[0-2])\/?([0-9]{2})$";
+
+            if(!preg_match($reg_numRue, $_POST["numRue"])){
+                echo "<script>appendAlert('Numero de rue invalide', 'danger')</script>";
+                die();
+            }
+
+            if(!preg_match($reg_cp, $_POST["cp"])){
+                echo "<script>appendAlert('Code postale invalide', 'danger')</script>";
+                die();
+            }
+
+            if(!preg_match($reg_cvv, $_POST["cc-cvv"])){
+                echo "<script>appendAlert('Code de securité invalide', 'danger')</script>";
+                die();
+            }
+
+            if(!preg_match($reg_exp, $_POST["cc-expiration"])){
+                echo "<script>appendAlert('Date d'expiration de la carte invalide', 'danger')</script>";
+                die();
+            }
         }
     ?>
         <!-- Pied de page -->
