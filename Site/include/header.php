@@ -48,7 +48,9 @@
                 }
             ?>
             
-            <img src='./icons/carte.png' alt="Panier" width="40" height="40">
+            <a href="panier.php">
+                <img src='./icons/carte.png' alt="Panier" width="40" height="40">
+            </a>
         </div>
     </div>
 </header>

@@ -75,9 +75,9 @@ require_once("./include/head.php");
                                         $prodPrix = $produit['prix'];
                                         $prodQuant = $produit['quantiter'];
 
-                                        $prixTotal += ($prodPrix*$prodQuant);
+                                        $prixTotal += ($prodPrix * $prodQuant);
 
-                                            ?>
+                                        ?>
                                         <div class="row">
                                             <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                                 <!-- Image -->
@@ -175,7 +175,7 @@ require_once("./include/head.php");
                                     <li
                                         class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                                         Produits
-                                        <span><?php echo $prixTotal?>€</span>
+                                        <span><?php echo $prixTotal ?>€</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                         Livraison
@@ -189,14 +189,17 @@ require_once("./include/head.php");
                                                 <p class="mb-0">(including VAT)</p>
                                             </strong>
                                         </div>
-                                        <span><strong><?php echo $prixTotal?>€</strong></span>
+                                        <span><strong><?php echo $prixTotal ?>€</strong></span>
                                     </li>
                                 </ul>
 
-                                <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                    class="btn btn-primary btn-lg btn-block">
-                                    Commander
-                                </button>
+                                <a href="commander.php">
+                                    <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                        class="btn btn-primary btn-lg btn-block">
+                                        Commander
+                                    </button>
+                                </a>
+
                             </div>
                         </div>
                     </div>
