@@ -121,13 +121,13 @@ require_once("./include/head.php");
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 mb-3">
-                    <a class="btn button-28">
+                <div class="col-md-4 mb-3">
+                    <a class="btn button-28 pl-4 pr-4 p-2">
                         Retour a l'accueil
                     </a>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <a class="btn button-28">
+                    <a class="btn button-28 pl-4 pr-4 p-2">
                         Mon compte
                     </a>
                 </div>
