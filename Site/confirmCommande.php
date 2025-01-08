@@ -93,39 +93,58 @@ require_once("./include/head.php");
                     <hr>
                     <div>
                         <h4 class="text-left">Livraison :</h4>
-                        <div class="text-left d-flex flex-row ml-2">
-                            <h5>
-                                Destinataire :
-                            </h5>
-                            <p class="ml-2">
-                                <?php
-                                    echo $livraison["nom"] . " " . $livraison["prenom"]
-                                ?>
-                            </p>
-                        </div>
-
-                        <div class="text-left d-flex flex-row ml-2">
-                            <h5>
-                                Adresse :
-                            </h5>
-                            <p class="ml-2">
-                                <?php
-                                    echo $livraison["numRue"]." ".$livraison["nomRue"]
-                                ?>
-                                <br>
-                                <?php
-                                    echo $livraison["codePostal"]." ".$livraison["ville"]
-                                ?>
-                                <br>
-                                <?php
+                        <div class="card mb-4 mt-4">
+                            <div class="card-header py-3">
+                                <h1 class="mb-0">Merci de votre commande !</h1>
+                            </div>
+                            <div class="card-body">
+                            <p class="text-left">
+                                    <?php
+                                    echo $livraison["numRue"] . " " . $livraison["nomRue"]
+                                        ?>
+                                    <br>
+                                    <?php
+                                    echo $livraison["codePostal"] . " " . $livraison["ville"]
+                                        ?>
+                                    <br>
+                                    <?php
                                     echo $livraison["pays"]
-                                ?>
-                            </p>
-                        </div>
+                                        ?>
+                                </p>
+                            </div>
+                            <div class="text-left d-flex flex-row ml-2">
+                                <h5>
+                                    Destinataire :
+                                </h5>
+                                <p class="ml-2">
+                                    <?php
+                                    echo $livraison["nom"] . " " . $livraison["prenom"]
+                                        ?>
+                                </p>
+                            </div>
 
+                            <div class="text-left d-flex flex-row ml-2">
+                                <h5>
+                                    Adresse :
+                                </h5>
+                                <p class="ml-2">
+                                    <?php
+                                    echo $livraison["numRue"] . " " . $livraison["nomRue"]
+                                        ?>
+                                    <br>
+                                    <?php
+                                    echo $livraison["codePostal"] . " " . $livraison["ville"]
+                                        ?>
+                                    <br>
+                                    <?php
+                                    echo $livraison["pays"]
+                                        ?>
+                                </p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
         </center>
     </div>
 
