@@ -180,7 +180,7 @@ require_once("./include/head.php");
 
             $prodPanier->execute();
 
-            if($prodPanier->rowCount() <= 0){
+            if ($prodPanier->rowCount() <= 0) {
                 echo "<script>appendAlert('Votre panier est vide !', 'danger')</script>";
                 die();
             }
@@ -205,7 +205,7 @@ require_once("./include/head.php");
                 die();
             }
 
-        
+
             $insertAdresse = $conn->prepare("INSERT INTO Adresse (user_id, numRue, nomRue, ville, codePostal, nom, prenom, pays) VALUES (:userId, :numRue, :nomRue, :ville, :codePostale, :nom, :prenom, :pays)");
 
             $insertAdresse->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
@@ -266,7 +266,7 @@ require_once("./include/head.php");
                 die();
             }
 
-            foreach($prodPanier->fetchAll(PDO::FETCH_ASSOC) as $prod) {
+            foreach ($prodPanier->fetchAll(PDO::FETCH_ASSOC) as $prod) {
                 $insertProd = $conn->prepare("INSERT INTO ProduitCommander (id_produit, id_commande, quantiter) VALUES (:prodId, :commandeId, :quant)");
 
                 $insertProd->bindParam(":prodId", $prod["id_produit"], PDO::PARAM_INT);
@@ -283,8 +283,12 @@ require_once("./include/head.php");
                 $deleteProdPanier->execute();
             }
 
-            header("Location : confirmCommande.php?id=$insertCommandId");
-            exit();
+            ?>
+            <script type="text/javascript">
+                window.location.href = './confirmCommande.php?id=<?php echo $idCommande?>';
+            </script>
+            <?php
+
         }
         ?>
         <!-- Pied de page -->
