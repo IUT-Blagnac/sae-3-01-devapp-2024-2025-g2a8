@@ -122,12 +122,12 @@ require_once("./include/head.php");
             </div>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <a class="btn button-28 pl-4 pr-4 p-2">
+                    <a class="btn button-28 pl-4 pr-4 p-2" href="index.php">
                         Retour a l'accueil
                     </a>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <a class="btn button-28 pl-4 pr-4 p-2">
+                    <a class="btn button-28 pl-4 pr-4 p-2" href="compte.php">
                         Mon compte
                     </a>
                 </div>
