@@ -19,7 +19,7 @@ require_once("./include/head.php");
 
     <!-- Conteneur principal -->
     <div class="container-fluid flex-grow-1">
-        <div class="container">
+        <div class="container mb-3">
             <div id="liveAlertPlaceholder"></div>
             <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
@@ -161,7 +161,7 @@ require_once("./include/head.php");
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit" name="commande"
+                        <button class="btn button-28 btn-lg btn-block" type="submit" name="commande"
                             value="commande">Commander</button>
                     </form>
                 </div>
@@ -206,7 +206,7 @@ require_once("./include/head.php");
             }
 
         
-            $insertAdresse = $conn->prepare("INSERT INTO Adresse (user_id, numRue, nomRue, ville, codePostal, nom, prenom, ville) VALUES (:userId, :numRue, :nomRue, :ville, :codePostale, :nom, :prenom, :ville)");
+            $insertAdresse = $conn->prepare("INSERT INTO Adresse (user_id, numRue, nomRue, ville, codePostal, nom, prenom, pays) VALUES (:userId, :numRue, :nomRue, :ville, :codePostale, :nom, :prenom, :pays)");
 
             $insertAdresse->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
             $insertAdresse->bindParam(":numRue", $_POST["numRue"], PDO::PARAM_STR);
@@ -219,7 +219,6 @@ require_once("./include/head.php");
 
             if ($insertAdresse->execute()) {
                 $insertAdresseId = $conn->lastInsertId();
-                echo "<script>appendAlert('id adresse = $insertAdresseId', 'danger')</script>";
             } else {
                 echo "<script>appendAlert('Une erreur est survenu lors de votre commande', 'danger')</script>";
                 die();
@@ -245,7 +244,6 @@ require_once("./include/head.php");
 
                 if ($insertCard->execute()) {
                     $insertCbId = $_POST["cc-number"];
-                    echo "<script>appendAlert('id cb, adresse = $insertCbId, $insertAdresseId', 'danger')</script>";
                 } else {
                     echo "<script>appendAlert('Une erreur est survenu lors de votre commande', 'danger')</script>";
                     die();
@@ -263,7 +261,6 @@ require_once("./include/head.php");
 
             if ($insertCommande->execute()) {
                 $insertCommandId = $conn->lastInsertId();
-                echo "<script>appendAlert('id cb, adresse, commande = $insertCbId, $insertAdresseId, $insertCommandId', 'danger')</script>";
             } else {
                 echo "<script>appendAlert('Une erreur est survenu lors de votre commande', 'danger')</script>";
                 die();
@@ -285,7 +282,9 @@ require_once("./include/head.php");
 
                 $deleteProdPanier->execute();
             }
-            
+
+            header("Location : confirmCommande.php?id=$insertCommandId");
+            exit();
         }
         ?>
         <!-- Pied de page -->
