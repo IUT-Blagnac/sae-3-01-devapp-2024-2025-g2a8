@@ -91,18 +91,18 @@ require_once("./include/head.php");
                         </li>
                     </ul>
                     <hr>
-                    <div>
-                        <h4 class="text-left">Livraison :</h4>
+                    <div class="text-left">
+                        <h4>Livraison :</h4>
                         <div class="card w-25">
                             <div class="card-header py-3">
-                                <h5 class="mb-0">
+                                <h5 class="mb-0 text-center">
                                     <?php
                                         echo $livraison["nom"] . " " . $livraison["prenom"]
                                     ?>
                                 </h5>
                             </div>
                             <div class="card-body">
-                            <p>
+                            <p class="text-left">
                                     <?php
                                     echo $livraison["numRue"] . " " . $livraison["nomRue"]
                                         ?>
