@@ -24,6 +24,11 @@ require_once("./include/head.php");
     $commandeGet->bindParam(":commandId", $idCommande, PDO::PARAM_INT);
     $commandeGet->execute();
 
+    if($commandeGet->rowCount() <= 0){
+        header("Location: index.php");
+        exit();
+    }
+
     $commande = $commandeGet->fetch();
 
     if ($commande["user_id"] != $_SESSION["user_id"]) {
@@ -52,7 +57,7 @@ require_once("./include/head.php");
                     <h1 class="mb-0">Merci de votre commande !</h1>
                 </div>
                 <div class="card-body">
-                    <h3>Résumer de la commande n°<?php echo $idCommande; ?></h3>
+                    <h3>Résume de la commande n°<?php echo $idCommande; ?></h3>
                     <hr>
                     <h4 class="text-left">Produits commander :</h4>
                     <ul class="list-group mb-3">
