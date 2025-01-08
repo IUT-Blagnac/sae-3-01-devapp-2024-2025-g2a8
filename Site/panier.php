@@ -195,7 +195,7 @@ require_once("./include/head.php");
 
                                 <a href="commander.php">
                                     <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                        class="btn btn-primary btn-lg btn-block">
+                                        class="btn button-28 btn-lg btn-block">
                                         Commander
                                     </button>
                                 </a>
