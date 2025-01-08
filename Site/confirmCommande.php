@@ -93,7 +93,7 @@ require_once("./include/head.php");
                     <hr>
                     <div class="text-left">
                         <h4>Livraison :</h4>
-                        <div class="card w-25">
+                        <div class="card w-25 ml-4 mt-3">
                             <div class="card-header py-3">
                                 <h5 class="mb-0 text-center">
                                     <?php
