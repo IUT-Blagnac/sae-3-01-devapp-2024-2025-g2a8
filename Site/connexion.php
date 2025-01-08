@@ -40,11 +40,11 @@ require_once("./include/head.php");
                                 <label class="form-check-label" for="checkRemember">
                                     Se souvenir de moi
                                 </label>
-                                <button class="btn btn-primary w-100 py-2" type="submit"
+                                <button class="btn button-28 w-100 py-2" type="submit"
                                     name="valider">Connexion</button>
                             </div>
                         </form>
-                        <a href="CreaCompte.php" class="btn btn-secondary w-100 py-2">
+                        <a href="CreaCompte.php" class="btn button-28 w-100 py-2">
                             S'inscrire
                         </a>
                     </div>
