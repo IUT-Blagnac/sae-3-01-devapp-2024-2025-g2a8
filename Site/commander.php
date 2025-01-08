@@ -215,7 +215,7 @@ require_once("./include/head.php");
             $insertAdresse->bindParam(":codePostale", $_POST["cp"], PDO::PARAM_STR);
             $insertAdresse->bindParam(":nom", $_POST["firstName"], PDO::PARAM_STR);
             $insertAdresse->bindParam(":prenom", $_POST["lastName"], PDO::PARAM_STR);
-            $insertAdresse->bindParam(":ville", $_POST["ville"], PDO::PARAM_STR);
+            $insertAdresse->bindParam(":pays", $_POST["pays"], PDO::PARAM_STR);
 
             if ($insertAdresse->execute()) {
                 $insertAdresseId = $conn->lastInsertId();
