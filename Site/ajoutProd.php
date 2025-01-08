@@ -35,7 +35,6 @@ require_once("./include/head.php");
                     }
 
                     $lastInsertId = $conn->lastInsertId();
-                    echo $lastInsertId;
 
                     if (!empty($_FILES['imageProduit']) AND $_FILES['imageProduit']['error'] == 0) {
                         $infosfichier = pathinfo($_FILES['imageProduit']['name']);
