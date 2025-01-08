@@ -93,14 +93,11 @@ require_once("./include/head.php");
                     <hr>
                     <div>
                         <h4 class="text-left">Livraison :</h4>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <p><?php echo $livraison["nom"]?></p> 
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <p><?php echo $livraison["prenom"]?></p> 
-                            </div>
-                        </div>
+                        <p>
+                            <?php 
+                                echo $livraison["nom"]." ".$livraison["prenom"]
+                            ?>
+                        </p>
                     </div>
                 </div>
             </div>
