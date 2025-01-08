@@ -119,6 +119,7 @@ require_once("./include/head.php");
                         </div>
                     </div>
                 </div>
+            </div>
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <a class="btn button-28">
