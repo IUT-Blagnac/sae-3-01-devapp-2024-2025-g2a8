@@ -90,6 +90,18 @@ require_once("./include/head.php");
                             <strong><?php echo $prixTotal ?>€</strong>
                         </li>
                     </ul>
+                    <hr>
+                    <div>
+                        <h4 class="text-left">Livraison :</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <p><?php echo $livraison["nom"]?></p> 
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <p><?php echo $livraison["prenom"]?></p> 
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </center>
