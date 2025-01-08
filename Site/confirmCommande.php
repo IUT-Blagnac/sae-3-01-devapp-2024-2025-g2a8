@@ -59,31 +59,31 @@ require_once("./include/head.php");
                         <?php
                         $prixTotal = 0;
 
-                            foreach ($produits as $prodRef) {
-                                $prodRefGet = $conn->prepare("SELECT * FROM Produit WHERE id_produit=:prodId");
-                                $prodRefGet->bindParam(":prodId", $prodRef["id_produit"], PDO::PARAM_INT);
-                                $prodRefGet->execute();
+                        foreach ($produits as $prodRef) {
+                            $prodRefGet = $conn->prepare("SELECT * FROM Produit WHERE id_produit=:prodId");
+                            $prodRefGet->bindParam(":prodId", $prodRef["id_produit"], PDO::PARAM_INT);
+                            $prodRefGet->execute();
 
-                                $prod = $prodRefGet->fetch();
+                            $prod = $prodRefGet->fetch();
 
-                                $prodId = $prod['id_produit'];
-                                $prodNom = $prod['nom'];
-                                $prodPrix = $prod['prix'];
-                                $prodQuant = $prodRef['quantiter'];
+                            $prodId = $prod['id_produit'];
+                            $prodNom = $prod['nom'];
+                            $prodPrix = $prod['prix'];
+                            $prodQuant = $prodRef['quantiter'];
 
-                                $prixTotal += ($prodPrix * $prodQuant);
+                            $prixTotal += ($prodPrix * $prodQuant);
 
-                                ?>
-                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <div>
-                                        <h6 class="my-0"><?php echo $prodNom ?></h6>
-                                        <small class="text-muted">Quantiter : <?php echo $prodQuant ?></small>
-                                    </div>
-                                    <span class="text-muted"><?php echo ($prodPrix * $prodQuant) ?>€</span>
-                                </li>
-                                <?php
+                            ?>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div>
+                                    <h6 class="my-0"><?php echo $prodNom ?></h6>
+                                    <small class="text-muted">Quantiter : <?php echo $prodQuant ?></small>
+                                </div>
+                                <span class="text-muted"><?php echo ($prodPrix * $prodQuant) ?>€</span>
+                            </li>
+                            <?php
 
-                            }
+                        }
                         ?>
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total (EUR)</span>
@@ -93,11 +93,17 @@ require_once("./include/head.php");
                     <hr>
                     <div>
                         <h4 class="text-left">Livraison :</h4>
-                        <p>
-                            <?php 
-                                echo $livraison["nom"]." ".$livraison["prenom"]
-                            ?>
-                        </p>
+                        <div class="text-left flex-row">
+                            <h5>
+                                Destinataire :
+                            </h5>
+                            <p>
+                                <?php
+                                    echo $livraison["nom"] . " " . $livraison["prenom"]
+                                ?>
+                            </p>
+                        </div>
+
                     </div>
                 </div>
             </div>
