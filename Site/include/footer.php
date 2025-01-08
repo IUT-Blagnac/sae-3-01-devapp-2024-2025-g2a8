@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <hr>
+<!--             <hr> -->
             <!-- Section : Moyens de paiement -->
             <!-- 
             <div class="text-center">
