@@ -172,10 +172,10 @@ require_once("./include/head.php");
                     }
                 ?>
 
-                <div class="justify-content-between mt-3 row">
+                <div class="justify-content-between m-0 row">
                     <div class = "col-8">
                         <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb bg-transparent ml-3">
+                            <ol class="breadcrumb bg-transparent">
                                 <li class="breadcrumb-item"><a href="index.php">Accueil</a></li>
                                 <?php
                                     if ($infoProduit["parent"] != null) {
@@ -451,10 +451,9 @@ require_once("./include/head.php");
                     </div>
 
                 </div>
-
+                <?php
+                require_once("./include/footer.php")
+                ?>
             </main>
-    <?php
-    require_once("./include/footer.php")
-    ?>
 </body>
 </html>
