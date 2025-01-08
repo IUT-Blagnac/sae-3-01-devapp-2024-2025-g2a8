@@ -104,6 +104,25 @@ require_once("./include/head.php");
                             </p>
                         </div>
 
+                        <div class="text-left d-flex flex-row ml-2">
+                            <h5>
+                                Adresse :
+                            </h5>
+                            <p class="ml-2">
+                                <?php
+                                    echo $livraison["numRue"]." ".$livraison["nomRue"]
+                                ?>
+                                <br>
+                                <?php
+                                    echo $livraison["codePostal"]." ".$livraison["ville"]
+                                ?>
+                                <br>
+                                <?php
+                                    echo $livraison["pays"]
+                                ?>
+                            </p>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -206,7 +206,7 @@ require_once("./include/head.php");
             }
 
         
-            $insertAdresse = $conn->prepare("INSERT INTO Adresse (user_id, numRue, nomRue, ville, codePostal, nom, prenom) VALUES (:userId, :numRue, :nomRue, :ville, :codePostale, :nom, :prenom)");
+            $insertAdresse = $conn->prepare("INSERT INTO Adresse (user_id, numRue, nomRue, ville, codePostal, nom, prenom, ville) VALUES (:userId, :numRue, :nomRue, :ville, :codePostale, :nom, :prenom, :ville)");
 
             $insertAdresse->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
             $insertAdresse->bindParam(":numRue", $_POST["numRue"], PDO::PARAM_STR);
@@ -215,6 +215,7 @@ require_once("./include/head.php");
             $insertAdresse->bindParam(":codePostale", $_POST["cp"], PDO::PARAM_STR);
             $insertAdresse->bindParam(":nom", $_POST["firstName"], PDO::PARAM_STR);
             $insertAdresse->bindParam(":prenom", $_POST["lastName"], PDO::PARAM_STR);
+            $insertAdresse->bindParam(":ville", $_POST["ville"], PDO::PARAM_STR);
 
             if ($insertAdresse->execute()) {
                 $insertAdresseId = $conn->lastInsertId();
