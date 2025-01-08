@@ -93,7 +93,7 @@ require_once("./include/head.php");
                     <hr>
                     <div>
                         <h4 class="text-left">Livraison :</h4>
-                        <div class="card mb-4 mt-4">
+                        <div class="card w-25">
                             <div class="card-header py-3">
                                 <h5 class="mb-0">
                                     <?php
@@ -102,7 +102,7 @@ require_once("./include/head.php");
                                 </h5>
                             </div>
                             <div class="card-body">
-                            <p class="text-left">
+                            <p>
                                     <?php
                                     echo $livraison["numRue"] . " " . $livraison["nomRue"]
                                         ?>
