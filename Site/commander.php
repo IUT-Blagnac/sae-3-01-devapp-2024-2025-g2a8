@@ -224,9 +224,10 @@ require_once("./include/head.php");
                 die();
             }
 
-            $getActCard = $conn->prepare("SELECT numCb FROM CarteBancaire WHERE user_id=:userId");
+            $getActCard = $conn->prepare("SELECT numCb FROM CarteBancaire WHERE user_id=:userId AND numCb=:numCb");
 
             $getActCard->bindParam(":userId", $_SESSION["user_id"], PDO::PARAM_INT);
+            $getActCard->bindParam(":numCb", $_POST["cc-number"], PDO::PARAM_STR);
 
             $getActCard->execute();
 
