@@ -285,7 +285,7 @@ require_once("./include/head.php");
 
             ?>
             <script type="text/javascript">
-                window.location.href="confirmCommande.php?id=<?php echo $idCommande?>";
+                window.location.href="confirmCommande.php?id=<?php echo $lastInsertId?>";
             </script>
             <?php
 
