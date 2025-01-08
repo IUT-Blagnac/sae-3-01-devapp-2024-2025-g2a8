@@ -30,7 +30,7 @@ require_once("./include/head.php");
                                 <input type="email" class="form-control" id="mailConnexion" name="mail"
                                     placeholder="E-Mail" required>
                             </div>
-                            <div class="form-floating">
+                            <div class="form-floating mt-2">
                                 <input type="password" class="form-control" id="passwordConnexion" name="pass"
                                     placeholder="Mot de passe" required>
                             </div>
