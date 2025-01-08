@@ -93,11 +93,11 @@ require_once("./include/head.php");
                     <hr>
                     <div>
                         <h4 class="text-left">Livraison :</h4>
-                        <div class="text-left flex-row">
+                        <div class="text-left d-flex flex-row ml-2">
                             <h5>
                                 Destinataire :
                             </h5>
-                            <p>
+                            <p class="ml-2">
                                 <?php
                                     echo $livraison["nom"] . " " . $livraison["prenom"]
                                 ?>
