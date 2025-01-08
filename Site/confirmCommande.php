@@ -58,7 +58,13 @@ require_once("./include/head.php");
                         <?php
                         $prixTotal = 0;
 
-                            foreach ($produits as $prod) {
+                            foreach ($produits as $prodRef) {
+                                $prodRefGet = $conn->prepare("SELECT * FROM Produit WHERE id_produit=:prodId");
+                                $prodRefGet->bindParam(":prodId", $prodRef["id_produit"], PDO::PARAM_INT);
+                                $prodRefGet->execute();
+
+                                $prod = $prodRefGet->fetch();
+
                                 $prodId = $prod['id_produit'];
                                 $prodNom = $prod['nom'];
                                 $prodPrix = $prod['prix'];
