@@ -52,8 +52,9 @@ require_once("./include/head.php");
                     <h1 class="mb-0">Merci de votre commande !</h1>
                 </div>
                 <div class="card-body">
-                    <h3>Votre commande porte le numero <?php echo $idCommande; ?></h3>
+                    <h3>Résumer de la commande n°<?php echo $idCommande; ?></h3>
                     <hr>
+                    <h4 class="text-left">Produits commander :</h4>
                     <ul class="list-group mb-3">
                         <?php
                         $prixTotal = 0;
