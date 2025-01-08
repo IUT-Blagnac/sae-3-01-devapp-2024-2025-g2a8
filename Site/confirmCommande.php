@@ -68,7 +68,7 @@ require_once("./include/head.php");
                                 $prodId = $prod['id_produit'];
                                 $prodNom = $prod['nom'];
                                 $prodPrix = $prod['prix'];
-                                $prodQuant = $prod['quantiter'];
+                                $prodQuant = $prodRef['quantiter'];
 
                                 $prixTotal += ($prodPrix * $prodQuant);
 
