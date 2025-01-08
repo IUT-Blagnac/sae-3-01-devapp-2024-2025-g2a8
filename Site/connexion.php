@@ -23,7 +23,7 @@ require_once("./include/head.php");
                 <div class="card-header py-3">
                     <h1 class="mb-0">Connexion</h1>
                 </div>
-                <div class="card-body w-75">
+                <div class="card-body">
                     <div class="form-signin w-75 text-center">
                         <form method="post">
                             <div class="form-floating">
