@@ -102,7 +102,7 @@ require_once("./include/head.php");
                                                     <input type="hidden" value="<?php echo $userId ?>" name="userId" />
                                                     <input type="hidden" value="suppr" name="typeAction" />
                                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                                                        class="btn btn-primary btn-sm me-1 mb-2" data-mdb-tooltip-init
+                                                        class="btn button-28 btn-sm me-1 mb-2" data-mdb-tooltip-init
                                                         title="Remove item" name="action">
                                                         Supprimer
                                                     </button>
@@ -119,7 +119,7 @@ require_once("./include/head.php");
                                                         <input type="hidden" value="del" name="typeAction" />
                                                         <input type="hidden" value="<?php echo $userId ?>" name="userId" />
                                                         <button type="submit" data-mdb-ripple-init
-                                                            class="btn btn-primary px-3 me-2" name="action">
+                                                            class="btn button-28 px-3 me-2" name="action">
                                                             -
                                                         </button>
                                                     </form>
@@ -128,19 +128,18 @@ require_once("./include/head.php");
                                                         <input id="form1" min="0" name="quantity"
                                                             value="<?php echo $prodQuant ?>" type="number" class="form-control"
                                                             disabled />
-                                                        <label class="form-label" for="form1">Quantity</label>
+                                                        <label class="form-label" for="form1">Quantité</label>
                                                     </div>
                                                     <form method="post">
                                                         <input type="hidden" value="<?php echo $prodId ?>" name="prodId" />
                                                         <input type="hidden" value="add" name="typeAction" />
                                                         <input type="hidden" value="<?php echo $userId ?>" name="userId" />
                                                         <button type="submit" data-mdb-ripple-init
-                                                            class="btn btn-primary px-3 me-2" name="action">
+                                                            class="btn button-28 px-3 me-2" name="action">
                                                             +
                                                         </button>
                                                     </form>
                                                 </div>
-                                                <!-- Quantity -->
 
                                                 <!-- Price -->
                                                 <p class="text-start text-md-center">
