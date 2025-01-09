@@ -119,7 +119,7 @@ require_once("./include/head.php");
                                                         <input type="hidden" value="del" name="typeAction" />
                                                         <input type="hidden" value="<?php echo $userId ?>" name="userId" />
                                                         <button type="submit" data-mdb-ripple-init
-                                                            class="btn button-28 px-3 me-2" name="action">
+                                                            class="btn btn-primary px-3 me-2" name="action">
                                                             -
                                                         </button>
                                                     </form>
@@ -135,11 +135,12 @@ require_once("./include/head.php");
                                                         <input type="hidden" value="add" name="typeAction" />
                                                         <input type="hidden" value="<?php echo $userId ?>" name="userId" />
                                                         <button type="submit" data-mdb-ripple-init
-                                                            class="btn button-28 px-3 me-2" name="action">
+                                                            class="btn btn-primary px-3 me-2" name="action">
                                                             +
                                                         </button>
                                                     </form>
                                                 </div>
+                                                <!-- Quantity -->
 
                                                 <!-- Price -->
                                                 <p class="text-start text-md-center">

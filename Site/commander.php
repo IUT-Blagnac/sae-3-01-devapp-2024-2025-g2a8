@@ -281,6 +281,22 @@ require_once("./include/head.php");
                 $deleteProdPanier->bindParam(":prodId", $prod["id_produit"], PDO::PARAM_INT);
 
                 $deleteProdPanier->execute();
+
+                $getProdStock = $conn->prepare("SELECT stock FROM Produit WHERE id_produit=:idProd");
+
+                $getProdStock->bindParam(":idProd", $prod, PDO::PARAM_INT);
+
+                $getProdStock->execute();
+
+                $prodStockMod = $getProdStock->fetch();
+
+                $stockAct = $prodStockMod["stock"] - 1;
+
+                $updateStock = $conn->prepare("UPDATE Produit SET stock=$stokAct WHERE id_produit=:ipP");
+
+                $updateStock->bindParam(":id_produit", $prod["id_produit"], PDO::PARAM_INT);
+
+                $updateStock->execute();
             }
 
             ?>
