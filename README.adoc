@@ -99,6 +99,11 @@ Note appel offre : 10/20
 odj OK; CR : Il manque le retour reunion client et analyse réussites/difficultés (techniques et organisationnelles). Peu d'avancement sur le site ce qui vous pénalise sur la note GPO, c'est dommage.  Je n'ai pas vu les jours de télétravail attention aux UAS en fin de projet.
 NOTE : 2,24/3
 
+=== retour semaine 51
+Pensez à indiquer la salle de réunion, l'IUT est grand. CR:analyse réussites difficultés à développer. Pensez à m'envoyer l'ODJ pour la semaine prochaine
+2,5/3
+semaine 48 corrigée mais avec pénalité de retard (-1 point) : 0,81/3
+
 == Gestion de projet & Qualité
 
 [cols="1,3"]
