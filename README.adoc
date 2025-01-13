@@ -40,7 +40,7 @@ image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests]
 image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License: MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
 //---------------------------------------------------------------
 
-**Version courante : https://github.com/IUT-Blagnac/sae3-01-template/releases/tag/v3.0.0[v3]**
+**https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/releases/tag/v4.final[version finale]**
 
 toc::[]
 
@@ -129,7 +129,8 @@ https://github.com/orgs/IUT-Blagnac/projects/271/views/16?groupedBy%5BcolumnId%5
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Cahier_Recette_Site.adoc[Cahier de recette]
 | Sprint #5 |https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Cahier_Recette_Site.adoc[Cahier de recette] +
 https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Documentation%20utilisateur.pdf[Documentation utilisateur] +
-https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc-Conception.adoc[Doc-Conception]
+https://github.com/IUT-Blagnac/sae-3-01-devapp-2024-2025-g2a8/blob/master/Documentation/Doc-Conception.adoc[Doc-Conception] +
+http://193.54.227.208/~R2024SAE3006/[Site final Rockworld]
 |===
 
 
