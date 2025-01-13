@@ -18,3 +18,24 @@ Voici donc le diagramme des cas d'utilisation du site, l'utilisateur peut se cr�
 L'administrateur peut gérer des produits et des catégories, il peut gérer les commandes des utilisateurs et gérer les stocks des produits.
 
 == II. Diagramme de classe métier
+
+._Diagramme de classe métier_
+image::/Documentation/img/Diagramme de classes métier.png[]
+Voici le diagramme de classe métier de la base de données du site. Le site va faire des requête à la base de données pour récupérer des informations diverses comme le stock disponible pour un produit, sa description, le panier d'un client etc.
+
+== III. Diagrammes de classes de conception
+
+._Diagramme de classe rechercher produit_
+image::/Documentation/img/Diagramme de classe rechercher produit.png[width=150]
+Pour rechercher un produit le client, va taper dans la barre de recherche un mot clé contenu dans le nom du produit ou dans sa description.
+Le site envoie une requête à la base de données de chercher dans le nom ou dans la decription le mot donné.
+
+._Diagramme de classe visualiser produit._
+image::/Documentation/img/Diagramme de classe visualiser produit.png[width=200]
+Pour visualiser un produit, le client choisit le produit à consulter en cliquant dessus, puis la page du produit s'affiche avec ses informations.
+Le site envoie une requête à la base de donnée pour récupérer et afficher les informations du produit grâce à son numéro d'identification unique. 
+
+._Diagramme de classe ajouter panier_
+image::/Documentation/img/Diagramme de classe ajouter panier.png[width=300]
+Pour ajouter un produit au panier, le client doit être connecté, il doit cliquer sur le bouton "Ajouter au Panier". 
+Le site envoie une requête à la base de données pour ajouter ce produit au panier s'il n'y est pas déjà avec sa quantité.
