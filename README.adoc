@@ -161,5 +161,5 @@ Pensez à raffraichir la page pour voir le graphique des évaluations.
 
 === retour semaine 2
 Il manque encore le afin de dans les US du sprint et tâches non rattachées.  Documentations : enfin !  Pensez à rappeler le contexte !  Peu de fonctionnalités admin développées. Pour la doc de conception il fallait la faire évoluer en doc technique pour permettre la maintenance du site. cahier de recette ok dommage qu'il n'a pas été fait avant.
-note provisoire : 9,36/20
+note provisoire : 10,9/20
 Note fiche de droit : 14/20
