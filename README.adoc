@@ -158,3 +158,8 @@ Backlog produit : je n'ai pas de lien vers le backlog produit; Des US sans final
 === retour semaine 50
 Des progrès , le sprint 3 se rapproche des attendus mais les tâches doivent être rattachées aux US. Après j'ai très peu de US et d'issue, il manque la plupart des tâches techniques.  Toujours pas de cahier de tests !  Doc tech et user juste initialisée et conception au même stade que la dernière fois !  Site web en demo ok , j'ai une release IOT mais pas Web.
 Pensez à raffraichir la page pour voir le graphique des évaluations.
+
+=== retour semaine 2
+Il manque encore le afin de dans les US du sprint et tâches non rattachées.  Documentations : enfin !  Pensez à rappeler le contexte !  Peu de fonctionnalités admin développées. Pour la doc de conception il fallait la faire évoluer en doc technique pour permettre la maintenance du site. cahier de recette ok dommage qu'il n'a pas été fait avant.
+note provisoire : 9,36/20
+Note fiche de droit : 14/20
